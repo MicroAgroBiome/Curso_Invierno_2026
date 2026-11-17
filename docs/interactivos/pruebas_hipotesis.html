@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Microbiome Hypothesis Testing — Rhizosphere</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0f1419; --surface:#161d26; --surface2:#1e2a38; --border:#2a3a4a;
+  --text:#d4e0ec; --text-dim:#7a9ab5; --text-bright:#eaf3ff;
+  --accent:#3d8bcd; --accent2:#5ba4d4;
+  --sig:#4caf82; --sig-bg:#0d2a1e; --nosig:#e07050; --nosig-bg:#2a160e;
+  --pop-a:#5ba4d4; --pop-b:#e07050; --pop-c:#8bbd6e;
+  --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif;
+  /* phylum palette */
+  --ph0:#5ba4d4; --ph1:#e07050; --ph2:#8bbd6e; --ph3:#c97bc4;
+  --ph4:#e8b84b; --ph5:#5ecec4; --ph6:#9b8ecf;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6}
+
+header{border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:baseline;gap:20px;background:var(--surface)}
+header h1{font-size:16px;font-weight:600;color:var(--text-bright);letter-spacing:-0.01em}
+header span{font-family:var(--mono);font-size:11px;color:var(--text-dim)}
+
+.layout{display:grid;grid-template-columns:264px 1fr;grid-template-rows:auto 1fr;min-height:calc(100vh - 50px)}
+
+.sidebar{grid-row:1/3;border-right:1px solid var(--border);background:var(--surface);padding:16px 14px;display:flex;flex-direction:column;gap:16px;overflow-y:auto}
+.sidebar-section{display:flex;flex-direction:column;gap:7px}
+.sidebar-label{font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:.08em;padding-bottom:4px;border-bottom:1px solid var(--border)}
+
+.scenario-btn{background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--text);padding:9px 11px;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;font-family:var(--sans);font-size:12px;line-height:1.4}
+.scenario-btn:hover{border-color:var(--accent)}
+.scenario-btn.active{border-color:var(--accent);background:#162233}
+.scenario-btn .s-title{font-weight:500;color:var(--text-bright);display:block;margin-bottom:2px}
+.scenario-btn .s-tag{font-family:var(--mono);font-size:10px;padding:1px 6px;border-radius:2px;margin-top:3px;display:inline-block}
+.tag-sig{background:var(--sig-bg);color:var(--sig)}
+.tag-nosig{background:var(--nosig-bg);color:var(--nosig)}
+
+.control-group{display:flex;flex-direction:column;gap:5px}
+.control-group label{font-size:12px;color:var(--text-dim);display:flex;justify-content:space-between}
+.control-group label span{font-family:var(--mono);color:var(--text)}
+input[type=range]{width:100%;accent-color:var(--accent);height:4px;cursor:pointer}
+select{background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--text);padding:7px 10px;font-family:var(--mono);font-size:12px;width:100%;cursor:pointer}
+
+/* ── EFFECT SLIDER ── */
+.effect-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.effect-track{position:relative;height:8px;border-radius:4px;background:linear-gradient(to right,var(--nosig-bg) 0%,#1a2a1a 50%,var(--sig-bg) 100%);border:1px solid var(--border);overflow:visible}
+.effect-track input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0}
+.effect-thumb{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--accent);border:2px solid var(--text-bright);transform:translate(-50%,-50%);pointer-events:none;transition:left .05s}
+.effect-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--text-dim)}
+.effect-pvals{display:flex;flex-direction:column;gap:4px}
+.effect-pval-row{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px}
+.pval-bar-wrap{flex:1;height:4px;background:var(--surface);border-radius:2px;margin:0 8px;overflow:hidden}
+.pval-bar{height:100%;border-radius:2px;transition:width .2s,background .2s}
+.threshold-line{position:absolute;right:0;top:0;bottom:0;width:2px;background:rgba(255,255,255,.15)}
+
+.run-btn{background:var(--accent);color:#fff;border:none;border-radius:4px;padding:9px;font-family:var(--sans);font-weight:500;font-size:13px;cursor:pointer;transition:background .15s;width:100%}
+.run-btn:hover{background:var(--accent2)}
+
+.topbar{border-bottom:1px solid var(--border);display:flex;background:var(--surface);padding:0 20px}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);padding:11px 14px;cursor:pointer;font-family:var(--sans);font-size:13px;transition:color .15s,border-color .15s;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--text-bright);border-bottom-color:var(--accent);font-weight:500}
+
+.content{padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
+.tab-panel{display:none;flex-direction:column;gap:16px}
+.tab-panel.visible{display:flex}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:16px 18px}
+.card-title{font-size:11px;font-weight:500;color:var(--text-dim);font-family:var(--mono);margin-bottom:12px;letter-spacing:.04em}
+
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.result-block{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:12px 14px}
+.result-block .test-name{font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-bottom:6px}
+.result-block .p-value{font-family:var(--mono);font-size:20px;font-weight:500;margin-bottom:3px}
+.result-block .stat-line{font-family:var(--mono);font-size:10px;color:var(--text-dim)}
+.result-block .verdict{margin-top:7px;font-size:10px;font-weight:500;padding:2px 7px;border-radius:3px;display:inline-block}
+.verdict-sig{background:var(--sig-bg);color:var(--sig)}
+.verdict-nosig{background:var(--nosig-bg);color:var(--nosig)}
+.pval-sig{color:var(--sig)}
+.pval-nosig{color:var(--nosig)}
+
+.plot-row{display:grid;grid-template-columns:1fr 300px;gap:14px;align-items:start}
+canvas{display:block;border-radius:4px}
+.legend{display:flex;flex-direction:column;gap:7px}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:12px}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* ── STACKED BARS ── */
+.bars-wrap{overflow-x:auto;padding-bottom:8px}
+.bars-svg-container{min-width:600px}
+.bar-label{font-family:var(--mono);font-size:10px;fill:var(--text-dim)}
+.bar-title{font-family:var(--mono);font-size:11px;fill:var(--text-dim);letter-spacing:.04em}
+.phylum-legend{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:12px}
+.phylum-item{display:flex;align-items:center;gap:5px;font-size:11px;font-family:var(--mono);color:var(--text-dim)}
+.phylum-swatch{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.otu-table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+th{text-align:left;color:var(--text-dim);padding:7px 9px;border-bottom:1px solid var(--border);font-weight:400;white-space:nowrap}
+td{padding:5px 9px;border-bottom:1px solid #1a2530;color:var(--text)}
+tr:hover td{background:var(--surface2)}
+.heat-cell{text-align:right}
+
+.explainer{background:#111e2b;border-left:3px solid var(--accent);border-radius:0 4px 4px 0;padding:12px 14px;font-size:12px;line-height:1.65;color:var(--text)}
+.explainer strong{color:var(--text-bright)}
+.explainer code{font-family:var(--mono);font-size:11px;background:var(--surface2);padding:1px 5px;border-radius:3px;color:#9fcfef}
+
+.scenario-desc{font-size:13px;color:var(--text-dim);line-height:1.6;padding:10px 13px;background:var(--surface2);border-radius:4px;border:1px solid var(--border)}
+.scenario-desc strong{color:var(--text)}
+
+.spinner{display:inline-block;width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{grid-row:auto;border-right:none;border-bottom:1px solid var(--border)}
+  .plot-row,.two-col{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Rhizosphere Microbiome — Hypothesis Testing</h1>
+  <span>MatmorBioCompUNAM · /files2/rizosfera</span>
+</header>
+
+<div class="layout">
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Escenarios</div>
+    <button class="scenario-btn active" onclick="loadScenario(0)">
+      <span class="s-title">Maíz vs Frijol</span>
+      Exudados radicales divergentes<span class="s-tag tag-sig">Significativo</span>
+    </button>
+    <button class="scenario-btn" onclick="loadScenario(1)">
+      <span class="s-title">Maíz A vs Maíz B</span>
+      Mismo cultivo, distintos campos<span class="s-tag tag-nosig">No significativo</span>
+    </button>
+    <button class="scenario-btn" onclick="loadScenario(2)">
+      <span class="s-title">Tomate vs Chile</span>
+      Solanáceas con OTUs compartidos<span class="s-tag tag-sig" style="background:#1a2010;color:#a0c060">Borderline</span>
+    </button>
+    <button class="scenario-btn" onclick="loadScenario(3)">
+      <span class="s-title">Trigo conv. vs orgánico</span>
+      Manejo agronómico diferencial<span class="s-tag tag-sig">Significativo</span>
+    </button>
+    <button class="scenario-btn" onclick="loadScenario(4)">
+      <span class="s-title">Réplicas técnicas</span>
+      Solo ruido de secuenciación<span class="s-tag tag-nosig">No significativo</span>
+    </button>
+  </div>
+
+  <!-- EFFECT SLIDER -->
+  <div class="sidebar-section">
+    <div class="sidebar-label">Control de efecto — tiempo real</div>
+    <div class="effect-wrap">
+      <div style="font-size:12px;color:var(--text-dim)">Separación entre comunidades</div>
+      <div class="effect-track">
+        <input type="range" id="effect-slider" min="0" max="100" value="75" oninput="onEffectSlide(this.value)">
+        <div class="effect-thumb" id="effect-thumb" style="left:75%"></div>
+      </div>
+      <div class="effect-labels">
+        <span style="color:var(--nosig)">sin efecto</span>
+        <span>α = 0.05</span>
+        <span style="color:var(--sig)">efecto máximo</span>
+      </div>
+      <div class="effect-pvals" id="effect-pvals">
+        <div class="effect-pval-row">
+          <span style="color:var(--text-dim)">PERMANOVA</span>
+          <div class="pval-bar-wrap"><div class="pval-bar" id="pb-permanova" style="width:75%;background:var(--sig)"></div></div>
+          <span id="pv-permanova" style="color:var(--sig);min-width:48px;text-align:right">—</span>
+        </div>
+        <div class="effect-pval-row">
+          <span style="color:var(--text-dim)">ANOSIM</span>
+          <div class="pval-bar-wrap"><div class="pval-bar" id="pb-anosim" style="width:75%;background:var(--sig)"></div></div>
+          <span id="pv-anosim" style="color:var(--sig);min-width:48px;text-align:right">—</span>
+        </div>
+        <div class="effect-pval-row">
+          <span style="color:var(--text-dim)">KW α-div</span>
+          <div class="pval-bar-wrap"><div class="pval-bar" id="pb-kruskal" style="width:60%;background:var(--sig)"></div></div>
+          <span id="pv-kruskal" style="color:var(--sig);min-width:48px;text-align:right">—</span>
+        </div>
+      </div>
+      <div id="effect-verdict" class="verdict verdict-sig" style="text-align:center;width:100%;font-size:11px">H₀ rechazada</div>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Parámetros de simulación</div>
+    <div class="control-group">
+      <label>Muestras por grupo <span id="n-label">10</span></label>
+      <input type="range" id="n-samples" min="5" max="30" value="10" oninput="updateLabel('n-label',this.value)">
+    </div>
+    <div class="control-group">
+      <label>OTUs totales <span id="otu-label">50</span></label>
+      <input type="range" id="n-otus" min="20" max="150" value="50" step="10" oninput="updateLabel('otu-label',this.value)">
+    </div>
+    <div class="control-group">
+      <label>Disimilitud</label>
+      <select id="dist-method">
+        <option value="bray">Bray-Curtis</option>
+        <option value="jaccard">Jaccard</option>
+        <option value="unifrac">UniFrac (simulado)</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label>Permutaciones <span id="perm-label">999</span></label>
+      <input type="range" id="n-perms" min="99" max="4999" value="999" step="100" oninput="updateLabel('perm-label',this.value)">
+    </div>
+  </div>
+
+  <button class="run-btn" onclick="runAnalysis()">▶ Correr análisis completo</button>
+</aside>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <button class="tab-btn active" onclick="showTab('tab-overview',this)">Resumen</button>
+  <button class="tab-btn" onclick="showTab('tab-pcoa',this)">PCoA</button>
+  <button class="tab-btn" onclick="showTab('tab-bars',this)">Stacked Bars</button>
+  <button class="tab-btn" onclick="showTab('tab-tests',this)">Pruebas</button>
+  <button class="tab-btn" onclick="showTab('tab-data',this)">Tabla OTUs</button>
+  <button class="tab-btn" onclick="showTab('tab-theory',this)">Teoría</button>
+</div>
+
+<!-- ── CONTENT ── -->
+<main class="content">
+
+<!-- OVERVIEW -->
+<div id="tab-overview" class="tab-panel visible">
+  <div id="scenario-desc-card" class="scenario-desc"></div>
+  <div class="results-grid" id="overview-results">
+    <div class="result-block"><div class="test-name">— esperando análisis —</div><div class="p-value" style="color:var(--text-dim)">—</div></div>
+  </div>
+  <div class="explainer" id="overview-interp">Selecciona un escenario y presiona <strong>▶ Correr análisis</strong>.</div>
+</div>
+
+<!-- PCoA -->
+<div id="tab-pcoa" class="tab-panel">
+  <div class="card">
+    <div class="card-title">PCoA — Análisis de Coordenadas Principales</div>
+    <div class="plot-row">
+      <div><canvas id="pcoa-canvas" width="500" height="390"></canvas></div>
+      <div>
+        <div class="legend" id="pcoa-legend"></div>
+        <div style="margin-top:14px" class="explainer" id="pcoa-explain">Correr análisis para visualizar.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STACKED BARS -->
+<div id="tab-bars" class="tab-panel">
+  <div class="card">
+    <div class="card-title">Abundancia relativa por filo — cada barra = una muestra</div>
+    <div class="bars-wrap">
+      <div class="bars-svg-container">
+        <svg id="bars-svg" width="800" height="340" style="display:block"></svg>
+      </div>
+    </div>
+    <div class="phylum-legend" id="phylum-legend"></div>
+  </div>
+  <div class="explainer" id="bars-explainer">
+    Las stacked bars muestran la <strong>composición relativa</strong> (abundancia normalizada a 100%) de cada muestra. Los patrones visuales de separación entre grupos anticipan lo que PERMANOVA cuantificará estadísticamente.
+  </div>
+</div>
+
+<!-- TESTS -->
+<div id="tab-tests" class="tab-panel">
+  <div class="two-col">
+    <div class="card"><div class="card-title">PERMANOVA (adonis2)</div><div id="permanova-detail" class="explainer">— correr análisis —</div></div>
+    <div class="card"><div class="card-title">ANOSIM</div><div id="anosim-detail" class="explainer">— correr análisis —</div></div>
+  </div>
+  <div class="two-col">
+    <div class="card"><div class="card-title">Kruskal-Wallis (diversidad α)</div><div id="kruskal-detail" class="explainer">— correr análisis —</div></div>
+    <div class="card"><div class="card-title">LEfSe (biomarcadores)</div><div id="lefse-detail" class="explainer">— correr análisis —</div></div>
+  </div>
+</div>
+
+<!-- DATA TABLE -->
+<div id="tab-data" class="tab-panel">
+  <div class="card">
+    <div class="card-title">Tabla de abundancias — primeras 15 OTUs</div>
+    <div class="otu-table-wrap">
+      <table id="otu-table"><thead><tr><th>OTU</th><th>Filo</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- THEORY -->
+<div id="tab-theory" class="tab-panel">
+  <div class="card">
+    <div class="card-title">Marco teórico</div>
+    <div style="display:flex;flex-direction:column;gap:14px;font-size:13px;line-height:1.7">
+      <div class="explainer"><strong>H₀:</strong> Las comunidades no difieren más allá del azar.<br><strong>H₁:</strong> Al menos un grupo difiere en composición.</div>
+      <div><strong style="color:var(--text-bright)">PERMANOVA</strong> — descompone la varianza en la matriz de distancias.<br>
+      <code style="display:block;margin-top:6px;padding:8px;background:var(--surface2);border-radius:4px;font-family:var(--mono);font-size:11px;color:#9fcfef">F = (SS_between/df_b) / (SS_within/df_w)</code></div>
+      <div><strong style="color:var(--text-bright)">ANOSIM</strong> — compara rangos de distancias inter vs intra grupo. R ∈ [-1,1].</div>
+      <div><strong style="color:var(--text-bright)">Kruskal-Wallis</strong> — test no paramétrico de rangos sobre índices α (Shannon, Chao1). Evalúa riqueza/equitatividad, no composición.</div>
+      <div><strong style="color:var(--text-bright)">LEfSe</strong> — Kruskal-Wallis + Wilcoxon pairwise + LDA. Genera ranking de biomarcadores por LDA score (threshold = 2).</div>
+      <div><strong style="color:var(--text-bright)">Stacked bars</strong> — visualización de abundancia relativa por taxón. Permite detectar visualmente qué filos dominan cada grupo antes de aplicar pruebas formales.</div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// PALETA filos
+// ═══════════════════════════════════════
+const PHYLUM_COLORS=['#5ba4d4','#e07050','#8bbd6e','#c97bc4','#e8b84b','#5ecec4','#9b8ecf','#e88b6e','#6bbf9f','#d4a05a'];
+
+// ═══════════════════════════════════════
+// ESCENARIOS
+// ═══════════════════════════════════════
+const SCENARIOS=[
+  {name:"Maíz vs Frijol",groups:["Maíz (Zea mays)","Frijol (Phaseolus vulgaris)"],separation:2.8,dispersion:0.6,
+   desc:`<strong>Maíz vs Frijol (rizosfera)</strong><br>Comunidades microbianas de suelos rizosféricos de maíz (<em>Zea mays</em>) y frijol (<em>Phaseolus vulgaris</em>). La fijación de nitrógeno del frijol selecciona Rhizobiaceae, generando diferenciación clara.`,
+   phyla:[{name:"Proteobacteria",popA:.35,popB:.18},{name:"Actinobacteria",popA:.20,popB:.12},{name:"Firmicutes",popA:.08,popB:.22},{name:"Rhizobiaceae",popA:.03,popB:.28},{name:"Bacteroidetes",popA:.15,popB:.08},{name:"Chloroflexi",popA:.10,popB:.05},{name:"Verrucomicrobia",popA:.09,popB:.07}]},
+  {name:"Maíz A vs Maíz B",groups:["Maíz — Campo A","Maíz — Campo B"],separation:0.5,dispersion:1.1,
+   desc:`<strong>Maíz A vs Maíz B (mismo cultivo)</strong><br>Dos parcelas de maíz con manejo similar. La variación inter-campo es pequeña relativa a la intra-campo. Se espera no-significancia.`,
+   phyla:[{name:"Proteobacteria",popA:.32,popB:.30},{name:"Actinobacteria",popA:.19,popB:.21},{name:"Firmicutes",popA:.12,popB:.11},{name:"Rhizobiaceae",popA:.07,popB:.08},{name:"Bacteroidetes",popA:.14,popB:.13},{name:"Chloroflexi",popA:.09,popB:.10},{name:"Verrucomicrobia",popA:.07,popB:.07}]},
+  {name:"Tomate vs Chile",groups:["Tomate (S. lycopersicum)","Chile (C. annuum)"],separation:1.4,dispersion:0.9,
+   desc:`<strong>Tomate vs Chile (Solanáceas)</strong><br>Ambas Solanáceas comparten parte del microbioma. Separación moderada, resultado <em>borderline</em> que depende de n y distancia.`,
+   phyla:[{name:"Proteobacteria",popA:.30,popB:.27},{name:"Actinobacteria",popA:.17,popB:.20},{name:"Firmicutes",popA:.11,popB:.14},{name:"Rhizobiaceae",popA:.05,popB:.04},{name:"Bacteroidetes",popA:.16,popB:.13},{name:"Chloroflexi",popA:.12,popB:.14},{name:"Verrucomicrobia",popA:.09,popB:.08}]},
+  {name:"Trigo conv. vs orgánico",groups:["Trigo convencional","Trigo orgánico"],separation:2.1,dispersion:0.7,
+   desc:`<strong>Trigo convencional vs orgánico</strong><br>Agroquímicos en el sistema convencional reducen Actinobacteria y hongos micorrízicos, generando comunidades claramente distintas.`,
+   phyla:[{name:"Proteobacteria",popA:.38,popB:.22},{name:"Actinobacteria",popA:.12,popB:.28},{name:"Firmicutes",popA:.14,popB:.09},{name:"Rhizobiaceae",popA:.04,popB:.11},{name:"Bacteroidetes",popA:.16,popB:.14},{name:"Glomeromycota (AMF)",popA:.05,popB:.10},{name:"Verrucomicrobia",popA:.11,popB:.06}]},
+  {name:"Réplicas técnicas",groups:["Réplica A","Réplica B"],separation:0.15,dispersion:0.5,
+   desc:`<strong>Réplicas técnicas de secuenciación</strong><br>La misma muestra de rizosfera de maíz secuenciada en duplicado. Las diferencias reflejan solo ruido técnico.`,
+   phyla:[{name:"Proteobacteria",popA:.33,popB:.33},{name:"Actinobacteria",popA:.20,popB:.19},{name:"Firmicutes",popA:.11,popB:.12},{name:"Rhizobiaceae",popA:.06,popB:.06},{name:"Bacteroidetes",popA:.14,popB:.14},{name:"Chloroflexi",popA:.09,popB:.09},{name:"Verrucomicrobia",popA:.07,popB:.07}]}
+];
+
+let currentScenario=0, simData=null, lastResults=null;
+
+// ═══════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════
+function updateLabel(id,v){document.getElementById(id).textContent=v}
+
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  if(btn) btn.classList.add('active');
+}
+
+function loadScenario(idx){
+  currentScenario=idx;
+  document.querySelectorAll('.scenario-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  document.getElementById('scenario-desc-card').innerHTML=SCENARIOS[idx].desc;
+  document.getElementById('overview-results').innerHTML=`<div class="result-block"><div class="test-name">— listo —</div><div class="p-value" style="color:var(--text-dim)">—</div></div>`;
+  document.getElementById('overview-interp').innerHTML='Presiona <strong>▶ Correr análisis</strong>.';
+  // Reset effect slider to match scenario
+  const eff=Math.round((SCENARIOS[idx].separation/3)*100);
+  document.getElementById('effect-slider').value=eff;
+  document.getElementById('effect-thumb').style.left=eff+'%';
+}
+
+// ═══════════════════════════════════════
+// SIMULATION
+// ═══════════════════════════════════════
+function rng(seed){let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/4294967296}}
+function rNorm(rand,mu=0,sg=1){const u1=rand(),u2=rand();return mu+sg*Math.sqrt(-2*Math.log(u1+1e-10))*Math.cos(2*Math.PI*u2)}
+
+function simulateOTU(scenarioIdx,nSamples,nOTUs,separation,seed=42){
+  const rand=rng(seed);
+  const sc=SCENARIOS[scenarioIdx];
+  const samples=[],groupLabels=[];
+  for(let g=0;g<2;g++){
+    for(let s=0;s<nSamples;s++){
+      const row=[];
+      for(let o=0;o<nOTUs;o++){
+        const pi=o%sc.phyla.length;
+        const baseA=sc.phyla[pi].popA, baseB=sc.phyla[pi].popB;
+        // interpolate between original and mixed based on separation (0-1 effect)
+        const eff=Math.min(1,separation/3);
+        const baseProp=g===0
+          ? baseA*(eff)+(baseA+baseB)/2*(1-eff)
+          : baseB*(eff)+(baseA+baseB)/2*(1-eff);
+        const noise=Math.max(0,baseProp+rNorm(rand,0,0.035*(1+sc.dispersion*0.3)));
+        row.push(Math.round(noise*5000+rand()*50));
+      }
+      samples.push(row); groupLabels.push(g);
+    }
+  }
+  return{samples,groupLabels,nSamples,nOTUs};
+}
+
+// ═══════════════════════════════════════
+// DISTANCES
+// ═══════════════════════════════════════
+function brayCurtis(a,b){let n=0,d=0;for(let i=0;i<a.length;i++){n+=Math.abs(a[i]-b[i]);d+=a[i]+b[i]}return d?n/d:0}
+function jaccard(a,b){let sh=0,un=0;for(let i=0;i<a.length;i++){if(a[i]>0||b[i]>0)un++;if(a[i]>0&&b[i]>0)sh++}return un?1-sh/un:0}
+function distMatrix(samples,method){
+  const n=samples.length;
+  const D=Array.from({length:n},()=>new Float32Array(n));
+  for(let i=0;i<n;i++) for(let j=i+1;j<n;j++){
+    const d=method==='jaccard'?jaccard(samples[i],samples[j]):brayCurtis(samples[i],samples[j]);
+    D[i][j]=D[j][i]=d;
+  }
+  return D;
+}
+
+// ═══════════════════════════════════════
+// PCoA (classical MDS, power iteration)
+// ═══════════════════════════════════════
+function pcoa(D){
+  const n=D.length;
+  const A=D.map(r=>r.map(v=>-0.5*v*v));
+  const rMean=A.map(r=>r.reduce((a,b)=>a+b,0)/n);
+  const cMean=Array.from({length:n},(_,j)=>A.reduce((a,r)=>a+r[j],0)/n);
+  const gMean=rMean.reduce((a,b)=>a+b,0)/n;
+  const B=A.map((r,i)=>r.map((v,j)=>v-rMean[i]-cMean[j]+gMean));
+  function pIter(B,it=180){
+    const n=B.length;let v=Array.from({length:n},()=>Math.random()-.5);
+    for(let k=0;k<it;k++){let nv=Array(n).fill(0);for(let i=0;i<n;i++)for(let j=0;j<n;j++)nv[i]+=B[i][j]*v[j];const nm=Math.sqrt(nv.reduce((a,b)=>a+b*b,0));v=nv.map(x=>x/nm)}
+    const lam=v.reduce((a,_,i)=>a+v[i]*B[i].reduce((s,b,j)=>s+b*v[j],0),0);
+    return{v,lam};
+  }
+  const{v:v1,lam:l1}=pIter(B);
+  const B2=B.map((r,i)=>r.map((x,j)=>x-l1*v1[i]*v1[j]));
+  const{v:v2,lam:l2}=pIter(B2);
+  const coords=v1.map((_,i)=>[v1[i]*Math.sqrt(Math.max(l1,0)),v2[i]*Math.sqrt(Math.max(l2,0))]);
+  const tv=B.reduce((a,r)=>a+r.reduce((b,v)=>b+v*v,0),0);
+  return{coords,pct1:tv?l1/tv*100:50,pct2:tv?Math.max(l2,0)/tv*100:30};
+}
+
+// ═══════════════════════════════════════
+// PERMANOVA
+// ═══════════════════════════════════════
+function permanova(D,labels,nPerms=499){
+  const n=D.length;
+  function fStat(D,lbs){
+    const groups=[...new Set(lbs)];
+    let SS_t=0,SS_w=0;
+    const N=n*(n-1)/2;
+    let gm=0; for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)gm+=D[i][j]; gm/=N;
+    for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)SS_t+=(D[i][j]-gm)**2;
+    for(const g of groups){
+      const idx=lbs.map((_,i)=>i).filter(i=>lbs[i]===g);
+      let gMean=0,gc=idx.length*(idx.length-1)/2;
+      for(let a=0;a<idx.length;a++)for(let b=a+1;b<idx.length;b++)gMean+=D[idx[a]][idx[b]];
+      gMean/=gc||1;
+      for(let a=0;a<idx.length;a++)for(let b=a+1;b<idx.length;b++)SS_w+=(D[idx[a]][idx[b]]-gMean)**2;
+    }
+    const SS_b=SS_t-SS_w,df_b=groups.length-1,df_w=n-groups.length;
+    return(SS_b/df_b)/(SS_w/df_w);
+  }
+  const obs=fStat(D,labels);
+  let exceed=0;
+  for(let p=0;p<nPerms;p++){const pm=[...labels].sort(()=>Math.random()-.5);if(fStat(D,pm)>=obs)exceed++}
+  const pval=(exceed+1)/(nPerms+1);
+  const R2=Math.min(.99,Math.max(.01,0.1+obs*.04));
+  return{F:obs,pval,R2};
+}
+
+// ═══════════════════════════════════════
+// ANOSIM
+// ═══════════════════════════════════════
+function anosim(D,labels,nPerms=299){
+  const n=D.length;
+  function rStat(D,lbs){
+    const bt=[],wt=[];
+    for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)(lbs[i]===lbs[j]?wt:bt).push(D[i][j]);
+    const all=[...bt,...wt].sort((a,b)=>a-b);
+    const rank=v=>all.indexOf(v)+1;
+    return(bt.reduce((a,v)=>a+rank(v),0)/bt.length-wt.reduce((a,v)=>a+rank(v),0)/wt.length)/(n*(n-1)/4);
+  }
+  const obs=rStat(D,labels);
+  let exceed=0;
+  for(let p=0;p<nPerms;p++){const pm=[...labels].sort(()=>Math.random()-.5);if(rStat(D,pm)>=obs)exceed++}
+  return{R:obs,pval:(exceed+1)/(nPerms+1)};
+}
+
+// ═══════════════════════════════════════
+// SHANNON + KRUSKAL-WALLIS
+// ═══════════════════════════════════════
+function shannon(counts){const t=counts.reduce((a,b)=>a+b,0);if(!t)return 0;return-counts.filter(c=>c>0).reduce((a,c)=>{const p=c/t;return a+p*Math.log(p)},0)}
+function lgamma(x){const c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,.1208650973866179e-2,-.5395239384953e-5];let y=x,tmp=x+5.5;tmp-=(x+.5)*Math.log(tmp);let ser=1.000000000190015;for(const ci of c)ser+=ci/++y;return-tmp+Math.log(2.5066282746310005*ser/x)}
+function gammainc(x,a){if(x<=0||a<=0)return 0;let term=1/a,sum=term;for(let n=1;n<200;n++){term*=x/(a+n);sum+=term;if(term<1e-10)break}return Math.min(1,sum*Math.exp(-x+a*Math.log(x)-lgamma(a)))}
+function chi2cdf(x,k){return x<=0?0:gammainc(x/2,k/2)}
+function kruskalWallis(gdata){
+  const all=gdata.flatMap((g,i)=>g.map(v=>({v,g:i}))).sort((a,b)=>a.v-b.v);
+  all.forEach((x,i)=>x.rank=i+1);
+  const N=all.length,groups=[...new Set(all.map(x=>x.g))];
+  const H=(12/(N*(N+1)))*groups.reduce((a,g)=>{const gr=all.filter(x=>x.g===g);return a+gr.reduce((s,x)=>s+x.rank,0)**2/gr.length},0)-3*(N+1);
+  const df=groups.length-1;
+  return{H,df,pval:1-chi2cdf(H,df)};
+}
+
+// ═══════════════════════════════════════
+// LEfSe
+// ═══════════════════════════════════════
+function lefse(samples,labels,nOTUs,phyla){
+  const results=[];
+  for(let o=0;o<Math.min(nOTUs,phyla.length*3);o++){
+    const pi=o%phyla.length;
+    const g0=samples.filter((_,i)=>labels[i]===0).map(s=>s[o]);
+    const g1=samples.filter((_,i)=>labels[i]===1).map(s=>s[o]);
+    const m0=g0.reduce((a,b)=>a+b,0)/g0.length;
+    const m1=g1.reduce((a,b)=>a+b,0)/g1.length;
+    const lda=Math.abs(Math.log2((m0+1)/(m1+1)));
+    if(lda>.5)results.push({otu:`OTU_${o+1}`,phylum:phyla[pi].name,lda,enriched:m0>m1?0:1,m0,m1});
+  }
+  return results.sort((a,b)=>b.lda-a.lda).slice(0,10);
+}
+
+// ═══════════════════════════════════════
+// DRAW PCoA
+// ═══════════════════════════════════════
+function drawPCoA(coords,labels,pct1,pct2){
+  const sc=SCENARIOS[currentScenario];
+  const canvas=document.getElementById('pcoa-canvas');
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#111820'; ctx.fillRect(0,0,W,H);
+
+  const xs=coords.map(c=>c[0]),ys=coords.map(c=>c[1]);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  const rX=maxX-minX||1,rY=maxY-minY||1;
+  const pad=46;
+  const toX=v=>(v-minX)/rX*(W-2*pad)+pad;
+  const toY=v=>(v-minY)/rY*(H-2*pad)+pad;
+
+  // Grid
+  ctx.strokeStyle='#1e2d3d';ctx.lineWidth=1;
+  for(let i=0;i<=5;i++){
+    const x=pad+i*(W-2*pad)/5;ctx.beginPath();ctx.moveTo(x,pad);ctx.lineTo(x,H-pad);ctx.stroke();
+    const y=pad+i*(H-2*pad)/5;ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(W-pad,y);ctx.stroke();
+  }
+
+  const rawColors=['#5ba4d4','#e07050','#8bbd6e'];
+  // Ellipses
+  for(let g=0;g<2;g++){
+    const idx=labels.map((_,i)=>i).filter(i=>labels[i]===g);
+    const gx=idx.map(i=>toX(coords[i][0])),gy=idx.map(i=>toY(coords[i][1]));
+    const mx=gx.reduce((a,b)=>a+b,0)/gx.length,my=gy.reduce((a,b)=>a+b,0)/gy.length;
+    const sx=Math.sqrt(gx.reduce((a,v)=>a+(v-mx)**2,0)/gx.length)||20;
+    const sy=Math.sqrt(gy.reduce((a,v)=>a+(v-my)**2,0)/gy.length)||20;
+    ctx.save();
+    ctx.globalAlpha=.11;ctx.beginPath();ctx.ellipse(mx,my,sx*2.5,sy*2.5,0,0,2*Math.PI);ctx.fillStyle=rawColors[g];ctx.fill();
+    ctx.globalAlpha=.4;ctx.strokeStyle=rawColors[g];ctx.lineWidth=1;ctx.stroke();
+    ctx.restore();
+  }
+  // Points
+  coords.forEach((c,i)=>{
+    const g=labels[i];
+    ctx.beginPath();ctx.arc(toX(c[0]),toY(c[1]),4.5,0,2*Math.PI);
+    ctx.fillStyle=rawColors[g];ctx.globalAlpha=.85;ctx.fill();
+    ctx.globalAlpha=1;ctx.strokeStyle='#111820';ctx.lineWidth=1;ctx.stroke();
+  });
+  // Axes labels
+  ctx.fillStyle='#7a9ab5';ctx.font='11px IBM Plex Mono,monospace';ctx.textAlign='center';
+  ctx.fillText(`PC1 (${pct1.toFixed(1)}%)`,W/2,H-6);
+  ctx.save();ctx.translate(14,H/2);ctx.rotate(-Math.PI/2);ctx.fillText(`PC2 (${pct2.toFixed(1)}%)`,0,0);ctx.restore();
+  // Legend on canvas
+  for(let g=0;g<2;g++){
+    ctx.beginPath();ctx.arc(W-115,18+g*17,4,0,2*Math.PI);ctx.fillStyle=rawColors[g];ctx.fill();
+    ctx.fillStyle='#aac4d8';ctx.font='10px IBM Plex Sans,sans-serif';ctx.textAlign='left';
+    ctx.fillText(sc.groups[g].split(' ')[0],W-108,22+g*17);
+  }
+  // Legend panel
+  document.getElementById('pcoa-legend').innerHTML=sc.groups.map((g,i)=>`<div class="legend-item"><div class="legend-dot" style="background:${rawColors[i]}"></div><span>${g}</span></div>`).join('');
+}
+
+// ═══════════════════════════════════════
+// DRAW STACKED BARS
+// ═══════════════════════════════════════
+function drawStackedBars(data){
+  const sc=SCENARIOS[currentScenario];
+  const svg=document.getElementById('bars-svg');
+  const W=800,H=300,padL=40,padB=55,padT=30,padR=20;
+  const plotW=W-padL-padR,plotH=H-padB-padT;
+  const nSamples=data.nSamples;
+  const totalSamples=nSamples*2;
+  const barW=Math.min(28,(plotW/totalSamples)-4);
+  const gap=(plotW-barW*totalSamples)/(totalSamples+1);
+
+  // Normalize each sample to relative abundance
+  const relAbund=data.samples.map(samp=>{
+    const total=samp.reduce((a,b)=>a+b,0)||1;
+    // aggregate by phylum
+    const phylumCounts=sc.phyla.map((_,pi)=>
+      samp.filter((_,oi)=>oi%sc.phyla.length===pi).reduce((a,b)=>a+b,0)
+    );
+    const phylumTotal=phylumCounts.reduce((a,b)=>a+b,0)||1;
+    return phylumCounts.map(c=>c/phylumTotal);
+  });
+
+  let svgContent=`<rect width="${W}" height="${H}" fill="#111820" rx="4"/>`;
+
+  // Group dividers + labels
+  for(let g=0;g<2;g++){
+    const x0=padL+gap+(barW+gap)*g*nSamples;
+    const x1=padL+gap+(barW+gap)*(g*nSamples+nSamples)-gap;
+    svgContent+=`<rect x="${x0-gap/2}" y="${padT}" width="${x1-x0+gap}" height="${plotH}" fill="${g===0?'rgba(91,164,212,.04)':'rgba(224,112,80,.04)'}" rx="2"/>`;
+    const cx=(x0+x1)/2;
+    svgContent+=`<text x="${cx}" y="${H-4}" text-anchor="middle" class="bar-title" font-family="IBM Plex Mono,monospace" font-size="11" fill="#7a9ab5">${sc.groups[g].split(' ')[0]}</text>`;
+  }
+
+  // Bars
+  relAbund.forEach((rel,si)=>{
+    const col=data.groupLabels[si];
+    const sInGroup=si-col*nSamples;
+    const x=padL+gap+(barW+gap)*(col*nSamples+sInGroup);
+    let y=padT+plotH;
+    rel.forEach((prop,pi)=>{
+      const bh=prop*plotH;
+      if(bh<0.5)return;
+      const fill=PHYLUM_COLORS[pi%PHYLUM_COLORS.length];
+      svgContent+=`<rect x="${x.toFixed(1)}" y="${(y-bh).toFixed(1)}" width="${barW}" height="${bh.toFixed(1)}" fill="${fill}" opacity="0.9"/>`;
+      y-=bh;
+    });
+    // Sample label
+    svgContent+=`<text x="${(x+barW/2).toFixed(1)}" y="${padT+plotH+13}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#4a6a84">S${sInGroup+1}</text>`;
+  });
+
+  // Y axis ticks
+  for(let t=0;t<=4;t++){
+    const y=padT+plotH*(1-t/4);
+    svgContent+=`<text x="${padL-5}" y="${y+4}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="10" fill="#4a6a84">${(t*25)}%</text>`;
+    svgContent+=`<line x1="${padL}" y1="${y}" x2="${padL+plotW}" y2="${y}" stroke="#1e2d3d" stroke-width="1"/>`;
+  }
+
+  svg.innerHTML=svgContent;
+
+  // Phylum legend
+  document.getElementById('phylum-legend').innerHTML=sc.phyla.map((p,i)=>`
+    <div class="phylum-item">
+      <div class="phylum-swatch" style="background:${PHYLUM_COLORS[i%PHYLUM_COLORS.length]}"></div>
+      ${p.name}
+    </div>`).join('');
+
+  // Update bars explainer
+  const sc2=SCENARIOS[currentScenario];
+  const eff=parseInt(document.getElementById('effect-slider').value)/100;
+  document.getElementById('bars-explainer').innerHTML=
+    eff>0.6
+    ? `Separación visual <strong style="color:var(--sig)">marcada</strong>: los perfiles de filo difieren visiblemente entre <em>${sc2.groups[0].split(' ')[0]}</em> y <em>${sc2.groups[1].split(' ')[0]}</em>. PERMANOVA formalizará esta diferencia.`
+    : eff>0.3
+    ? `Separación visual <strong style="color:#e8b84b">moderada</strong>: algunos filos se diferencian entre grupos pero con superposición. Resultado estadístico puede ser borderline.`
+    : `Separación visual <strong style="color:var(--nosig)">mínima</strong>: los perfiles son casi idénticos entre grupos. Se espera no-significancia en todas las pruebas.`;
+}
+
+// ═══════════════════════════════════════
+// BUILD OTU TABLE
+// ═══════════════════════════════════════
+function buildOTUTable(data){
+  const sc=SCENARIOS[currentScenario];
+  const thead=document.querySelector('#otu-table thead tr');
+  thead.innerHTML='<th>OTU</th><th>Filo</th>';
+  for(let g=0;g<2;g++) for(let s=0;s<data.nSamples;s++){
+    const th=document.createElement('th');
+    th.textContent=`${sc.groups[g].split(' ')[0].substring(0,4)}_S${s+1}`;
+    thead.appendChild(th);
+  }
+  const tbody=document.querySelector('#otu-table tbody');
+  tbody.innerHTML='';
+  const maxCount=Math.max(...data.samples.flatMap(s=>s.slice(0,15)));
+  for(let o=0;o<15;o++){
+    const tr=document.createElement('tr');
+    const pi=o%sc.phyla.length;
+    tr.innerHTML=`<td style="font-family:var(--mono)">OTU_${o+1}</td><td style="color:var(--text-dim)">${sc.phyla[pi].name}</td>`;
+    data.samples.forEach(s=>{
+      const v=s[o];const pct=v/maxCount;
+      const td=document.createElement('td');td.className='heat-cell';
+      td.style.color=`rgb(${Math.round(50+pct*180)},${Math.round(80+pct*100)},100)`;
+      td.textContent=v.toLocaleString();tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+}
+
+// ═══════════════════════════════════════
+// EFFECT SLIDER — realtime
+// ═══════════════════════════════════════
+let effectDebounce=null;
+
+function onEffectSlide(val){
+  const pct=parseInt(val);
+  document.getElementById('effect-thumb').style.left=pct+'%';
+  clearTimeout(effectDebounce);
+  effectDebounce=setTimeout(()=>quickEffect(pct),80);
+}
+
+function quickEffect(pct){
+  const eff=pct/100;
+  const sc=SCENARIOS[currentScenario];
+  const nSamples=parseInt(document.getElementById('n-samples').value);
+  const nOTUs=parseInt(document.getElementById('n-otus').value);
+  const distMethod=document.getElementById('dist-method').value;
+
+  // Separation as continuous param
+  const separation=eff*3.2;
+  const data=simulateOTU(currentScenario,nSamples,nOTUs,separation,12345);
+  const D=distMatrix(data.samples,distMethod);
+
+  // Fast estimates (fewer perms)
+  const perm=permanova(D,data.groupLabels,199);
+  const anos=anosim(D,data.groupLabels,99);
+  const shanGroups=[0,1].map(g=>data.samples.filter((_,i)=>data.groupLabels[i]===g).map(s=>shannon(s)));
+  const kw=kruskalWallis(shanGroups);
+
+  // Update mini bars
+  function miniBar(id,pvId,pval){
+    const sig=pval<0.05;
+    const barPct=Math.max(2,Math.min(98,(1-pval)*100));
+    document.getElementById(id).style.width=barPct+'%';
+    document.getElementById(id).style.background=sig?'var(--sig)':'var(--nosig)';
+    const el=document.getElementById(pvId);
+    el.textContent=pval.toFixed(3);
+    el.style.color=sig?'var(--sig)':'var(--nosig)';
+  }
+  miniBar('pb-permanova','pv-permanova',perm.pval);
+  miniBar('pb-anosim','pv-anosim',anos.pval);
+  miniBar('pb-kruskal','pv-kruskal',kw.pval);
+
+  const allSig=perm.pval<0.05&&anos.pval<0.05;
+  const verd=document.getElementById('effect-verdict');
+  if(allSig){verd.className='verdict verdict-sig';verd.textContent='H₀ rechazada (p < 0.05)'}
+  else{verd.className='verdict verdict-nosig';verd.textContent='H₀ no rechazada (p ≥ 0.05)'}
+
+  // Update PCoA live
+  const{coords,pct1,pct2}=pcoa(D);
+  drawPCoA(coords,data.groupLabels,pct1,pct2);
+  drawStackedBars(data);
+}
+
+// ═══════════════════════════════════════
+// FULL ANALYSIS
+// ═══════════════════════════════════════
+async function runAnalysis(){
+  const btn=document.querySelector('.run-btn');
+  btn.innerHTML='<span class="spinner"></span>Calculando…';btn.disabled=true;
+  await new Promise(r=>setTimeout(r,30));
+
+  const nSamples=parseInt(document.getElementById('n-samples').value);
+  const nOTUs=parseInt(document.getElementById('n-otus').value);
+  const distMethod=document.getElementById('dist-method').value;
+  const nPerms=parseInt(document.getElementById('n-perms').value);
+  const sc=SCENARIOS[currentScenario];
+  const effPct=parseInt(document.getElementById('effect-slider').value);
+  const separation=effPct/100*3.2;
+
+  const data=simulateOTU(currentScenario,nSamples,nOTUs,separation,Date.now()&0xffff);
+  simData=data;
+  const D=distMatrix(data.samples,distMethod);
+
+  const perm=permanova(D,data.groupLabels,Math.min(nPerms,799));
+  const anos=anosim(D,data.groupLabels,Math.min(nPerms,399));
+  const shanGroups=[0,1].map(g=>data.samples.filter((_,i)=>data.groupLabels[i]===g).map(s=>shannon(s)));
+  const kw=kruskalWallis(shanGroups);
+  const lef=lefse(data.samples,data.groupLabels,nOTUs,sc.phyla);
+  const{coords,pct1,pct2}=pcoa(D);
+
+  drawPCoA(coords,data.groupLabels,pct1,pct2);
+  drawStackedBars(data);
+  buildOTUTable(data);
+
+  function pBadge(p){const s=p<0.05;return`<span class="verdict ${s?'verdict-sig':'verdict-nosig'}">${s?'p &lt; 0.05 ✓':'p ≥ 0.05 ✗'}</span>`}
+  function pCol(p){return p<0.05?'pval-sig':'pval-nosig'}
+
+  document.getElementById('overview-results').innerHTML=`
+    <div class="result-block">
+      <div class="test-name">PERMANOVA (adonis2)</div>
+      <div class="p-value ${pCol(perm.pval)}">${perm.pval.toFixed(4)}</div>
+      <div class="stat-line">F=${perm.F.toFixed(3)} · R²=${perm.R2.toFixed(3)}</div>
+      ${pBadge(perm.pval)}
+    </div>
+    <div class="result-block">
+      <div class="test-name">ANOSIM</div>
+      <div class="p-value ${pCol(anos.pval)}">${anos.pval.toFixed(4)}</div>
+      <div class="stat-line">R=${anos.R.toFixed(3)}</div>
+      ${pBadge(anos.pval)}
+    </div>
+    <div class="result-block">
+      <div class="test-name">Kruskal-Wallis (Shannon)</div>
+      <div class="p-value ${pCol(kw.pval)}">${kw.pval.toFixed(4)}</div>
+      <div class="stat-line">H=${kw.H.toFixed(3)} · df=${kw.df}</div>
+      ${pBadge(kw.pval)}
+    </div>
+    <div class="result-block">
+      <div class="test-name">LEfSe — biomarcadores</div>
+      <div class="p-value" style="color:var(--accent);font-size:18px">${lef.length}</div>
+      <div class="stat-line">OTUs detectados (LDA≥2)</div>
+      <span class="verdict ${lef.filter(l=>l.lda>=2).length>0?'verdict-sig':'verdict-nosig'}">${lef.filter(l=>l.lda>=2).length} biomarcadores</span>
+    </div>`;
+
+  const allSig=perm.pval<0.05&&anos.pval<0.05,noneSig=perm.pval>=0.05&&anos.pval>=0.05;
+  document.getElementById('overview-interp').innerHTML=
+    allSig?`<strong>Conclusión:</strong> Comunidades de <em>${sc.groups[0]}</em> y <em>${sc.groups[1]}</em> son estadísticamente distintas (PERMANOVA p=${perm.pval.toFixed(4)}, R²=${perm.R2.toFixed(2)}; ANOSIM R=${anos.R.toFixed(3)}). Se identificaron <strong>${lef.filter(l=>l.lda>=2).length} OTUs biomarcadores</strong> con LDA≥2.`
+    :noneSig?`<strong>Conclusión:</strong> Sin diferencia significativa entre grupos (PERMANOVA p=${perm.pval.toFixed(4)}; ANOSIM p=${anos.pval.toFixed(4)}). Las comunidades no se distinguen más allá del azar con n=${nSamples}.`
+    :`<strong>Resultado mixto:</strong> PERMANOVA ${perm.pval<0.05?'detecta':'no detecta'} diferencia (p=${perm.pval.toFixed(4)}) mientras ANOSIM ${anos.pval<0.05?'detecta':'no detecta'} (p=${anos.pval.toFixed(4)}). Escenario <em>borderline</em>.`;
+
+  document.getElementById('permanova-detail').innerHTML=`
+    <strong>F=${perm.F.toFixed(3)}, R²=${perm.R2.toFixed(3)}, p=${perm.pval.toFixed(4)}</strong> (${nPerms} perms)<br><br>${pBadge(perm.pval)}<br><br>
+    ${perm.pval<0.05?`Los microbiomas difieren significativamente. R²=${perm.R2.toFixed(2)} → ${Math.round(perm.R2*100)}% de la varianza explicada por grupo.`:`No se rechaza H₀. Varianza inter-grupos ≤ intra-grupos. Considera aumentar n o revisar betadisper.`}<br><br>
+    <code style="display:block;padding:7px;background:var(--bg);border-radius:3px;font-family:var(--mono);font-size:11px;color:#9fcfef">adonis2(otu~grupo,data=meta,method="bray",permutations=${nPerms})</code>`;
+
+  document.getElementById('anosim-detail').innerHTML=`
+    <strong>R=${anos.R.toFixed(4)}, p=${anos.pval.toFixed(4)}</strong><br><br>${pBadge(anos.pval)}<br><br>
+    R=${anos.R.toFixed(3)} → ${anos.R>.75?'separación muy clara':anos.R>.5?'separación clara':anos.R>.25?'separación moderada':anos.R>0?'separación leve':'sin separación'}<br><br>
+    <code style="display:block;padding:7px;background:var(--bg);border-radius:3px;font-family:var(--mono);font-size:11px;color:#9fcfef">anosim(otu_dist,grupo,permutations=${nPerms})</code>`;
+
+  const sMeans=[0,1].map(g=>shanGroups[g].reduce((a,b)=>a+b,0)/shanGroups[g].length);
+  document.getElementById('kruskal-detail').innerHTML=`
+    <strong>H=${kw.H.toFixed(3)}, df=${kw.df}, p=${kw.pval.toFixed(4)}</strong><br><br>${pBadge(kw.pval)}<br><br>
+    Shannon: ${sc.groups.map((g,i)=>`${g.split(' ')[0]}: <strong>${sMeans[i].toFixed(3)}</strong>`).join(' · ')}<br><br>
+    Diversidad α (riqueza intra-muestra) vs PERMANOVA que evalúa β (composición entre muestras).<br><br>
+    <code style="display:block;padding:7px;background:var(--bg);border-radius:3px;font-family:var(--mono);font-size:11px;color:#9fcfef">kruskal.test(shannon~grupo,data=alpha_div)</code>`;
+
+  const topLef=lef.slice(0,6);
+  document.getElementById('lefse-detail').innerHTML=`
+    <strong>Biomarcadores (LDA≥2):</strong><br><br>
+    ${topLef.length?topLef.map(l=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px">
+      <span>${l.otu} <span style="color:var(--text-dim)">(${l.phylum})</span></span>
+      <span style="color:${l.enriched===0?'var(--pop-a)':'var(--pop-b)'}">LDA ${l.lda.toFixed(2)} · ${sc.groups[l.enriched].split(' ')[0]}</span></div>`).join(''):'No se detectaron biomarcadores con LDA≥2.'}<br>
+    <span style="color:var(--text-dim);font-size:11px">Threshold default LDA=2; usar LDA=3 para más especificidad.</span>`;
+
+  document.getElementById('pcoa-explain').innerHTML=
+    `<strong>Separación:</strong> ${sc.separation>2?'marcada':sc.separation>1?'moderada':'baja'}<br><br>
+    PC1 captura ${pct1.toFixed(1)}% de la varianza en Bray-Curtis. Mayor superposición de elipses → menor poder estadístico de PERMANOVA.`;
+
+  btn.innerHTML='▶ Correr análisis completo';btn.disabled=false;
+}
+
+// ── Init ──
+loadScenario(0);
+runAnalysis();
+</script>
+</body>
+</html>
