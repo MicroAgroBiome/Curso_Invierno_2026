@@ -2,7 +2,9 @@ project:
   type: book
   output-dir: docs
   resources:
-    - notebooks/*.ipynb 
+    - notebooks/*.ipynb
+    - notebooks/participante/*.ipynb
+    - interactivos/*.html
 
 book:
   title: "MicroAgroBiome"
@@ -34,38 +36,35 @@ book:
         - name: Centro de Investigación en Materiales Avanzados (CIMAV)
           country: Mexico
           url: https://cimav.edu.mx/ 
-          
-  date: "12/01/2026"
+    - name: Manuel Alejandro Ucan Puc
+      degrees: PhD
+      url: alejandroucanpuc.github.io
+      orcid: https://orcid.org/0000-0002-0037-9394
+      email: alejandro.ucan-puc@tec.mx
+      affiliations:
+        - name: Escuela de Ingeniería y Ciencias, Tecnológico de Monterrey
+          country: Mexico
+          url: https://research.tec.mx/vivo-tec/display/PID_318207          
+  date: "11/30/2026"
   page-navigation: true
   chapters:
   - index.qmd
   - dinamica_trabajo.qmd
-  - part: "**Exploración y clustering**"
-    chapters:
-    - cap01_intro_datos.qmd
-    - cap02_clustering.qmd
-  - part: "**Sección 3**"
-    chapters:
-    - Cap3A.qmd
-  - part: "**Sección 4**"
-    chapters:
-    - Cap5A.qmd
-    - Cap5B.qmd
-  - part: "**Sección 5**"
-    chapters:
-    - Cap4A.qmd
-  - part: "**Sección 6**"
-    chapters:
-    - Cap6A.qmd
+  - proyecto.qmd
+  - mapa_del_tesoro.qmd
+  - intro_datos.qmd
+  - pruebas_hipotesis.qmd
+  - clustering.qmd 
+  
   # Information
-  site-url: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro # 📍URL del sitio completo Rladies Mexico
-  repo-url: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro  # link de Github
+  site-url: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro
+  repo-url: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro
   sharing: [twitter, facebook, linkedin]
-  favicon: "logos/favicon.png" # icono de la pagina en pestana
+  favicon: "logos/MicroAgroBiome.png"
 
 format:
   html:
-    logo: "logos/favicon.png"
+    logo: "logos/MicroAgroBiome.png"
     toc-depth: 4
     number-depth: 3
     # css

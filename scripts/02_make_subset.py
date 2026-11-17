@@ -378,8 +378,8 @@ def write_outputs(args, res, out_dir):
 def main():
     ap = argparse.ArgumentParser(description="Subconjunto canónico del taller (solo lectura de entradas).",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    ap.add_argument("--biom", default="datos/all_abundances_598_260616.biom")
-    ap.add_argument("--meta", default="datos/full_metadata.csv")
+    ap.add_argument("--biom", default="datos/agrobiomData/all_abundances_598_260616.biom")
+    ap.add_argument("--meta", default="datos/agrobiomData/full_metadata.csv")
     ap.add_argument("--id-col", default="sample")
     ap.add_argument("--study-col", default="doi")
     ap.add_argument("--assay-col", default="assay_type")
@@ -398,7 +398,7 @@ def main():
     ap.add_argument("--explore", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--candidates", nargs="+", default=DEFAULT_CANDIDATES)
-    ap.add_argument("--out-dir", default="datos/subset")
+    ap.add_argument("--out-dir", default="datos/agrobiomData/subset")
     args = ap.parse_args()
 
     out_dir = Path(args.out_dir)
