@@ -187,7 +187,7 @@ El flujo completo está en el libro: [Dinámica de trabajo → Para instructores
 
 ## Financiamiento
 
-Este curso forma parte del proyecto de Ciencia de Frontera **CBF-2026-992 "MicroAgroBiome 2.0: un atlas evolutivo del metabolismo especializado en microbiomas de cultivos"**, financiado por ⚐.
+Este curso forma parte del proyecto de Ciencia de Frontera **CBF-2026-992 "MicroAgroBiome 2.0: un atlas evolutivo del metabolismo especializado en microbiomas de cultivos"**, financiado por SECIHTI.
 
 ## Licencia
 
