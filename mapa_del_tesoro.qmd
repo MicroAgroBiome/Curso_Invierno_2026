@@ -1,0 +1,71 @@
+---
+title: "Mapa del tesoro: la ruta de la rizósfera"
+---
+
+> **Instructor:** 
+
+::: {.callout-note .questions}
+## Preguntas
+
+- ¿Qué es la rizósfera y por qué vive ahí tanta diversidad microbiana?
+- ¿Qué tienen que ver las matemáticas (topología, combinatoria, árboles) con los microorganismos del suelo?
+- ¿Cómo se identifican microorganismos que no se pueden cultivar?
+:::
+
+::: {.callout-note .objectives}
+## Objetivos
+
+Al terminar el recorrido, serás capaz de:
+
+1.  Explicar qué es la rizósfera y por qué sus comunidades microbianas son tan diversas.
+2.  Reconocer tres ideas matemáticas que usaremos en el curso: la **forma** de un objeto (topología), los **árboles** que ordenan la diversidad (filogenia) y el **tamaño** de los espacios de posibilidades (combinatoria).
+3.  Describir cómo una secuencia de ADN permite clasificar microorganismos sin cultivarlos.
+:::
+
+## La actividad
+
+Antes de trabajar con datos, recorremos una ruta interactiva de **5 paradas** por el [Museo Virtual de Matemáticas (MUMAT)](https://mumat.matcuer.unam.mx/) de la UNAM. Cada parada combina una sala del museo o una aplicación en línea con una pregunta para responder.
+
+::: {.callout-tip}
+## 🗺️ Abrir el mapa del tesoro
+
+<a href="interactivos/mapa_del_tesoro.html" target="_blank" class="btn btn-primary btn-lg" role="button">Abrir la ruta en una pestaña nueva ↗</a>
+
+Necesitas conexión a internet: las salas y aplicaciones del MUMAT se abren desde la ruta.
+:::
+
+## Las cinco paradas
+
+| Parada | Tema | Dónde reaparece en el curso |
+|---|---|---|
+| 1 · Bienvenida | El Hormiguero del MUMAT: ¿cuántos microorganismos caben en un gramo de suelo? | Escala de los datos: millones de lecturas por muestra (capítulo 2) |
+| 2 · Topología | La forma de un objeto depende de sus **hoyos** y **conexiones**, no de sus medidas | Análisis topológico de datos (Lección 4) |
+| 3 · Rizósfera | La zona del suelo que rodea las raíces y su diversidad microbiana | Los datos del curso son metagenomas de rizósfera (capítulos 2 y 4) |
+| 4 · Filogenia | Árboles que ordenan la diversidad por su ADN; qué es un **OTU** | Rangos taxonómicos y dendrogramas (capítulos 2 y 4) |
+| 5 · Gen 16S | Un solo gen para clasificar bacterias sin cultivarlas | Diferencia entre 16S y metagenómica *shotgun* (capítulo 2) |
+
+: Paradas de la ruta y su conexión con el resto del curso.
+
+::: callout-important
+## 🔗 Del 16S a nuestros datos
+
+La ruta presenta el **gen 16S**, que secuencia un solo gen. Los datos del curso son **metagenomas** (*shotgun*): secuencian fragmentos de ADN de *todo* el genoma de *todos* los organismos de la muestra. Por eso en el curso no usamos OTU: cada lectura se asigna directamente a un taxón con nombre. Lo veremos en el capítulo 2.
+:::
+
+## Para discutir
+
+Al terminar la ruta, responde en el Etherpad:
+
+1.  En la parada 2, ¿por qué una taza y una dona son "la misma forma" para la topología? ¿Qué propiedad del suelo describe mejor la topología que una regla?
+2.  En la parada 4, un OTU agrupa secuencias con ≥ 97 % de similitud. ¿Qué ventaja y qué problema tiene usar un umbral fijo para definir "especie"?
+3.  En la parada 5, ¿por qué comparar secuencias de ADN permite estudiar microorganismos que nunca se han cultivado en un laboratorio?
+
+::: {.callout-note .keypoints}
+## Puntos clave
+
+- La **rizósfera** es la zona del suelo influida por las raíces; concentra una diversidad microbiana enorme.
+- Las matemáticas dan herramientas para describir esa diversidad: la **topología** (forma y conexiones), los **árboles** (relaciones evolutivas) y la **combinatoria** (cuántas secuencias posibles existen).
+- La secuenciación de ADN permite identificar microorganismos sin cultivarlos: con un gen marcador (16S) o con todo el ADN de la muestra (metagenómica, como en este curso).
+:::
+
+**Siguiente capítulo:** pasamos del recorrido a los datos reales: qué es una tabla de abundancia y cómo se explora en Python.

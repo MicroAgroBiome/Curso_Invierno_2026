@@ -1,0 +1,241 @@
+# **Dinámica de trabajo** {.unnumbered}
+
+Esta página explica **cómo trabajamos** durante la semana: qué material usar en cada sesión, cómo es la dinámica de clase, cómo avanzar en el proyecto y qué hacer si algo falla. La última sección es para instructores.
+
+## Cómo está organizado el material
+
+El libro tiene tres tipos de capítulo:
+
+| Tipo | Capítulos | Cómo se trabaja |
+|---|---|---|
+| **Actividad interactiva** | 1 · [Mapa del tesoro](mapa_del_tesoro.qmd) <br> 3 · [Pruebas de hipótesis](pruebas_hipotesis.qmd) | Se abre una página web desde el capítulo. No hay que escribir código |
+| **Lección con notebook** | 2 · [Introducción a los datos](intro_datos.qmd) <br> 4 · [Técnicas de clustering](clustering.qmd) | El capítulo explica los conceptos y muestra los resultados esperados; el **notebook de Jupyter** es donde escribes y ejecutas el código |
+| **Proyecto** | [Proyecto del curso](proyecto.qmd) | Página de referencia para el trabajo en equipo de toda la semana, con su propio notebook inicial |
+
+: Falta agregar los capítulos de transformación composicional (martes) y de redes y TDA (viernes).
+
+En las lecciones con notebook, las figuras del libro **son las salidas del mismo notebook** que vas a ejecutar: si tu resultado se ve distinto al del libro, algo cambió en el camino (y vale la pena preguntar).
+
+## Antes del curso
+
+### Elige dónde vas a ejecutar el código
+
+::: panel-tabset
+### Google Colab (recomendado)
+
+No necesitas instalar nada; solo una cuenta de Google.
+
+1.  Abre el notebook con el botón **Open in Colab** del capítulo correspondiente.
+2.  Guarda una copia en tu Drive (*Archivo → Guardar una copia en Drive*): así conservas lo que escribas.
+3.  Ejecuta la celda de **Setup**: instala las librerías que faltan y **descarga los datos automáticamente** (no necesitas descargar nada a mano).
+4.  Si ves `Entorno: Google Colab`, todo está listo.
+
+### En tu computadora
+
+Para quien ya trabaja con Python localmente (VSCode o Jupyter).
+
+``` bash
+git clone https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro.git
+cd MicroAgroBiome_bioinfo2026_libro
+python -m venv venv
+source venv/bin/activate        # en Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Abre el notebook y ejecuta la celda de **Setup**; debe decir `Entorno: Local (VSCode)`.
+:::
+
+### Lista de verificación
+
+- [ ] Puedo abrir el notebook de la Lección 1 en Colab (o localmente) y guardé una copia.
+- [ ] La celda de Setup se ejecuta sin errores.
+- [ ] La celda de carga de datos muestra `(75, 3330)` y `(75, 21)`: 75 muestras, 3330 géneros y 21 columnas de metadatos.
+
+## Dinámica de cada sesión
+
+En las lecciones con notebook trabajamos con **codificación en vivo participativa**, al estilo de [The Carpentries](https://carpentries.org/): el instructor escribe el código en pantalla, explicando cada línea, y tú lo escribes al mismo tiempo en tu notebook. Escribirlo (en vez de solo ejecutarlo) es lo que te ayuda a entenderlo y recordarlo.
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+    A["📖 Concepto<br/>(libro en pantalla)"] --> P["🔮 Predice<br/>¿qué saldrá?"]
+    P --> B["⌨️ Escribimos juntos<br/>celdas ⌨️ del notebook"]
+    B --> R["▶️ Ejecutas y comparas<br/>con la figura del libro"]
+    R --> C["✏️ Ejercicio"]
+    C --> E["💬 Discusión<br/>¿qué significa el resultado?"]
+    E -->|siguiente concepto| A
+```
+
+Cada concepto sigue el mismo ciclo:
+
+1.  **Explicación (instructor):** se presenta el concepto con el capítulo del libro en pantalla.
+2.  **Predicción (todos):** antes de ejecutar, respondes en el Etherpad qué esperas ver (bloques 🔮).
+3.  **Código en vivo (todos):** escribimos juntos las celdas marcadas con **⌨️**. Las demás, sobre todo las de gráficas, ya vienen escritas: solo se ejecutan.
+4.  **Ejercicio (individual):** completas el código o respondes una pregunta, con un tiempo indicado.
+5.  **Solución y discusión (grupo):** se revisa la solución y, sobre todo, **la interpretación** del resultado.
+
+**Al final de cada sesión**, la última media hora a una hora es **tiempo de proyecto**: los equipos aplican a sus datos lo que se vio ese día (ver [Proyecto del curso](proyecto.qmd)).
+
+### Si te atrasas o algo falla
+
+- **Pide ayuda sin detener la clase:** levanta la mano (en el salón) o escribe en el chat o en el Etherpad (en línea); uno de los instructores o *helpers* te atiende.
+- **Copia del Etherpad:** después de escribir cada bloque, el instructor lo pega en el Etherpad.
+- **🛟 Ponerse al día:** al inicio de cada sección hay una celda de rescate (con el código oculto) que recrea todas las variables anteriores. Ejecútala **solo** si te atrasaste o algo falló.
+
+### Cómo son los ejercicios
+
+Los ejercicios **no** piden escribir código desde cero. Hay cuatro tipos:
+
+- **Predecir (🔮):** antes de ejecutar, anotas qué esperas que salga.
+- **Completar una línea:** reemplazas `TU_CODIGO_AQUI` por una función, un valor o un nombre de columna.
+- **Cambiar y comparar:** cambias un parámetro (una métrica, un número de grupos) y comparas con el resultado anterior.
+- **Interpretar:** respondes preguntas sobre una figura o un resultado, sin escribir código.
+
+``` python
+# Ejemplo (Lección 1, Ejercicio 2)
+fabaceae_samples = merged_table[merged_table["host_name_family"] == TU_CODIGO_AQUI]
+```
+
+::: callout-tip
+### Es normal ver este error
+
+Si ejecutas un ejercicio **sin completarlo**, verás:
+
+`NameError: name 'TU_CODIGO_AQUI' is not defined`
+
+Es intencional: indica qué línea falta completar.
+:::
+
+Las soluciones están en el **capítulo del libro**, en bloques plegados **"Solución"** debajo de cada ejercicio. Intenta resolverlo primero; la solución incluye una explicación del resultado.
+
+## Agenda
+
+La agenda completa de la semana está en [Información general → Agenda](index.qmd#agenda). Aquí, el detalle de las dos lecciones con notebook. Los tiempos son **estimaciones** de diseño, no mediciones de una sesión real.
+
+### Lunes 30 · Introducción a los datos
+
+| Bloque | Contenido | Tiempo |
+|---|:---:|---|
+| 🔧 Setup | Entorno, librerías y ⌨️ carga del BIOM | 10 min |
+| 📖 Sección 1 | Dimensiones de la tabla y medidas de resumen; media vs mediana (⌨️ + 🔮) | 10 min |
+| 📖 Sección 1 | Tipos de variable (`dtypes`, `head`, `describe`) | — |
+| ✏️ Ejercicio 1 | Media y desviación estándar de *Pseudomonas* | — |
+| 📖 Sección 2 | Tabla de abundancia, formato BIOM, metadatos (⌨️) | 10 min |
+| ✏️ Ejercicio 2 | Filtrar las muestras de Fabaceae (completar) | 5 min |
+| 📖 Sección 3.1–3.2 | Diseño del estudio, abundancia relativa, ADN humano, limpieza (⌨️ + 🔮) | 15 min |
+| 📖 Sección 3.3 | Composición por filo | — |
+| 📖 Sección 3.4 | Profundidad de secuenciación (⌨️) | 5 min |
+| 📖 Sección 3.5 | Prevalencia | — |
+| 📖 Sección 3.6 | Diversidad α, correlación y Kruskal-Wallis (⌨️ + 🔮) | 10 min |
+| ✏️ Ejercicio 3 | Interpretar las figuras de diversidad (interpretar) | 5 min |
+| ✏️ Ejercicio 4 | Cambiar Shannon por Simpson (tarea) | — |
+
+Lo que se ve en vivo es justo lo que el proyecto necesita el lunes: cargar los datos, limpiarlos, revisar la profundidad y calcular la diversidad α.
+
+### Jueves 3 · Técnicas de clustering
+
+| Bloque | Contenido | Tiempo |
+|---|:---:|---|
+| 🔧 Setup | Entorno, preparación de datos y ⌨️ repaso de abundancia relativa | 10 min |
+| 📖 Sección 1 | Distancia de Bray-Curtis y matriz de distancias (⌨️ + 🔮) | 10 min |
+| ✏️ Ejercicio 1 | Distancia euclidiana vs Bray-Curtis (completar) | 5 min |
+| 📖 Sección 2 | Ordenación PCoA (⌨️ + 🔮) | 10 min |
+| 📖 Sección 3 | Clustering jerárquico, dendrograma, corte del árbol y correlación cofenética (⌨️) | 15 min |
+| ✏️ Ejercicio 2 | Enlace `complete` vs `average` (cambiar y comparar) | 5 min |
+| 📖 Sección 4 | k-means y silhouette (⌨️ + 🔮) | 15 min |
+| ✏️ Ejercicio 3 | k-means con k = 6 (cambiar y comparar) | 5 min |
+| 📖 Sección 5 | ¿Los clusters siguen a la planta o al estudio? ARI, PERMANOVA, pares, atípicos (⌨️ + 🔮) | 20 min |
+| ✏️ Ejercicio 4 | Interpretar el mensaje de la lección (interpretar) | 5 min |
+| 📊 Resumen | Puntos clave y exportar resultados | 5 min |
+| 🧩 Proyecto | Comparación entre comunidades del maíz | 60 min |
+
+## Continuidad entre sesiones
+
+Cada notebook es **independiente**: vuelve a cargar los datos y repite la limpieza que necesita, así que no hace falta haber terminado la sesión anterior para empezar la siguiente.
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+    D[("Datos del curso<br/>75 metagenomas")] --> L1["Lunes<br/>Introducción a los datos"]
+    L1 -->|"conteos limpios,<br/>metadatos"| L3["Martes<br/>Transformación composicional"]
+    D --> L2["Jueves<br/>Clustering"]
+    L2 -.->|"distancias,<br/>clusters"| L4["Viernes<br/>Redes y TDA"]
+    P[("Datos del proyecto<br/>41 metagenomas de maíz")] --> PR["Proyecto<br/>todos los días"]
+```
+
+::: callout-warning
+### En Colab los archivos son temporales
+
+Lo que guardas en Colab (resultados exportados, figuras) **se borra al cerrar la sesión**. Tu notebook se conserva solo si guardaste una copia en Drive.
+:::
+
+## Si algo falla
+
+| Síntoma | Qué hacer |
+|------------------------------------|------------------------------------|
+| `NameError: TU_CODIGO_AQUI` | Es un ejercicio sin completar: reemplaza `TU_CODIGO_AQUI`. |
+| `NameError` con otro nombre | Falta ejecutar (o escribir) una celda anterior. Ejecuta la celda **🛟 Ponerse al día** más cercana hacia arriba. |
+| Me atrasé al escribir | Copia el bloque del Etherpad o usa la celda **🛟** de la sección. |
+| `ModuleNotFoundError` | No se ejecutó la celda de Setup (o falló la instalación): ejecútala de nuevo. |
+| Colab se desconectó | *Entorno de ejecución → Reiniciar* y vuelve a ejecutar desde el Setup. |
+| Perdí lo que había escrito | Abre tu copia desde Drive (*Archivo → Abrir notebook*). Si no guardaste copia, vuelve a abrir el notebook y usa las celdas 🛟. |
+| Mi figura no se parece a la del libro | Revisa que no cambiaste parámetros fuera del ejercicio; si persiste, pregunta. |
+
+## Para instructores: cómo se produce el material
+
+Todo sale de **una sola fuente**: el **notebook completo** ejecutado (`notebooks/leccion_N_*.ipynb`).
+
+- El **libro** toma de él el código y las figuras (`{{{< embed ... echo=true >}}}`) y **no vuelve a ejecutar** nada, por lo que quien renderiza no necesita Python ni los datos.
+- El **notebook del participante** (`notebooks/participante/`) se **genera** con un script: nunca se edita a mano.
+- El **notebook del proyecto** (`notebooks/proyecto_maiz.ipynb`) y las **páginas interactivas** (`interactivos/`) se suben tal cual: no pasan por el generador.
+
+```{mermaid}
+%%| echo: false
+flowchart TD
+    A["Editar el notebook completo (.ipynb)"] --> B["Ejecutarlo completo en local<br/>nbconvert --execute --allow-errors"]
+    B --> B2["Generar el notebook del participante<br/>scripts/generar_notebook_participante.py"]
+    B2 --> C["Commit de ambos notebooks<br/>en una rama propia"]
+    C --> D["quarto preview<br/>revisar el capítulo (sin commit de docs/)"]
+    D --> E["Pull request → revisión"]
+    E --> F["Merge a main"]
+    F --> G["Render y publicación<br/>(GitHub Pages)"]
+```
+
+**Reglas:**
+
+1.  **Ejecutar el notebook completo** antes de cada commit: las figuras del libro son exactamente esas salidas. Las celdas de ejercicio fallan a propósito, por eso se usa `--allow-errors`. Se necesitan `nbconvert`, `nbformat` e `ipykernel` en el entorno:
+
+    ``` bash
+    jupyter nbconvert --to notebook --execute --inplace --allow-errors notebooks/leccion_1_introduccion_datos.ipynb
+    python scripts/generar_notebook_participante.py notebooks/leccion_1_introduccion_datos.ipynb
+    ```
+
+2.  **Etiquetas de celda** del notebook completo (en VSCode: `...` de la celda → *Add Cell Tag*), que usa el script generador:
+
+    | Etiqueta | En el notebook del participante |
+    |---|---|
+    | `teclear` | Queda vacía; solo conserva su comentario guía `# ⌨️ ...` (obligatorio) |
+    | `estado` | Su código se copia a las celdas de rescate posteriores |
+    | `rescate` | Se llena con el código de las celdas `estado` anteriores (🛟, con el código oculto) |
+    | `solucion`, `instructor` | Se eliminan |
+
+3.  **No hacer commit de `docs/`** en las ramas: es salida generada y provoca conflictos en los merges.
+
+4.  Las celdas cuyo código o salida aparece en el libro llevan al inicio una etiqueta de Quarto, por ejemplo:
+
+    ``` python
+    #| label: fig-l1-profundidad
+    #| fig-cap: "Distribución de la profundidad de secuenciación."
+    ```
+
+    Las etiquetas viven en el propio notebook: si una celda nueva debe aparecer en el libro, agrégale su `#| label:` a mano. Las de gráficas llevan además `#| code-fold: true` para que el libro muestre su código plegado.
+
+5.  La URL del repositorio aparece en un solo archivo (`_variables.yml`), para que un cambio de nombre del repo sea una edición de una línea.
+
+6.  **Datos:** el subconjunto de clase (`datos/subset.zip`) y el del proyecto (`datos/subset_proyecto.zip`) se generan con `scripts/02_make_subset.py`; su receta y su registro (`taller_samples.csv`, `subset_log.txt`) van dentro de cada zip. Nunca sobrescribir `datos/subset/` al generar otro subconjunto: usar siempre `--out-dir` propio.
+
+::: callout-warning
+### Pendiente
+
+- Si las sesiones de transformación composicional y de redes y TDA siguen esta misma dinámica (notebook completo + participante).
+:::

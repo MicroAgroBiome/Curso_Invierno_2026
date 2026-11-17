@@ -1,9 +1,0 @@
-# Memoria y Carga Cognitiva
-
-> Instructora: Verónica Jimenez
-
-<iframe 
-  src="presentaciones/Seccion3.MemoriaYotrosPrincipios.pdf" 
-  width="100%" 
-  height="700px">
-</iframe>

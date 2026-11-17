@@ -1,0 +1,134 @@
+---
+title: "Pruebas de hipótesis en microbiomas"
+---
+
+> **Instructor:** 
+
+::: {.callout-note .questions}
+## Preguntas
+
+- ¿Cómo se decide si dos grupos de comunidades microbianas son "distintos"?
+- ¿Qué cambia en una prueba cuando hay más muestras o una diferencia más grande entre grupos?
+- ¿Por qué una prueba sobre diversidad α y una sobre composición (β) pueden dar respuestas distintas?
+:::
+
+::: {.callout-note .objectives}
+## Objetivos
+
+Al terminar esta actividad, serás capaz de:
+
+1.  Plantear la hipótesis nula y la alternativa al comparar comunidades microbianas.
+2.  Explicar qué mide una prueba por **permutaciones** y cómo se interpreta su valor *p*.
+3.  Describir cómo el **tamaño del efecto** y el **número de muestras** cambian el resultado de una prueba.
+4.  Distinguir una prueba sobre diversidad α (Kruskal-Wallis sobre Shannon) de una sobre composición (PERMANOVA, ANOSIM).
+:::
+
+## De explorar a probar
+
+En el capítulo anterior **exploramos** los datos: vimos diferencias en las figuras. Una **prueba de hipótesis** pregunta si esa diferencia es mayor de lo que esperaríamos **por azar**:
+
+- **H₀ (hipótesis nula):** las comunidades de los grupos no difieren más allá del azar.
+- **H₁ (hipótesis alternativa):** al menos un grupo difiere.
+
+El **valor *p*** es la probabilidad de observar una diferencia al menos tan grande como la de los datos **si H₀ fuera cierta**. Si *p* es menor que un umbral fijado de antemano (α, normalmente 0.05), rechazamos H₀.
+
+### Pruebas por permutaciones
+
+Con datos de microbioma casi nunca se cumplen los supuestos de las pruebas clásicas (normalidad, independencia de las variables). Las pruebas **por permutaciones** evitan esos supuestos:
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+    A["Calcular el estadístico<br/>con las etiquetas reales"] --> B["Revolver las etiquetas<br/>de grupo al azar"]
+    B --> C["Recalcular el estadístico"]
+    C -->|repetir 999 veces| B
+    C --> D["p = fracción de permutaciones con un<br/>estadístico ≥ al observado"]
+```
+
+Si las etiquetas no importan (H₀ cierta), revolverlas no cambia mucho el estadístico, y el valor observado será "uno más" entre los permutados: *p* grande.
+
+### Las pruebas del laboratorio
+
+| Prueba | Qué compara | Sobre qué datos |
+|---|---|---|
+| **Kruskal-Wallis** | Si un índice de diversidad α (Shannon) difiere entre grupos | Un número por muestra |
+| **PERMANOVA** | Si la composición difiere: variación **entre** grupos frente a variación **dentro** de los grupos | Matriz de distancias (Bray-Curtis, Jaccard) |
+| **ANOSIM** | Si las distancias **entre** grupos son mayores que las distancias **dentro** de los grupos, usando sus rangos | Matriz de distancias |
+
+: Pruebas que calcula el laboratorio.
+
+## El laboratorio
+
+::: {.callout-warning}
+## Los datos son simulados
+
+El laboratorio **genera datos artificiales** cada vez que corres un análisis. Los escenarios (maíz contra frijol, tomate contra chile, etc.) son **ejemplos ilustrativos**: sus resultados no provienen de muestras reales ni de los datos del curso. Úsalo para entender **cómo se comportan las pruebas**, no para sacar conclusiones biológicas.
+:::
+
+::: {.callout-tip}
+## 🧪 Abrir el laboratorio
+
+<a href="interactivos/pruebas_hipotesis.html" target="_blank" class="btn btn-primary btn-lg" role="button">Abrir el laboratorio en una pestaña nueva ↗</a>
+:::
+
+**Cómo usarlo:**
+
+1.  Elige un **escenario** en el panel izquierdo.
+2.  Mueve el control **"Separación entre comunidades"**: los valores *p* se recalculan al instante.
+3.  Ajusta los **parámetros de simulación** (muestras por grupo, métrica de distancia) y presiona **▶ Correr análisis completo**.
+4.  Revisa las pestañas **PCoA**, **Stacked Bars** y **Pruebas**.
+
+## Ejercicios
+
+::: {.callout-tip .challenge}
+## ✏️ Ejercicio 1: El efecto del tamaño de muestra (5 min)
+
+En el escenario **Tomate vs Chile**, deja la separación fija y corre el análisis con **5**, **10** y **30** muestras por grupo. Anota el valor *p* de PERMANOVA en cada caso.
+
+¿Qué pasa con *p* al aumentar las muestras? ¿Cambió la diferencia real entre los grupos?
+:::
+
+::: {.callout-note .solution collapse="true"}
+## Solución
+
+Con más muestras, la misma diferencia produce valores *p* más pequeños: la prueba tiene más **poder** para detectarla. La diferencia entre grupos no cambió; cambió nuestra capacidad de distinguirla del azar. Por eso un valor *p* pequeño **no** indica por sí solo una diferencia grande.
+:::
+
+::: {.callout-tip .challenge}
+## ✏️ Ejercicio 2: ¿Dónde se cruza α = 0.05? (5 min)
+
+En cualquier escenario, mueve el control de separación desde **"sin efecto"** hasta **"efecto máximo"**. ¿A partir de qué punto PERMANOVA rechaza H₀? Repite con el doble de muestras por grupo: ¿se mueve ese punto?
+:::
+
+::: {.callout-note .solution collapse="true"}
+## Solución
+
+El punto donde *p* cruza 0.05 se desplaza hacia efectos **más pequeños** cuando hay más muestras. Con pocas muestras, solo las diferencias grandes resultan "significativas". El umbral α es una convención: *p* = 0.049 y *p* = 0.051 describen prácticamente la misma evidencia.
+:::
+
+::: {.callout-tip .challenge}
+## ✏️ Ejercicio 3: Diversidad α frente a composición (5 min)
+
+Compara el resultado de **Kruskal-Wallis** (sobre Shannon) con el de **PERMANOVA** en varios escenarios. ¿Encuentras alguno en el que una prueba sea significativa y la otra no? ¿Cómo es posible?
+:::
+
+::: {.callout-note .solution collapse="true"}
+## Solución
+
+Son preguntas distintas. Kruskal-Wallis compara un **resumen** de cada muestra (qué tan diversa es); PERMANOVA compara **qué taxones** hay y en qué proporción. Dos grupos pueden tener la misma diversidad con taxones completamente distintos (PERMANOVA significativa, Kruskal-Wallis no), o la misma composición dominante con distinta equidad.
+:::
+
+## Conexión con los datos reales
+
+En el capítulo 4 aplicamos PERMANOVA a los **datos reales** del curso. Ahí aparece algo que este laboratorio no puede mostrar: cuando dos variables están **entrelazadas** (la planta y el estudio de origen), una prueba significativa no dice cuál de las dos produce la diferencia. Un valor *p* responde "¿es esto mayor que el azar?", no "¿qué lo causa?".
+
+::: {.callout-note .keypoints}
+## Puntos clave
+
+- Una prueba de hipótesis compara lo observado con lo que esperaríamos **por azar** si H₀ fuera cierta.
+- Las pruebas por **permutaciones** (PERMANOVA, ANOSIM) no suponen normalidad, por eso se usan con datos de microbioma.
+- El valor *p* depende del **tamaño del efecto** y del **número de muestras**: significativo no significa grande ni importante.
+- Diversidad α y composición (β) responden preguntas distintas y pueden dar resultados distintos.
+:::
+
+**Siguiente capítulo:** medimos distancias entre comunidades reales, buscamos grupos con clustering y ponemos a prueba si siguen a la planta o al estudio.

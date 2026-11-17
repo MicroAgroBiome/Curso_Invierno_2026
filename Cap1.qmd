@@ -1,9 +1,0 @@
-# ¿Cómo aprenden las personas?
-
-> Instructora: 
-
-<iframe 
-  src="presentaciones/python-cheatsheet.pdf" 
-  width="100%" 
-  height="700px">
-</iframe>

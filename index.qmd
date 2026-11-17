@@ -1,109 +1,120 @@
-::: {layout-ncol="2"}
-![](flyer/favicon.png){fig-align="left" width="108"}
+# **Información general** {.unnumbered}
+
+::: {.panel-tabset group="globalInfo"}
+### Curso
+
+Este curso forma parte de la [**Segunda Escuela Michoacana de Biología Matemática**](https://matmor.unam.mx/embm-2026/).
+
+- **Fechas:** 30 de noviembre al 5 de diciembre de 2026
+- **Duración del curso:** 12 horas
+- **Horario:** 15:00 a 18:30 h, con receso de 16:30 a 17:00 h
+- **Modalidad:** Híbrido
+- **Sede:** Centro de Ciencias Matemáticas, UNAM
+
+#### Instructores
+
+- **Dra. Nelly Sélem Mojica** – 
+- **MC. Rafael** – 
+- **Dra. Haydeé Peruyero** – Profesora Investigadora de la ENES-Juriquilla UNAM, RLadies Morelia. [Página web](https://haydeeperuyero.github.io/), [haydeeperuyero\@unam.mx](mailto:haydeeperuyero@unam.mx)
+- **MC. David Alberto García Estrada** – Técnico Titular "C", Centro de Investigación en Materiales Avanzados ([CIMAV](https://cimav.edu.mx/)), [david.garcia\@cimav.edu.mx](mailto:david.garcia@cimav.edu.mx)
+- **Dr. Manuel Alejandro Ucan Puc** – Profesor Investigador de la Escuela de Ingeniería y Ciencias, [Tecnológico de Monterrey](https://research.tec.mx/vivo-tec/), [alejandro.ucan-puc\@tec.mx](mailto:alejandro.ucan-puc@tec.mx)
+
+#### Objetivo
+
+Desarrollar habilidades para identificar y cuantificar diferencias estadísticas y topológicas entre comunidades microbianas usando herramientas de análisis de datos y topología aplicada.
+
+#### Resultados
+
+Al finalizar, cada estudiante presentará un análisis comparativo de comunidades microbianas y su interpretación biológica (ver [Proyecto del curso](proyecto.qmd)).
+
+#### Estructura académica
+
+Se combinarán herramientas de estadística multivariada, análisis topológico de datos (TDA) e inferencia ecológica para caracterizar la diversidad microbiana. Los participantes trabajarán con **conjuntos de datos reales** de comunidades microbianas, aplicando métodos comparativos que integran estadística clásica y geometría de datos.
+
+#### Objeto de estudio
+
+Analizamos comunidades microbianas de la **rizósfera de cultivos** (el suelo que rodea las raíces) a partir de metagenomas reales, y comparamos su estructura estadística y topológica para identificar patrones de diversidad y organización. Se enfatiza el uso de:
+
+- Análisis de diversidad microbiana
+- Comparación estadística entre comunidades
+- Métodos de topología aplicada a datos biológicos
+
+### Agenda {#agenda}
+
+Las sesiones de lunes a viernes son de **15:00 a 18:30 h**, con receso de **16:30 a 17:00 h**. El miércoles 2 de diciembre no hay sesión. Las presentaciones finales son el sábado 5, de **9:00 a 12:30 h**.
+
+Cada día, la **última media hora a una hora** se dedica a que los equipos avancen en su [proyecto](proyecto.qmd).
+
+#### Lunes 30 de noviembre: Introducción
+
+**Instructores:** Nelly, Rafa, David
+
+| Horario | Actividad | Capítulo |
+|:---:|---|---|
+| 15:00 – 15:10 | Presentación y bienvenida al taller | - |
+| 15:10 – 15:50 | Mapa del tesoro: la ruta de la rizósfera (MUMAT) | [Mapa del tesoro](mapa_del_tesoro.qmd) |
+| 15:50 – 16:30 | Pruebas de hipótesis en microbiomas | [Prueba de Hipótesis](pruebas_hipotesis.qmd) |
+| 16:30 – 17:00 | ☕ *Receso* | |
+| 17:00 – 18:10 | Introducción a los datos | [Introducción al análisis de datos](intro_datos.qmd) |
+| 18:10 – 18:30 | Inicio del proyecto: formar parejas y explorar los datos | [Proyecto](proyecto.qmd) |
+
+#### Martes 1 de diciembre: Transformación composicional y clasificación
+
+**Instructores:** Rafa, Nelly
+
+| Horario | Actividad | Capítulo |
+|:---:|---|---|
+| 15:00 – 16:30 | Transposición composicional | - |
+| 16:30 – 17:00 | ☕ *Receso* | |
+| 17:00 – 17:30 | Transposición composicional | - |
+| 17:30 – 18:30 | Avance del proyecto | [Proyecto](proyecto.qmd) |
+
+#### Jueves 3 de diciembre: Clustering
+
+**Instructor:** David
+
+| Horario | Actividad | Capítulo |
+|:---:|---|---|
+| 15:00 – 16:30 | Técnicas de clustering: distancias, PCoA y clustering jerárquico | [Técnicas de clustering](clustering.qmd) |
+| 16:30 – 17:00 | ☕ *Receso* | |
+| 17:00 – 17:30 | Técnicas de clustering: k-means, silhouette y ¿planta o estudio? | [Técnicas de clustering](clustering.qmd) |
+| 17:30 – 18:30 | Avance del proyecto | [Proyecto](proyecto.qmd) |
+
+#### Viernes 4 de diciembre: Análisis topológico
+
+**Instructores:** Haydeé, Alejandro
+
+| Horario | Actividad | Capítulo |
+|:---:|---|---|
+| 15:00 – 16:30 | Redes de coocurrencia | - |
+| 16:30 – 17:00 | ☕ *Receso* | |
+| 17:00 – 17:30 | Análisis topológico de datos (TDA) | - |
+| 17:30 – 18:30 | Avance del proyecto e integración del notebook del equipo | [Proyecto](proyecto.qmd) |
+
+#### Sábado 5 de diciembre: Presentaciones
+
+| Horario | Actividad |
+|:---:|---|
+| 9:00 – 12:30 | Presentación final de los proyectos de la Escuela ([Proyecto](proyecto.qmd)) |
+
+### Requisitos
+
+- Conocimientos básicos de estadística y de programación. Se recomienda revisar material introductorio de **Python** antes de la escuela: el curso se imparte en Python.
+- Una **cuenta de Google** para trabajar en Google Colab (recomendado; no requiere instalar nada).
+- Opcional: Python 3.10 o superior instalado localmente, para quien prefiera trabajar en su computadora.
+- Leer la [Dinámica de trabajo](dinamica_trabajo.qmd) antes de la primera sesión y verificar que el notebook de la Lección 1 abre y su celda de Setup se ejecuta sin errores.
+
+### MicroAgroBiome
+
+Este curso forma parte del proyecto de Ciencia de Frontera **CBF-2026-992 "MicroAgroBiome 2.0: un atlas evolutivo del metabolismo especializado en microbiomas de cultivos"**, financiado por **SECIHTI**.
+
+Los datos del curso son un subconjunto de la base de datos [MicroAgroBiome](https://agrobiom.matmor.unam.mx/), descrita en:
+
+> Aguilar C, Fontove-Herrera F, Pashkov A, García-Estrada DA, Contreras-Peruyero H, Guerrero-Flores S, Ramírez-Sánchez O, Sélem-Mojica N. *MicroAgroBiome: a toolkit for exploring specialized metabolism and ecological interactions in rhizosphere microbiomes of cultivated crops.* **Nucleic Acids Research** 54(D1): D1743–D1752 (2026). [doi:10.1093/nar/gkaf1083](https://doi.org/10.1093/nar/gkaf1083)
+
+### Citar y reutilizar
+
+El material del curso se puede reutilizar y adaptar libremente con la debida atribución, bajo la licencia [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es).
+
+Si usas los datos, cita el artículo de MicroAgroBiome (pestaña **Proyecto MicroAgroBiome**).
 :::
-
-# Información general {.unnumbered}
-
-- :::: {.panel-tabset group="globalInfo"}
-  ### Sobre el curso 📌
-
-  info general
-
-  - **Fechas:**
-  - **Duración del curso:**
-  - **Horario:**
-  - **Modalidad:** Virtual
-  - **Sede:** ??
-
-  #### **Instructores:**
-
-  - **Dra. Haydeé Peruyero** - Profesora Investigadora de la ENES-Juriquilla UNAM, Rladies Morelia. [Web page](https://haydeeperuyero.github.io/), haydeeperuyero\@unam.mx
-
-  #### **Descripción**
-
-  Por llenar
-
-  #### **Objetivo**
-
-  Por llenar
-
-  #### **Enfoque de la audiencia**
-
-  Por llenar
-
-  ## Citar y reutilizar el material del curso
-
-  Los datos del curso se pueden reutilizar y adaptar libremente con la debida atribución. Todos los datos de los cursos de estos repositorios están sujetos a la licencia [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
-  ### Requisitos previos
-
-  Por llenar
-
-  ### Agenda 📆 {#agenda}
-
-  **Dia 1**
-
-  +-------------------------------------------------------------------------+-----------------------+
-  | Tema                                                                    | Tiempo                |
-  +=========================================================================+:=====================:+
-  | **Lunes 21 de septiembre (9:00 - 18:00)**                               |                       |
-  +-------------------------------------------------------------------------+-----------------------+
-  | 🔷 **Sección 1 - (9:00 - 11:30 h)**                                     |                       |
-  +-------------------------------------------------------------------------+-----------------------+
-  | - Bienvenida e introducción                                             | 2h 30 min             |
-  +-------------------------------------------------------------------------+-----------------------+
-  | ☕ *break (11:30 - 12:00) ☕*                                           | 30 min                |
-  +-------------------------------------------------------------------------+-----------------------+
-  | 🔷 **Sección** **2 - (12:00-14:30 h)**                                  |                       |
-  +-------------------------------------------------------------------------+-----------------------+
-  | - Modelos mentales y carga cognitiva                                    | 2h 30 min             |
-  +-------------------------------------------------------------------------+-----------------------+
-  | *🍕 Comida (14:30 - 15:30 h) 🍕*                                        | 1 h                   |
-  +-------------------------------------------------------------------------+-----------------------+
-  | 🔷 **Sección** **3 - (15:30-18:00 h)**                                  |                       |
-  +-------------------------------------------------------------------------+-----------------------+
-  | - Memoria y otros principios                                            | 2h 30 min             |
-  +-------------------------------------------------------------------------+-----------------------+
-  | [Cuestionario de evaluación Día 1](https://forms.gle/qv1nyL25TFqJh8CLA) |                       |
-  +-------------------------------------------------------------------------+-----------------------+
-
-  **Dia 2**
-
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | Tema                                                                    | Tiempo    | Instructora    |
-  +=========================================================================+:=========:+================+
-  | **Miércoles 23 de septiembre (9:00 - 18:00)**                           |           |                |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | 🔷 **Sección 4 - (9:00 - 11:30 h)**                                     |           |                |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | - Enseñar en línea y planificación de cursos                            | 2h 30 min | Evelia Coss    |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | ☕ *break (11:30 - 12:00) ☕*                                           | 30 min    |                |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | 🔷 **Sección** **5 - (12:00-14:30 h)**                                  |           |                |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | - Audiencia y simulación de entrenamiento                               | 2h 30 min | Nelly Sélem    |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | *🍕 Comida (14:30 - 15:30 h) 🍕*                                        | 1 h       |                |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | 🔷 **Sección 6 - (15:30-18:00 h)**                                      |           |                |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | - Programación en vivo y entrenamientos                                 | 2h 30 min | Sofía Zorrilla |
-  +-------------------------------------------------------------------------+-----------+----------------+
-  | [Cuestionario de evaluación Día 2](https://forms.gle/esibtLAGrZExAS8C6) |           |                |
-  +-------------------------------------------------------------------------+-----------+----------------+
-
-  ### Comité organizador
-
-  quienes
-
-  #### **Patrocinadores**
-
-  ::: {layout-ncol="3"}
-  PAPIME
-
-  DINERO
-
-  ![](logos/rladiesmorelia.jpeg){width="232"}
-  :::
-  ::::

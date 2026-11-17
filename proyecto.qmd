@@ -1,0 +1,99 @@
+# **Proyecto del curso** {.unnumbered}
+
+> Trabajo **en equipo** · Entrega: **un reporte** y **una presentación de 10 minutos** por equipo, el **sábado 5 de diciembre** (9:00–12:30 h)
+
+::: {.callout-note .questions}
+## La pregunta del proyecto
+
+**¿Qué tan parecido es el microbioma de la rizósfera del maíz entre estudios distintos?**
+
+En las sesiones descubrimos que el **estudio de origen** pesa mucho en la composición de las comunidades. En el proyecto lo van a **medir**: dos muestras de maíz, ¿se parecen más si vienen del **mismo estudio**, de **otro estudio del mismo país**, o de **otro país**?
+:::
+
+## Los datos
+
+Trabajarán con un subconjunto de la base de datos [MicroAgroBiome](https://agrobiom.matmor.unam.mx/), distinto del que usamos en clase:
+
+- **41 metagenomas de rizósfera de maíz** (*Zea mays*), secuenciados con WGS.
+- **6 estudios publicados:** 31 muestras de **Sudáfrica** (5 estudios) y 10 de **Estados Unidos** (1 estudio).
+- Conteos de lecturas por **género**, igual que en clase.
+
+::: callout-warning
+## Una limitación que deben declarar
+
+Las 10 muestras de Estados Unidos vienen de **un solo estudio**: para ese país, *país* y *estudio* son la misma variable. Lo que sí pueden medir es cuánto varía el maíz **entre estudios dentro de Sudáfrica**. Su interpretación debe tomarlo en cuenta.
+:::
+
+::: callout-tip
+## 🧪 Notebook del proyecto
+
+Cada integrante abre el notebook inicial y guarda **su propia copia** (*Archivo → Guardar una copia en Drive*):
+
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/proyecto_maiz.ipynb)
+
+El notebook trae la pregunta, la tabla del equipo, la celda de **Setup** que descarga los datos del proyecto y una sección vacía para cada pareja. Todo lo demás lo construye el equipo. En tu computadora: [descarga el notebook](notebooks/proyecto_maiz.ipynb){download="proyecto_maiz.ipynb"}.
+:::
+
+## Cómo se organiza el equipo
+
+Todo el equipo trabaja con los mismos datos y la misma pregunta:
+
+| Pareja | Responsable de | Se trabaja el |
+|---|---|---|
+| 1 | Exploración y control de calidad | Lunes 30 |
+| 2 | Transformación composicional | Martes 1 |
+| 3 | Comparación entre comunidades | Jueves 3 |
+| 4 | Análisis topológico | Viernes 4 |
+
+- **Todos** hacen todos los pasos en su propia copia del notebook: así practican lo de cada sesión.
+- **Las conclusiones** se discuten y se escriben entre todo el equipo.
+- **Un solo notebook integrado:** el viernes, el equipo junta las cuatro partes en un notebook común (en una carpeta compartida de Google Drive). 
+
+## Qué hacer cada día
+
+Cada sesión agrega una parte al proyecto, usando lo que se vio ese día. **La última media hora a una hora de cada sesión es tiempo de proyecto**, con los instructores disponibles para resolver dudas. El miércoles 2 no hay sesión: es buen momento para que cada pareja avance en su parte.
+
+| Día | Parte del proyecto | Herramientas de |
+|---|---|---|
+| **Lunes 30** (18:00–18:30) | Formar parejas · **Exploración y control de calidad:** dimensiones, profundidad de secuenciación, ADN humano, limpieza (solo Bacteria y Archaea), composición por filo, diversidad α por estudio | [Introducción a los datos](intro_datos.qmd) |
+| **Martes 1** (17:30–18:30) | **Transformación composicional** de los datos y su efecto en el análisis | Sesión de transformación composicional |
+| **Jueves 3** (17:30–18:30) | **Comparación entre comunidades:** Bray-Curtis, PCoA (coloreado por estudio y por país), PERMANOVA y la figura de distancias entre pares (mismo estudio / otro estudio del mismo país / otro país) | [Técnicas de clustering](clustering.qmd) |
+| **Viernes 4** (17:30–18:30) | **Análisis topológico** de las muestras · **Integración** del notebook · **Conclusiones** | Sesión de redes y TDA |
+| **Sábado 5** (9:00–12:30) | **Presentación** del equipo (10 min) | |
+
+: Avance del proyecto por sesión.
+
+## Qué entregar
+
+**1. Reporte del equipo**, entregado antes de la presentación del sábado. Formato propuesto: el notebook integrado, ejecutado de principio a fin, con estas secciones en Markdown:
+
+1.  **Pregunta y datos:** qué preguntas y con qué muestras.
+2.  **Exploración y control de calidad:** qué encontraste y qué decisiones de limpieza tomaste.
+3.  **Comparación entre comunidades:** figuras y pruebas, con una frase de interpretación debajo de cada una.
+4.  **Análisis topológico:** qué estructura encontraste y si coincide con la de la comparación estadística.
+5.  **Conclusiones y limitaciones:** qué se puede afirmar con estos datos y qué no.
+6.  **Contribuciones:** una tabla breve de quién hizo qué.
+
+**2. Presentación de 10 minutos** el sábado 5: unos 7 minutos de exposición y 3 de preguntas. Sugerencia: 5 a 6 diapositivas, una por sección del reporte, con la figura más importante de cada una. Cada pareja presenta su parte (alrededor de 1.5 min cada una) y el equipo cierra con las conclusiones.
+
+## Criterios de evaluación (propuesta)
+
+| Criterio | Qué se espera | Puntos |
+|---|---|:---:|
+| Pregunta y datos | La pregunta es clara y se describen las muestras, los estudios y la limitación del diseño | 5 |
+| Exploración y control de calidad | Se revisan profundidad, contaminación y composición; las decisiones de limpieza están justificadas | 15 |
+| Comparación entre comunidades | Distancias, ordenación y PERMANOVA aplicadas correctamente; figuras legibles | 20 |
+| Análisis topológico | Se aplica el análisis topológico visto en clase y se compara con los resultados estadísticos | 15 |
+| Interpretación y limitaciones | Las conclusiones se apoyan en los resultados y distinguen el efecto del estudio del efecto del país | 20 |
+| Reproducibilidad | El notebook integrado se ejecuta de principio a fin sin errores; el código está comentado | 5 |
+| Presentación | Clara, dentro del tiempo, con figuras comprensibles | 10 |
+| Contribución individual | Según la tabla de contribuciones y la participación en la presentación (se califica por persona) | 10 |
+| **Total** | | **100** |
+
+::: {.callout-note .keypoints}
+## Recuerda
+
+- Cada quien trabaja en su **copia** del notebook (*Archivo → Guardar una copia en Drive*): lo que haces en Colab sin guardar se pierde al cerrar la sesión.
+- No hace falta "descubrir" un efecto: una conclusión honesta como **"con estos datos no se puede separar el país del estudio"** es un buen resultado si está bien argumentada.
+- Si se atoran, pregunten en el Etherpad o a cualquiera de los instructores y *helpers*.
+:::
