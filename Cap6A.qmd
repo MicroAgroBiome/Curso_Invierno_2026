@@ -1,6 +1,6 @@
 # Programación en vivo
 
-> Instructora: 
+> Instructora:
 
 <object data="presentaciones/python-cheatsheet.pdf" type="application/pdf" width="100%" height="700px">
 
