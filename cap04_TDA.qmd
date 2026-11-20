@@ -1,8 +1,10 @@
 ---
 title: "Uso de Análisis Topológico de Datos (TDA) en datos Biológicos"
+format: html
+notebook-links: true
 ---
 
-> **Instructor:** Haydee Peyurero, Alejandro Ucan-Puc · \~2 h (día 4, incluye un descanso)
+> **Instructor:** Haydee Peyurero, Alejandro Ucan-Puc · \~3.5 h (día 4, incluye un descanso)
 
 ::: {.callout-note .questions}
 ## Preguntas
@@ -39,17 +41,18 @@ Para repasar después del curso: [notebook completo, con todo el código y las s
 
 Trabajamos con **75 metagenomas de rizósfera** de cultivos de tres familias de plantas (Poaceae, Solanaceae y Fabaceae; 25 muestras de cada una), provenientes de **19 estudios** publicados. Son un subconjunto de la base de datos MicroAgroBiome [@aguilar2026] (<https://agrobiom.matmor.unam.mx>). La celda de **Setup** del notebook descarga y prepara los archivos; después los cargamos:
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l1-cargar-datos echo=true >}}
+{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-cargar-datos echo=true >}}
 
 `abundance_table` tiene una fila por muestra y una columna por género; `metadata_df`, una fila por muestra y una columna por cada dato que conocemos de ella.
 
+
 Notemos que las muestras pertenecen a 11 plantas: *tomate, maíz, soya, cacahuate, entre otras*. Puedes ver la distribución de las muestras por planta con el siguiente código:
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l2-distribucion-muestras echo=true >}}
+{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-distribucion-muestras-por-planta echo=true >}}
 
 siendo el tomate la planta con más muestras, de las cuales al menos 20 provienen de un país conocido, ver:
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l3-distribucion-paises echo=true >}}
+{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-distribucion-muestras-tomate-por-pais echo=true >}}
 
 ## Análisis de Abundancias
 
@@ -59,7 +62,7 @@ $$\text{abundancia relativa} = \frac{\text{conteo del taxón}}{\text{suma de con
 
 Agrupamos características con la misma etiqueta de género; las etiquetas ausentes se conservan como `Sin asignar`. En estas gráficas, `Otros géneros` representa la abundancia que no está entre los 10 principales.
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-abundancias echo=true >}}
+{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-abundancias-relativas-por-genero-tomate echo=true >}}
 
 Notemos que la abundancia relativa de los géneros varía entre plantas y entre países. Por ejemplo, el género *Pseudomonas* es menos abundante en tomate que en maíz, mientras que *Sphingonomas* es más abundante en el tomate que en el resto de las plantas presentes. Dada la variabilidad de abundancias en las muestras de tomate, nos interesa analizar estas.
 
