@@ -41,18 +41,29 @@ Para repasar después del curso: [notebook completo, con todo el código y las s
 
 Trabajamos con **75 metagenomas de rizósfera** de cultivos de tres familias de plantas (Poaceae, Solanaceae y Fabaceae; 25 muestras de cada una), provenientes de **19 estudios** publicados. Son un subconjunto de la base de datos MicroAgroBiome [@aguilar2026] (<https://agrobiom.matmor.unam.mx>). La celda de **Setup** del notebook descarga y prepara los archivos; después los cargamos:
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-cargar-datos echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-cargar-datos echo=true >}}
 
 `abundance_table` tiene una fila por muestra y una columna por género; `metadata_df`, una fila por muestra y una columna por cada dato que conocemos de ella.
+
+La tabla de conteo de abundancias se muestra a continuación:
+{{< embed notebooks/leccion04_TDA.ipynb#l4-mostrar-tabla-conteo echo=true >}}
+
+La tabla de taxonomías se muestra a continuación:
+{{< embed notebooks/leccion04_TDA.ipynb#l4-mostrar-tabla-taxonomia echo=true >}}
+
+
+La tabla de metadatos se muestra a continuación:
+{{< embed notebooks/leccion04_TDA.ipynb#l4-mostrar-tabla-metadata echo=true >}}
+
 
 
 Notemos que las muestras pertenecen a 11 plantas: *tomate, maíz, soya, cacahuate, entre otras*. Puedes ver la distribución de las muestras por planta con el siguiente código:
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-distribucion-muestras-por-planta echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-distribucion-muestras-por-planta echo=true >}}
 
 siendo el tomate la planta con más muestras, de las cuales al menos 20 provienen de un país conocido, ver:
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-distribucion-muestras-tomate-por-pais echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-distribucion-muestras-tomate-por-pais echo=true >}}
 
 ## Análisis de Abundancias
 
@@ -62,7 +73,7 @@ $$\text{abundancia relativa} = \frac{\text{conteo del taxón}}{\text{suma de con
 
 Agrupamos características con la misma etiqueta de género; las etiquetas ausentes se conservan como `Sin asignar`. En estas gráficas, `Otros géneros` representa la abundancia que no está entre los 10 principales.
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l4-abundancias-relativas-por-genero-tomate echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-abundancias-relativas-por-genero-tomate echo=true >}}
 
 Notemos que la abundancia relativa de los géneros varía entre plantas y entre países. Por ejemplo, el género *Pseudomonas* es menos abundante en tomate que en maíz, mientras que *Sphingonomas* es más abundante en el tomate que en el resto de las plantas presentes. Dada la variabilidad de abundancias en las muestras de tomate, nos interesa analizar estas.
 
@@ -70,7 +81,7 @@ Notemos que la abundancia relativa de los géneros varía entre plantas y entre 
 
 Veamos la distribución de abundancias de los 10 generos más abundantes en las muestras de tomate, agrupadas por país:
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l5-abundancias-tomate echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#14-top10-generos-tomate echo=true >}}
 
 Podemos observar que las distribuciones son muy similares entre países.
 
@@ -84,11 +95,18 @@ $$D_{BC}(p, q) = \frac{\sum |p_i - q_i|}{\sum (p_i + q_i)},$$
 
 cuando las abundancias relativas están normalizadas a 1. Esta función varía entre 0 (muestras idénticas) y 1 (muestras completamente diferentes). Cabe resaltar, que la disimilitud de Bray-Curtis no es una métrica de distancia en el sentido estricto, ya que no cumple con la desigualdad triangular. Sin embargo, es ampliamente utilizada en ecología y microbiología para comparar comunidades biológicas.
 
-Calcularemos la matriz de Bray-Curtis para los datos de abundancia de los microorganismos presentes en las muestras de Tomate, y mostrando las agrupaciones de las muestras según el continente de origen. Esto nos permitirá observar cómo varía la diversidad microbiana según el continente y cómo se relaciona con la especie de planta y el tipo de microorganismo presente en cada muestra.
+Calcularemos la matriz de Bray-Curtis para los datos de abundancia de los microorganismos presentes en las muestras de Tomate, y mostrando las agrupaciones de las muestras según el continente de origen. 
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l6-red-similitud echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-bray-curtis-tomate echo=true >}}
+
+
+Esto nos permitirá observar cómo varía la diversidad microbiana según el continente y cómo se relaciona con la especie de planta y el tipo de microorganismo presente en cada muestra. Del heatmap podemos observar que las muestras de tomate provenientes de diferentes continentes presentan patrones de abundancia similares, lo que sugiere que la diversidad microbiana en estas muestras está influenciada por factores ambientales y geográficos.
+
+{{< embed notebooks/leccion04_TDA.ipynb#l4-red-similitud echo=true >}}
 
 Una vez que tenemos la matriz de Bray-Curtis, podemos construir un grafo de similitud de microorganismos en las muestras de Tomate, donde los nodos representan los diferentes microorganismos y las aristas representan la coocurrencia entre ellos. Esto nos permitirá observar cómo se relacionan los diferentes microorganismos presentes en las muestras de Tomate y cómo varía la diversidad microbiana según el continente y la especie de planta.
+
+{{< embed notebooks/leccion04_TDA.ipynb#l4-red-similitud echo=true >}}
 
 Cada nodo es una **muestra**. Se añade una arista si su disimilitud es menor o igual a $\varepsilon$. El umbral de 0.2 se utiliza **como ejemplo visual**, no como resultado óptimo ni como evidencia de agrupación. La posición de los nodos se calcula a partir de la red, **sin imponer centros geográficos**. Los colores solo se añaden al final.
 
@@ -100,11 +118,13 @@ A partir de `braycurtis_tomato_by_country`, calcula el rango de disimilitud, y c
 
 ### Análisis de la Red de Similitud
 
-A simple vista, no podemos determinar cuál es la estructura de la red de similitud que describe mejor la relación entre las muestras de tomate y esto es debido a la dependencia de la red con el umbral de disimilitud que se utiliza para construirla.
+A simple vista, no podemos determinar cuál es la estructura de la red de similitud que describe mejor la relación entre las muestras de tomate y esto es debido a la dependencia de la red con el umbral de disimilitud que se utiliza para construirla (recordemos, que inicialmente fue 0.2).
 
-Una forma de analizar estas relaciones es a través de la **topología de la red**, que nos permite identificar patrones y estructuras en los datos que no son evidentes a simple vista. Para ello, podemos utilizar técnicas de Análisis Topológico de Datos (TDA), que nos permiten estudiar la forma de los datos y cómo se relacionan entre sí.
+Una forma de analizar estas relaciones es a través de la **topología de la red**, que nos permite identificar patrones y estructuras en los datos que no son evidentes a simple vista. Para ello, podemos utilizar técnicas de *Análisis Topológico de Datos (TDA)*, que nos permiten estudiar la forma de los datos y cómo se relacionan entre sí.
 
 El TDA nos permite identificar **componentes conectados**, **ciclos** y otras estructuras topológicas en la red de similitud, lo que nos ayuda a entender mejor cómo se relacionan las diferentes muestras de tomate y cómo varía la diversidad microbiana según el continente y la especie de planta.
+
+{{< video figures/PersistenHomology.mp4 >}}
 
 #### Introducción al TDA
 
@@ -112,22 +132,33 @@ Para estudiar datos usando la topología, necesitamos construir un objeto matem�
 
 Un complejo simplicial es un conjunto de **simplices**, que son generalizaciones de triángulos y tetraedros a dimensiones superiores. Por ejemplo, un 0-simplex es un punto, un 1-simplex es una línea, un 2-simplex es un triángulo y un 3-simplex es un tetraedro.
 
+{{< figure src="figures/simplices.png" width="400px" >}}
+
 Una forma construir un complejo simplicial a partir de un conjunto de puntos es mediante el **complejo de Vietoris-Rips**. Este complejo se construye a partir de un conjunto de puntos y un parámetro $\varepsilon$, que determina la distancia máxima entre los puntos para que se consideren conectados.
 
 $$ \text{VR}_\varepsilon(X) = \{ \sigma \subseteq X : d(x_i, x_j) \leq \varepsilon \text{ para todos } x_i, x_j \in \sigma \}$$
+
+{{< video figures/VietorisRips.mp4 >}}
 
 Sin embargo, tenemos el mismo problema con la red de similitud: la estructura del complejo simplicial depende del parámetro $\varepsilon$. Para resolver esto, podemos utilizar **filtraciones**, que nos permiten estudiar cómo cambia la topología de los datos a medida que variamos el parámetro $\varepsilon$.
 
 Una *filtración* es una secuencia de complejos simpliciales $\{K_\varepsilon\}_{\varepsilon \geq 0}$, donde cada complejo $K_\varepsilon$ está contenido en el siguiente $K_{\varepsilon'}$ para $\varepsilon < \varepsilon'$. Esto nos permite estudiar cómo cambian las estructuras topológicas a medida que aumentamos el parámetro $\varepsilon$.
 
+{{< figure src="figures/filtration.png" width="400px" >}}
+
 Con la topología podemos medir cómo cambian las estructuras topológicas a medida que aumentamos el parámetro $\varepsilon$. Por ejemplo, podemos medir cómo cambian los **componentes conectados** (es decir, cómo se van conectando los puntos) y los **ciclos** (es decir, cómo se forman bucles) en la red de similitud a medida que aumentamos el parámetro $\varepsilon$. Esto nos permite construir un **diagrama de persistencia**, que nos muestra cómo cambian las estructuras topológicas a medida que aumentamos el parámetro $\varepsilon$, el eje $x$ representa el parámetro $\varepsilon$ dónde se `nacieron` las estructuras topológicas (componentes no conectadas o ciclos) y el eje $y$ representa el parámetro $\varepsilon$ dónde \`murieron' las estructuras topológicas (donde se conectan componentes o se rellenan los ciclos).
 
 Este diagrama nos permite identificar el tipo de estructuras topológicas. Ver ejemplos en:
 
-- [Ejemplo 1](link_ejemplo_1)
-- [Ejemplo 2](link_ejemplo_2)
+{{< video figures/PersistenceDiagram.mp4 >}}
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l7-diagrama echo=true >}}
+Para realizar el análisis topológico (homología persistente) de la red de similitud, utilizaremos la función
+
+{{< embed notebooks/leccion04_TDA.ipynb#l4-TDA-create_complex echo=true >}}
+
+Esta función nos permite construir un complejo simplicial Vietoris-Rips a partir de la matriz de disimilitud de Bray-Curtis y calcular la homología persistente de la red de similitud. La función devuelve un objeto que contiene la información sobre los complejos simpliciales y los diagramas de persistencia. A continuación, presentamos los diagramas obtenidos de esta función para las muestras de tomate:
+
+{{< embed notebooks/leccion04_TDA.ipynb#l4-TDA-braycurtis-tomato echo=true >}}
 
 Del diagrama podemos observar que no existen ciclos persistentes en la red de similitud. Lo que indica que estas muestras de Tomate presentan una estructura muy cercana a un árbol, lo que sugiere que los microorganismos presentes en estas muestras están altamente organizados y presentan una estructura jerárquica. Esto podría indicar que los microorganismos presentes en estas muestras tienen una relación simbiótica o mutualista, lo que podría ser beneficioso para la planta de Tomate.
 
@@ -157,9 +188,13 @@ Estas matrices son **disimilitudes construidas para explorar filtraciones**, no 
 
 Antes de Calcular los grafos de co-ocurrencia, ocupamos definir algunas funciones auxiliares que nos permitirán realizar los cálculos de manera más eficiente y organizada. Estas funciones incluirán la creación de matrices de correlación de Spearmen, matriz de valores P, y traducción de correlación a distancia para poder construir los grafos.
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l8-spearman_corr_matrix echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-spearman-corr-matrix echo=true >}}
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l9-corr_to_distance echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-corr_to_distance echo=true >}}
+
+Por ejemplo, aquí se muestran las matrices de distancias calculadas a partir de la correlación de Spearman para el país `South Africa`:
+
+{{< embed notebooks/leccion04_TDA.ipynb#l4-plot-corr-distance-matrices-south-africa echo=true >}}
 
 ## Construcción de Grafos de Coocurrencia por País
 
@@ -167,7 +202,7 @@ Se representa una arista si $d \leq 0.3$ (equivale a $|\rho|\geq 0.7$ para la ve
 
 En el siguiente código, se construyen los grafos de coocurrencia para *South Africa*, mostrando las relaciones absolutas, positivas y negativas entre los géneros microbianos presentes en las muestras de tomate. Cada nodo representa un género microbiano y cada arista representa una relación de coocurrencia entre dos géneros.
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l10-coocurrence_graphs echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-coocurrence_graphs echo=true >}}
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 2: ¿Y los demás países? (5 min)
@@ -175,16 +210,15 @@ En el siguiente código, se construyen los grafos de coocurrencia para *South Af
 A partir de las funciones definidas, construye los grafos de coocurrencia para los demás países presentes en las muestras de tomate. Compara la estructura de los grafos obtenidos y describe cómo varían las relaciones de coocurrencia entre los diferentes países.
 :::
 
-
 ### TDA en Grafos de Coocurrencia
 
 De nuevo, nuestras observaciones iniciales de los grafos de coocurrencia dependen del umbral elegido para construirlos. Para obtener una visión más completa de la estructura topológica de los datos, podemos aplicar técnicas de Análisis Topológico de Datos (TDA) a los grafos de coocurrencia.
 
 Tomemos como ejemplo a los datos de `South Africa`. Calculamos el diagrama de persistencia para los grafos de coocurrencia absoluta, positiva y negativa, utilizando filtraciones basadas en la disimilitud calculada a partir de la correlación de Spearman.
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l11-persistence_diagrams echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-TDA-corr-distance-matrices-south-africa echo=true >}}
 
-Podemos observar que tanto los diagramas de persistencia absoluta y positiva presentan un patrón similar, con un ciclo de baja persistena lo que podría indicar que hay una estructura cíclica en la red pero no muy robusta. Por otro lado, el diagrama de persistencia negativa presentan multiples ciclos de alta persistencia, lo que sugiere que hay una estructura cíclica más robusta en la red de coocurrencia negativa. Esto podría indicar que las relaciones negativas entre los géneros microbianos son más estables y persistentes en el tiempo, lo que podría tener implicaciones importantes para la dinámica de la comunidad microbiana en las muestras de tomate.
+Podemos observar que tanto los diagramas de persistencia absoluta y positiva presentan un patrón similar, con un ciclo de baja persistena lo que podría indicar que hay una estructura cíclica en la red pero no muy robusta. Por otro lado, el diagrama de persistencia negativa presentan multiples ciclos de alta persistencia, lo que sugiere que hay una estructura cíclica más robusta en la red de coocurrencia negativa. Esto podría indicar que las relaciones negativas entre los géneros microbianos son más estables y persistentes al cambio de parámetros de Spearman, lo que podría tener implicaciones importantes para la dinámica de la comunidad microbiana en las muestras de tomate.
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 3: ¿Y los demás países? (5 min)
@@ -196,7 +230,32 @@ A partir de las funciones definidas, estudia la estructura topológica de los gr
 
 ¿La topología de la red de un país difiere de la de otro? Uno pensaría que conociendo las estructuras topológicas de los grafos de coocurrencia de cada país podríamos compararlas directamente y obtener conclusiones sobre la similitud ecológica entre los países. En TDA, la *distancia de Wasserstein* es una métrica que nos permite comparar diagramas de persistencia y cuantificar la diferencia entre ellos. Esta distancia se calcula como el costo mínimo de transformar un diagrama de persistencia en otro, considerando tanto la posición de los puntos como su multiplicidad.
 
+{{< video figures/WassersteinDistance.mp4 >}}
 
 La distancia de Wasserstein compara diagramas de persistencia; **no mide directamente similitud ecológica**. Usamos solo puntos con muerte finita (en $H_0$ existe una componente esencial con muerte infinita). Comparamos únicamente países con el mismo conjunto de géneros y la misma transformación de correlación. Las distancias calculadas son descriptivas y no constituyen pruebas de significación. Con pocos datos, incluso estas comparaciones pueden ser muy inestables.
 
-{{< embed notebooks/leccion_2_tda_tomates.ipynb#l12-wasserstein echo=true >}}
+{{< embed notebooks/leccion04_TDA.ipynb#l4-wasserstein-distance echo=true >}}
+
+## Discusión y conclusiones 
+
+### ¿Qué podemos concluir?
+
+**Parte I (muestras):** Bray–Curtis resume diferencias de composición microbiana entre muestras de rizosfera de tomate. La red y los diagramas muestran cómo se conectan estas muestras al variar un umbral. Si se observan patrones por país, se describen como **hipótesis exploratorias**, no como efectos geográficos demostrados.
+
+**Parte II (géneros):** Spearman permite explorar asociaciones monotónicas entre abundancias relativas de géneros dentro de cada país. Las redes y sus diagramas caracterizan la organización de esas **asociaciones estadísticas**, no relaciones de simbiosis, mutualismo, antagonismo o coocurrencia demostrada. Distancias Wasserstein pequeñas/grandes no establecen por sí solas similitud/diferencia biológica significativa.
+
+### Limitaciones que deben reportarse
+
+1. Número desigual y posiblemente pequeño de muestras por país; las correlaciones son sensibles a ello.
+2. Abundancias relativas son composicionales y pueden inducir asociaciones espurias; para inferir asociaciones microbianas serían preferibles enfoques especializados y validación independiente.
+3. Posibles variables de confusión (suelo, ubicación específica, lote, metodología de secuenciación, profundidad y procesamiento).
+4. Elección de nivel taxonómico (género) y de umbrales visuales; revisar sensibilidad.
+5. La filtración de Vietoris–Rips usa qué métrica.
+
+### Preguntas para discutir en el taller
+
+- ¿Qué cambia si se modifica el umbral de la red de Bray–Curtis?
+- ¿Por qué un triángulo del grafo no necesariamente representa una clase de $H_1$?
+- ¿Por qué no podemos interpretar una correlación positiva como mutualismo?
+- ¿Qué cambiaría si los países tuvieran el mismo número de muestras?
+- ¿Cómo distinguir una descripción topológica de una afirmación ecológica causal?
