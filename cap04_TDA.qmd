@@ -122,7 +122,7 @@ Una forma de analizar estas relaciones es a través de la **topología de la red
 
 El TDA nos permite identificar **componentes conectados**, **ciclos** y otras estructuras topológicas en la red de similitud, lo que nos ayuda a entender mejor cómo se relacionan las diferentes muestras de tomate y cómo varía la diversidad microbiana según el continente y la especie de planta.
 
-{{< video figures/PersistenHomology.mp4 >}}
+{{< video figures/PersistentHomology.mp4 >}}
 
 #### Introducción al TDA
 
@@ -130,25 +130,33 @@ Para estudiar datos usando la topología, necesitamos construir un objeto matem�
 
 Un complejo simplicial es un conjunto de **simplices**, que son generalizaciones de triángulos y tetraedros a dimensiones superiores. Por ejemplo, un 0-simplex es un punto, un 1-simplex es una línea, un 2-simplex es un triángulo y un 3-simplex es un tetraedro.
 
-{{< figure src="figures/simplices.png" width="400px" >}}
+![Vértices, aristas y simples de mayor dimensión](figures/tda_Vertices.png){width="400px"}
+
+Con los simplejos, podemos construir un complejo simplicial, que es un conjunto de simplejos que cumplen ciertas condiciones de intersección. Por ejemplo, si tenemos un conjunto de puntos en el plano, podemos construir un complejo simplicial conectando los puntos con líneas y formando triángulos.
+
+![Ejemplo de complejo simplicial](figures/Tda_Simplicial_complex_example.png){width="400px"}
 
 Una forma construir un complejo simplicial a partir de un conjunto de puntos es mediante el **complejo de Vietoris-Rips**. Este complejo se construye a partir de un conjunto de puntos y un parámetro $\varepsilon$, que determina la distancia máxima entre los puntos para que se consideren conectados.
 
 $$ \text{VR}_\varepsilon(X) = \{ \sigma \subseteq X : d(x_i, x_j) \leq \varepsilon \text{ para todos } x_i, x_j \in \sigma \}$$
 
-{{< video figures/VietorisRips.mp4 >}}
+{{< video figures/VietorisRipsDemo.mp4 >}}
 
 Sin embargo, tenemos el mismo problema con la red de similitud: la estructura del complejo simplicial depende del parámetro $\varepsilon$. Para resolver esto, podemos utilizar **filtraciones**, que nos permiten estudiar cómo cambia la topología de los datos a medida que variamos el parámetro $\varepsilon$.
 
 Una *filtración* es una secuencia de complejos simpliciales $\{K_\varepsilon\}_{\varepsilon \geq 0}$, donde cada complejo $K_\varepsilon$ está contenido en el siguiente $K_{\varepsilon'}$ para $\varepsilon < \varepsilon'$. Esto nos permite estudiar cómo cambian las estructuras topológicas a medida que aumentamos el parámetro $\varepsilon$.
 
-{{< figure src="figures/filtration.png" width="400px" >}}
+![Ejemplo de filtración](figures/Tda-Filtacion1.png){width="400px"}
 
 Con la topología podemos medir cómo cambian las estructuras topológicas a medida que aumentamos el parámetro $\varepsilon$. Por ejemplo, podemos medir cómo cambian los **componentes conectados** (es decir, cómo se van conectando los puntos) y los **ciclos** (es decir, cómo se forman bucles) en la red de similitud a medida que aumentamos el parámetro $\varepsilon$. Esto nos permite construir un **diagrama de persistencia**, que nos muestra cómo cambian las estructuras topológicas a medida que aumentamos el parámetro $\varepsilon$, el eje $x$ representa el parámetro $\varepsilon$ dónde se `nacieron` las estructuras topológicas (componentes no conectadas o ciclos) y el eje $y$ representa el parámetro $\varepsilon$ dónde \`murieron' las estructuras topológicas (donde se conectan componentes o se rellenan los ciclos).
 
+![Ejemplo de diagrama de persistencia](figures/tda_08_diagrama.png){width="400px"}
+
+![Ejemplo de código de barras de persistencia](figures/tda_08_barcode.png){width="400px"}
+
 Este diagrama nos permite identificar el tipo de estructuras topológicas. Ver ejemplos en:
 
-{{< video figures/PersistenceDiagram.mp4 >}}
+{{< video figures/PersistentHomology.mp4 >}}
 
 Para realizar el análisis topológico (homología persistente) de la red de similitud, utilizaremos la función
 

@@ -44,6 +44,7 @@ book:
   - part: "**Sección 5** -"
     chapters:
     - Cap4A.qmd
+    - cap04_TDA.qmd
   - part: "**Sección 6** "
     chapters:
     - Cap6A.qmd
