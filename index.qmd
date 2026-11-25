@@ -102,7 +102,7 @@ Cada día, la **última media hora a una hora** se dedica a que los equipos avan
 - Conocimientos básicos de estadística y de programación. Se recomienda revisar material introductorio de **Python** antes de la escuela: el curso se imparte en Python.
 - Una **cuenta de Google** para trabajar en Google Colab (recomendado; no requiere instalar nada).
 - Opcional: Python 3.10 o superior instalado localmente, para quien prefiera trabajar en su computadora.
-- Leer la [Dinámica de trabajo](dinamica_trabajo.qmd) antes de la primera sesión y verificar que el notebook de la Lección 1 abre y su celda de Setup se ejecuta sin errores.
+- Leer la [Dinámica de trabajo](dinamica_trabajo.qmd) antes de la primera sesión y verificar que el notebook del capítulo *Introducción a los datos* abre y su celda de Setup se ejecuta sin errores.
 
 ### MicroAgroBiome
 

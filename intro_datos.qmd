@@ -28,21 +28,21 @@ Al completar esta lección, serás capaz de:
 
 Escribimos el código **juntos, en vivo**. Abre tu notebook antes de empezar:
 
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/participante/leccion_1_introduccion_datos.ipynb)
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/participante/intro_datos.ipynb)
 
 - **Sin instalar nada:** ábrelo en Google Colab con el botón de arriba y guarda una copia (*Archivo → Guardar una copia en Drive*) para conservar lo que escribas.
-- **En tu computadora:** [descarga el notebook](notebooks/participante/leccion_1_introduccion_datos.ipynb){download="leccion_1_introduccion_datos.ipynb"} y ábrelo en VSCode o Jupyter.
+- **En tu computadora:** [descarga el notebook](notebooks/participante/intro_datos.ipynb){download="intro_datos.ipynb"} y ábrelo en VSCode o Jupyter.
 
 En esta página, los bloques de código que empiezan con `⌨️` son los que escribimos juntos; el código de las gráficas viene plegado (*Ver el código de la gráfica*) y ya está escrito en tu notebook. Si te atrasas, copia el código del Etherpad o ejecuta la celda **🛟 Ponerse al día** más cercana.
 
-Para repasar después del curso: [notebook completo, con todo el código y las soluciones]({{< var colab >}}notebooks/leccion_1_introduccion_datos.ipynb).
+Para repasar después del curso: [notebook completo, con todo el código y las soluciones]({{< var colab >}}notebooks/intro_datos.ipynb).
 :::
 
 ## Cargar los datos
 
 Trabajamos con **75 metagenomas de rizósfera** de cultivos de tres familias de plantas (Poaceae, Solanaceae y Fabaceae; 25 muestras de cada una), provenientes de **19 estudios** publicados. Son un subconjunto de la base de datos MicroAgroBiome [@aguilar2026] (<https://agrobiom.matmor.unam.mx>). La celda de **Setup** del notebook descarga y prepara los archivos; después los cargamos:
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-cargar-datos echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-cargar-datos echo=true >}}
 
 `abundance_table` tiene una fila por muestra y una columna por género; `metadata_df`, una fila por muestra y una columna por cada dato que conocemos de ella.
 
@@ -56,15 +56,15 @@ Trabajamos con **75 metagenomas de rizósfera** de cultivos de tres familias de 
 
 **Estructura de un dataset tabular:** cada **fila** es una observación (una muestra) y cada **columna** es una variable.
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-shape echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-shape echo=true >}}
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-iloc echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-iloc echo=true >}}
 
 Las variables pueden ser **numéricas** (valores medibles) o **categóricas** (un número limitado de categorías). `pandas` las distingue con `.dtypes`:
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-dtypes echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-dtypes echo=true >}}
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-head echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-head echo=true >}}
 
 **Medidas de resumen** para variables numéricas:
 
@@ -72,7 +72,7 @@ Las variables pueden ser **numéricas** (valores medibles) o **categóricas** (u
 - **Mediana:** valor central; es menos sensible a valores extremos.
 - **Desviación estándar:** qué tan dispersos están los valores respecto a la media.
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-resumen-genero echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-resumen-genero echo=true >}}
 
 ::: callout-important
 ## 🔮 Predice antes de ver la gráfica
@@ -82,11 +82,11 @@ En la siguiente figura marcamos la media y la mediana de *Streptomyces*. ¿Cuál
 
 Cuando unas pocas muestras tienen muchísimas lecturas, la media se va hacia ellas y se separa de la mediana (@fig-l1-media-mediana).
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-media-mediana echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-media-mediana echo=true >}}
 
 `.describe()` calcula varias medidas de resumen a la vez:
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-describe echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-describe echo=true >}}
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 1: Media y desviación estándar de un género (5 min)
@@ -140,17 +140,17 @@ Cada taxón se ubica en una jerarquía: **dominio → filo → clase → orden �
 
 Los datos se distribuyen en formato **BIOM** (*Biological Observation Matrix*): guarda los conteos de forma eficiente junto con **metadatos** de los taxones (su linaje) y de las muestras. En BIOM, los taxones se llaman **observaciones**:
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-biom-ids echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-biom-ids echo=true >}}
 
 ### Las muestras y sus metadatos
 
 Tres variables del metadato serán centrales: la **planta hospedera** (`host_name`, agrupada en `host_name_family`), el **estudio** de origen (`doi`) y el **país** (@tbl-l1-plantas).
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#tbl-l1-plantas echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#tbl-l1-plantas echo=true >}}
 
 Para analizar por planta, unimos conteos y metadatos por su índice común, `sample_id`:
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-join echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-join echo=true >}}
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 2: Filtrar por familia de planta (5 min)
@@ -176,11 +176,11 @@ fabaceae_samples = merged_table[merged_table["host_name_family"] == "Fabaceae"]
 
 Antes de comparar plantas hay que preguntar: **¿cuántas familias de planta aporta cada estudio?** Una tabla cruzada cuenta las muestras de cada combinación:
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-study-family echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-study-family echo=true >}}
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-estudio-familia echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-estudio-familia echo=true >}}
 
-Casi cada estudio muestreó **una sola familia de planta** (@fig-l1-estudio-familia). Eso significa que *planta* y *estudio* (con su laboratorio, su suelo y su protocolo) están **entrelazados**: si dos familias se ven distintas, no sabremos si es por la planta o por el estudio. Es la pregunta central de la Lección 2.
+Casi cada estudio muestreó **una sola familia de planta** (@fig-l1-estudio-familia). Eso significa que *planta* y *estudio* (con su laboratorio, su suelo y su protocolo) están **entrelazados**: si dos familias se ven distintas, no sabremos si es por la planta o por el estudio. Es la pregunta central del capítulo *Técnicas de clustering*.
 
 ### ¿Qué contiene realmente la tabla?
 
@@ -192,43 +192,43 @@ Para comparar muestras con profundidades distintas usamos **abundancias relativa
 Después de dividir cada conteo entre el total de su muestra, ¿cuánto debería sumar cada fila?
 :::
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-relativa echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-relativa echo=true >}}
 
 Revisar de qué organismos son las lecturas evita sorpresas (@fig-l1-top-generos).
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-top-generos echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-top-generos echo=true >}}
 
 Entre los géneros más abundantes aparece ***Homo***: ADN **humano**, no microbiano (contaminación durante el muestreo o la preparación). En algunas muestras es una fracción importante de las lecturas (@fig-l1-homo).
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-homo echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-homo echo=true >}}
 
 Para estudiar la comunidad **procariota** conservamos solo **Bacteria y Archaea** y descartamos *Homo* y los virus. Es una **decisión de análisis**, no un estándar: otros estudios conservarían hongos o virus. Lo importante es dejarla explícita.
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-procariotas echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-procariotas echo=true >}}
 
 ### Composición por filo (opcional)
 
 Una vista clásica de un microbioma es **una barra por muestra**, dividida según la abundancia relativa de cada **filo** (@fig-l1-filos). Dos filos dominan casi todas las muestras; fíjate en las barras que **se salen del patrón** y en qué estudios están.
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-filos echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-filos echo=true >}}
 
 ### Profundidad de secuenciación
 
 La **profundidad** de una muestra es su total de lecturas. Varía entre muestras por razones **técnicas**, no solo biológicas, y en este conjunto lo hace en más de dos órdenes de magnitud (@fig-l1-profundidad). Por eso, para comparar muestras usamos abundancias relativas en lugar de conteos crudos.
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-profundidad echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-profundidad echo=true >}}
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-profundidad echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-profundidad echo=true >}}
 
 ### Prevalencia de géneros
 
 La **prevalencia** de un género es en cuántas muestras aparece (conteo \> 0).
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-prevalencia echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-prevalencia echo=true >}}
 
 La tabla es **muy densa**: la mayoría de los géneros aparece en casi todas las muestras (@fig-l1-prevalencia). Con secuenciación tan profunda, incluso los géneros raros dejan algunas lecturas.
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-prevalencia echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-prevalencia echo=true >}}
 
 ### Diversidad α
 
@@ -238,7 +238,7 @@ La **diversidad α** resume una muestra con un número:
 - **Shannon:** combina riqueza y equidad (qué tan parejas son las abundancias). Más alto = más diverso.
 - **Simpson:** da más peso a los géneros dominantes.
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-alfa echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-alfa echo=true >}}
 
 ::: callout-important
 ## 🔮 Predice antes de ejecutar
@@ -246,21 +246,21 @@ La **diversidad α** resume una muestra con un número:
 ¿Las muestras con **más lecturas** tendrán **más géneros detectados**, menos, o no habrá relación?
 :::
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-spearman echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-spearman echo=true >}}
 
 En una tabla tan densa, la riqueza distingue poco entre muestras y además **depende de la profundidad** (@fig-l1-riqueza-profundidad).
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-riqueza-profundidad echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-riqueza-profundidad echo=true >}}
 
 Para comparar Shannon entre familias de plantas usamos la prueba de **Kruskal-Wallis**, que compara grupos sin suponer distribución normal (@fig-l1-shannon-familia).
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-shannon-familia echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-shannon-familia echo=true >}}
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#l1-kruskal echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#l1-kruskal echo=true >}}
 
 La misma diversidad, ahora por estudio (@fig-l1-shannon-estudio):
 
-{{< embed notebooks/leccion_1_introduccion_datos.ipynb#fig-l1-shannon-estudio echo=true >}}
+{{< embed notebooks/intro_datos.ipynb#fig-l1-shannon-estudio echo=true >}}
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 3: Interpretar las figuras de diversidad (5 min)
@@ -277,7 +277,7 @@ Con las dos figuras de diversidad y el resultado de Kruskal-Wallis, responde en 
 
 1.  No: las medianas de las tres familias son muy parecidas y Kruskal-Wallis da p \> 0.05.
 2.  Entre **estudios**: algunos estudios tienen valores de Shannon muy por debajo del resto, mientras que las familias se traslapan casi por completo.
-3.  Como casi cada estudio muestreó una sola familia, una diferencia entre familias podría deberse al estudio (suelo, laboratorio, protocolo). Con este diseño no se pueden separar; lo retomamos en la Lección 2.
+3.  Como casi cada estudio muestreó una sola familia, una diferencia entre familias podría deberse al estudio (suelo, laboratorio, protocolo). Con este diseño no se pueden separar; lo retomamos en el capítulo *Técnicas de clustering*.
 :::
 
 ::: {.callout-tip .challenge}

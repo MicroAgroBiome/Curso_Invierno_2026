@@ -42,7 +42,7 @@ A estudiantes y profesionales de biología, matemáticas, ciencias de datos y á
 - Estadística básica: media, varianza, pruebas de hipótesis.
 - Python básico: ejecutar celdas, usar variables y listas. **No** hace falta saber escribir funciones.
 - Una cuenta de Google para trabajar en Google Colab, o Python ≥ 3.10 instalado localmente.
-- Antes de la primera sesión: leer la [Dinámica de trabajo](https://microagrobiome.github.io/Curso_Invierno_2026/dinamica_trabajo.html) y verificar que el notebook de la Lección 1 abre y su celda de Setup se ejecuta.
+- Antes de la primera sesión: leer la [Dinámica de trabajo](https://microagrobiome.github.io/Curso_Invierno_2026/dinamica_trabajo.html) y verificar que el notebook del capítulo *Introducción a los datos* abre y su celda de Setup se ejecuta.
 
 ## Instructores
 
@@ -71,9 +71,9 @@ La agenda por horas está en el libro: [Información general → Agenda](https:/
 | Capítulo | Tipo | Notebook |
 |---|---|---|
 | 1 · [Mapa del tesoro: la ruta de la rizósfera](https://microagrobiome.github.io/Curso_Invierno_2026/mapa_del_tesoro.html) | Actividad interactiva | — |
-| 2 · [Introducción a los datos](https://microagrobiome.github.io/Curso_Invierno_2026/intro_datos.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/leccion_1_introduccion_datos.ipynb) |
+| 2 · [Introducción a los datos](https://microagrobiome.github.io/Curso_Invierno_2026/intro_datos.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/intro_datos.ipynb) |
 | 3 · [Pruebas de hipótesis en microbiomas](https://microagrobiome.github.io/Curso_Invierno_2026/pruebas_hipotesis.html) | Actividad interactiva (datos simulados) | — |
-| 4 · [Técnicas de clustering](https://microagrobiome.github.io/Curso_Invierno_2026/clustering.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/leccion_2_clustering.ipynb) |
+| 4 · [Técnicas de clustering](https://microagrobiome.github.io/Curso_Invierno_2026/clustering.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/clustering.ipynb) |
 | [Proyecto del curso](https://microagrobiome.github.io/Curso_Invierno_2026/proyecto.html) | Trabajo en equipo | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/proyecto_maiz.ipynb) |
 
 ⚐ Faltan los capítulos de transformación composicional (martes) y de redes y TDA (viernes).
@@ -118,7 +118,7 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Abre `notebooks/participante/leccion_1_introduccion_datos.ipynb` en VSCode o Jupyter y ejecuta la celda de Setup: debe mostrar `Entorno: Local (VSCode)`.
+Abre `notebooks/participante/intro_datos.ipynb` en VSCode o Jupyter y ejecuta la celda de Setup: debe mostrar `Entorno: Local (VSCode)`.
 
 Librerías principales: `pandas`, `numpy`, `scikit-bio`, `biom-format`, `scikit-learn`, `scipy`, `matplotlib`, `seaborn` (versiones en `requirements.txt`).
 
@@ -136,8 +136,8 @@ Librerías principales: `pandas`, `numpy`, `scikit-bio`, `biom-format`, `scikit-
 ├── clustering.qmd           # Clustering
 ├── interactivos/            # Páginas HTML de las actividades interactivas
 ├── notebooks/
-│   ├── leccion_1_introduccion_datos.ipynb   # Notebook completo (fuente; ejecutado)
-│   ├── leccion_2_clustering.ipynb
+│   ├── intro_datos.ipynb   # Notebook completo (fuente; ejecutado)
+│   ├── clustering.ipynb
 │   ├── proyecto_maiz.ipynb                  # Notebook inicial del proyecto
 │   └── participante/                        # Notebooks del participante (GENERADOS)
 ├── datos/                   # subset.zip, subset_proyecto.zip
@@ -158,8 +158,8 @@ El flujo completo está en el libro: [Dinámica de trabajo → Para instructores
 2. El **notebook completo** es la única fuente. Edítalo, **ejecútalo completo** y genera la versión del participante:
 
    ```bash
-   jupyter nbconvert --to notebook --execute --inplace --allow-errors notebooks/leccion_1_introduccion_datos.ipynb
-   python scripts/generar_notebook_participante.py notebooks/leccion_1_introduccion_datos.ipynb
+   jupyter nbconvert --to notebook --execute --inplace --allow-errors notebooks/intro_datos.ipynb
+   python scripts/generar_notebook_participante.py notebooks/intro_datos.ipynb
    ```
 
    Las celdas de ejercicio fallan a propósito (`TU_CODIGO_AQUI`); por eso se usa `--allow-errors`.
