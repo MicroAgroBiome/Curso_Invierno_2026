@@ -7,7 +7,7 @@ Esta página explica **cómo trabajamos** durante la semana: qué material usar 
 El libro tiene tres tipos de capítulo:
 
 | Tipo | Capítulos | Cómo se trabaja |
-|---|---|---|
+|------------------------|------------------------|------------------------|
 | **Actividad interactiva** | 1 · [Mapa del tesoro](mapa_del_tesoro.qmd) <br> 3 · [Pruebas de hipótesis](pruebas_hipotesis.qmd) | Se abre una página web desde el capítulo. No hay que escribir código |
 | **Lección con notebook** | 2 · [Introducción a los datos](intro_datos.qmd) <br> 4 · [Técnicas de clustering](clustering.qmd) | El capítulo explica los conceptos y muestra los resultados esperados; el **notebook de Jupyter** es donde escribes y ejecutas el código |
 | **Proyecto** | [Proyecto del curso](proyecto.qmd) | Página de referencia para el trabajo en equipo de toda la semana, con su propio notebook inicial |
@@ -115,7 +115,7 @@ La agenda completa de la semana está en [Información general → Agenda](index
 ### Lunes 30 · Introducción a los datos
 
 | Bloque | Contenido | Tiempo |
-|---|:---:|---|
+|--------------------|:------------------------------:|--------------------|
 | 🔧 Setup | Entorno, librerías y ⌨️ carga del BIOM | 10 min |
 | 📖 Sección 1 | Dimensiones de la tabla y medidas de resumen; media vs mediana (⌨️ + 🔮) | 10 min |
 | 📖 Sección 1 | Tipos de variable (`dtypes`, `head`, `describe`) | — |
@@ -135,7 +135,7 @@ Lo que se ve en vivo es justo lo que el proyecto necesita el lunes: cargar los d
 ### Jueves 3 · Técnicas de clustering
 
 | Bloque | Contenido | Tiempo |
-|---|:---:|---|
+|--------------------|:------------------------------:|--------------------|
 | 🔧 Setup | Entorno, preparación de datos y ⌨️ repaso de abundancia relativa | 10 min |
 | 📖 Sección 1 | Distancia de Bray-Curtis y matriz de distancias (⌨️ + 🔮) | 10 min |
 | ✏️ Ejercicio 1 | Distancia euclidiana vs Bray-Curtis (completar) | 5 min |
@@ -148,6 +148,25 @@ Lo que se ve en vivo es justo lo que el proyecto necesita el lunes: cargar los d
 | ✏️ Ejercicio 4 | Interpretar el mensaje de la lección (interpretar) | 5 min |
 | 📊 Resumen | Puntos clave y exportar resultados | 5 min |
 | 🧩 Proyecto | Comparación entre comunidades del maíz | 60 min |
+
+### Viernes 4 · Uso de Análisis Topológico de Datos (TDA) en Datos Biológicos
+
+| Bloque | Contenido | Tiempo |
+|--------------------|:------------------------------:|--------------------|
+| 🔧 Setup | Entorno, carga de datos, metadatos y repaso de abundancias relativas | 10 min |
+| 📖 Sección 1 | Exploración de abundancias de tomate por país | 10 min |
+| 📖 Sección 2 | Bray-Curtis y red de similitud entre muestras (⌨️ + 🔮) | 15 min |
+| ✏️ Ejercicio 1 | Comparar grafos con distintos umbrales de disimilitud | 5 min |
+| 📖 Sección 3 | Complejos simpliciales, Vietoris-Rips y homología persistente | 25 min |
+| ☕ Descanso | Pausa | 10 min |
+| 📖 Sección 4 | Correlación de Spearman y transformaciones a disimilitud | 15 min |
+| 📖 Sección 5 | Construcción de grafos de coocurrencia por país (⌨️ + 🔮) | 15 min |
+| ✏️ Ejercicio 2 | Generar los grafos de los países restantes | 5 min |
+| 📖 Sección 6 | TDA aplicado a redes de coocurrencia | 20 min |
+| ✏️ Ejercicio 3 | Comparar la topología de las redes entre países | 5 min |
+| 📖 Sección 7 | Comparación de diagramas mediante distancia de Wasserstein | 15 min |
+| 📊 Resumen | Interpretación, conclusiones y limitaciones | 10 min |
+| 🧩 Proyecto | Aplicar redes y TDA a las comunidades del maíz | 50 min |
 
 ## Continuidad entre sesiones
 
@@ -213,7 +232,7 @@ flowchart TD
 2.  **Etiquetas de celda** del notebook completo (en VSCode: `...` de la celda → *Add Cell Tag*), que usa el script generador:
 
     | Etiqueta | En el notebook del participante |
-    |---|---|
+    |------------------------------------|------------------------------------|
     | `teclear` | Queda vacía; solo conserva su comentario guía `# ⌨️ ...` (obligatorio) |
     | `estado` | Su código se copia a las celdas de rescate posteriores |
     | `rescate` | Se llena con el código de las celdas `estado` anteriores (🛟, con el código oculto) |

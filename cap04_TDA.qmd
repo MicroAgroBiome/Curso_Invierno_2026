@@ -34,7 +34,7 @@ Escribimos el código **juntos, en vivo**. Abre tu notebook antes de empezar:
 
 En esta página, los bloques de código que empiezan con `⌨️` son los que escribimos juntos; el código de las gráficas viene plegado (*Ver el código de la gráfica*) y ya está escrito en tu notebook. Si te atrasas, copia el código del Etherpad o ejecuta la celda **🛟 Ponerse al día** más cercana.
 
-Para repasar después del curso: [notebook completo, con todo el código y las soluciones]({{< var colab >}}notebooks/leccion_4_tda.ipynb).
+Para repasar después del curso: [notebook maestro completo, con todo el código y las soluciones](notebooks/leccion04_TDA_v2.ipynb){download="leccion04_TDA_v2.ipynb"}.
 :::
 
 ## Cargar los datos
@@ -45,11 +45,17 @@ Trabajamos con **75 metagenomas de rizósfera** de cultivos de tres familias de 
 
 `abundance_table` tiene una fila por muestra y una columna por género; `metadata_df`, una fila por muestra y una columna por cada dato que conocemos de ella.
 
-La tabla de conteo de abundancias se muestra a continuación: {{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-conteo echo=true >}}
+La tabla de conteo de abundancias se muestra a continuación:
 
-La tabla de taxonomías se muestra a continuación: {{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-taxonomia echo=true >}}
+{{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-conteo echo=true >}}
 
-La tabla de metadatos se muestra a continuación: {{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-metadata echo=true >}}
+La tabla de taxonomías se muestra a continuación:
+
+{{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-taxonomia echo=true >}}
+
+La tabla de metadatos se muestra a continuación:
+
+{{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-metadata echo=true >}}
 
 Notemos que las muestras pertenecen a 11 plantas: *tomate, maíz, soya, cacahuate, entre otras*. Puedes ver la distribución de las muestras por planta con el siguiente código:
 
@@ -258,3 +264,4 @@ La distancia de Wasserstein compara diagramas de persistencia; **no mide directa
 - ¿Por qué no podemos interpretar una correlación positiva como mutualismo?
 - ¿Qué cambiaría si los países tuvieran el mismo número de muestras?
 - ¿Cómo distinguir una descripción topológica de una afirmación ecológica causal?
+
