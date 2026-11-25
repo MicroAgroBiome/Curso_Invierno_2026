@@ -2,16 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>5&nbsp; Técnicas de clustering – MicroAgroBiome</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,14 +70,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./logos/MicroAgroBiome.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8c2d46cedc6697989d0e438fc92c576b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0109f0e7b6ffa9bd332c051c1db14944.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8c2d46cedc6697989d0e438fc92c576b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-06843bcf713c2c5f0bdcac5de3d60a13.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-7a58dfcef299af05c4d2e54ada8d77a5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-06843bcf713c2c5f0bdcac5de3d60a13.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -116,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -170,11 +172,15 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./logos/MicroAgroBiome.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./logos/MicroAgroBiome.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">MicroAgroBiome</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/MicroAgroBiome/Curso_Invierno_2026" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Compartir" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Compartir"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -418,7 +424,7 @@ window.Quarto = {
 <p>Escribimos el código <strong>juntos, en vivo</strong>. Abre tu notebook antes de empezar:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://colab.research.google.com/github/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/blob/main/notebooks/participante/leccion_2_clustering.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
+<p><a href="https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/leccion_2_clustering.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" class="img-fluid figure-img"></a></p>
 <figcaption>Abrir en Colab</figcaption>
 </figure>
 </div>
@@ -427,7 +433,7 @@ window.Quarto = {
 <li><strong>En tu computadora:</strong> <a href="notebooks/participante/leccion_2_clustering.ipynb" download="leccion_2_clustering.ipynb">descarga el notebook</a> y ábrelo en VSCode o Jupyter.</li>
 </ul>
 <p>El notebook es <strong>independiente</strong>: vuelve a cargar los datos y repite la limpieza de la Lección 1, así que no necesitas haberla terminado. Los bloques que empiezan con <code># ⌨️</code> son los que escribimos juntos; el código de las gráficas viene plegado y ya está escrito en tu notebook. Si te atrasas, copia el código del Etherpad o ejecuta la celda <strong>🛟 Ponerse al día</strong> más cercana.</p>
-<p>Para repasar después del curso: <a href="https://colab.research.google.com/github/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/blob/main/notebooks/leccion_2_clustering.ipynb">notebook completo, con todo el código y las soluciones</a>.</p>
+<p>Para repasar después del curso: <a href="https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/leccion_2_clustering.ipynb">notebook completo, con todo el código y las soluciones</a>.</p>
 </div>
 </div>
 <section id="la-pregunta-de-la-lección" class="level2" data-number="5.1">
@@ -453,7 +459,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Empezamos repasando la Lección 1: como la profundidad de secuenciación varía muchísimo entre muestras, no comparamos conteos crudos sino <strong>abundancias relativas</strong>, en las que cada muestra suma 1.</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-relativa">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-relativa">
 <div id="cell-l2-relativa" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:54.856433Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:54.856356Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:54.860746Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:54.860404Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="5">
 <details class="code-fold">
 <summary>Código</summary>
@@ -507,7 +513,7 @@ BC(A, B) = \frac{\sum_i |a_i - b_i|}{\sum_i (a_i + b_i)}
 </ol>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-distancias">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-distancias">
 <div id="cell-l2-distancias" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:54.864534Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:54.864466Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:54.872511Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:54.872060Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="7">
 <details class="code-fold">
 <summary>Código</summary>
@@ -580,7 +586,7 @@ BC(A, B) = \frac{\sum_i |a_i - b_i|}{\sum_i (a_i + b_i)}
 </div>
 </div>
 <p>La matriz es <strong>simétrica</strong> y tiene <strong>ceros en la diagonal</strong>. La mayoría de los pares tiene distancias bajas (<a href="#fig-l2-distancias" class="quarto-xref">Figura&nbsp;<span>5.1</span></a>): en general las comunidades se parecen bastante, y las distancias altas corresponden a unas pocas muestras muy distintas del resto.</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-distancias">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-distancias">
 <div id="cell-fig-l2-distancias" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:54.875603Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:54.875531Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:54.954795Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:54.954558Z&quot;}}" data-execution_count="9">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -650,7 +656,7 @@ Figura&nbsp;5.1: Distribución de las distancias de Bray-Curtis entre todos los 
 <li>El porcentaje de cada eje indica qué fracción de la variación total representa.</li>
 <li>Es el equivalente del PCA, pero parte de <strong>cualquier</strong> matriz de distancias (aquí, Bray-Curtis).</li>
 </ul>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-pcoa">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-pcoa">
 <div id="cell-l2-pcoa" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:55.007894Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:55.007719Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:55.064026Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:55.063587Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="12">
 <details class="code-fold">
 <summary>Código</summary>
@@ -684,7 +690,7 @@ dtype: float64</code></pre>
 <p>¿Esperas que las muestras se agrupen por <strong>familia de planta</strong>, por <strong>estudio</strong>, o que no haya grupos claros?</p>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-pcoa">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-pcoa">
 <div id="cell-fig-l2-pcoa" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:55.065257Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:55.065147Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:55.257020Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:55.255584Z&quot;}}" data-execution_count="13">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -752,7 +758,7 @@ Figura&nbsp;5.2: PCoA sobre Bray-Curtis: las mismas muestras coloreadas por fami
 </tr>
 </tbody>
 </table>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-linkage">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-linkage">
 <div id="cell-l2-linkage" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:55.263677Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:55.263605Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:55.266974Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:55.266439Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="15">
 <details class="code-fold">
 <summary>Código</summary>
@@ -770,7 +776,7 @@ Figura&nbsp;5.2: PCoA sobre Bray-Curtis: las mismas muestras coloreadas por fami
 </div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-dendrograma">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-dendrograma">
 <div id="cell-fig-l2-dendrograma" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:55.268283Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:55.268201Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:55.418394Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:55.418163Z&quot;}}" data-execution_count="16">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -810,7 +816,7 @@ Figura&nbsp;5.3: Dendrograma con enlace promedio (etiqueta = estudio; color = fa
 <section id="el-dendrograma-junto-a-la-matriz-de-distancias" class="level3" data-number="5.4.2">
 <h3 data-number="5.4.2" class="anchored" data-anchor-id="el-dendrograma-junto-a-la-matriz-de-distancias"><span class="header-section-number">5.4.2</span> El dendrograma junto a la matriz de distancias</h3>
 <p>Reordenar la matriz de distancias según el dendrograma muestra los grupos como <strong>bloques oscuros</strong> de muestras muy parecidas (<a href="#fig-l2-clustermap" class="quarto-xref">Figura&nbsp;<span>5.4</span></a>). Las franjas de color indican la familia y el estudio de cada muestra.</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-clustermap">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-clustermap">
 <div id="cell-fig-l2-clustermap" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:55.420527Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:55.420434Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:55.595800Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:55.595025Z&quot;}}" data-execution_count="17">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -842,7 +848,7 @@ Figura&nbsp;5.4: Matriz de distancias reordenada según el dendrograma, con fran
 <section id="de-árbol-a-clusters" class="level3" data-number="5.4.3">
 <h3 data-number="5.4.3" class="anchored" data-anchor-id="de-árbol-a-clusters"><span class="header-section-number">5.4.3</span> De árbol a clusters</h3>
 <p>Para obtener <strong>clusters</strong> “cortamos” el árbol a la altura que deja el número de grupos que pedimos. Revisa siempre <strong>cuántas muestras</strong> cae en cada cluster: un grupo de 3 muestras y otro de 69 no es lo mismo que tres grupos de 25.</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-fcluster">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-fcluster">
 <div id="cell-l2-fcluster" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:55.597055Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:55.596963Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:55.602407Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:55.602044Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="18">
 <details class="code-fold">
 <summary>Código</summary>
@@ -859,7 +865,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>La <strong>correlación cofenética</strong> mide qué tan fielmente el dendrograma conserva las distancias originales (más cerca de 1 = mejor). Sirve para comparar métodos de enlace.</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-cofenetica">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-cofenetica">
 <div id="cell-l2-cofenetica" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:55.603919Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:55.603832Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:55.606201Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:55.605950Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="19">
 <details class="code-fold">
 <summary>Código</summary>
@@ -925,7 +931,7 @@ Name: count, dtype: int64</code></pre>
 <li><strong>Negativa:</strong> probablemente está en el grupo equivocado.</li>
 </ul>
 <p>Probamos varios valores de <em>k</em> y comparamos la silhouette promedio (<a href="#fig-l2-eleccion-k" class="quarto-xref">Figura&nbsp;<span>5.5</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-eleccion-k">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-eleccion-k">
 <div id="cell-fig-l2-eleccion-k" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:57.171753Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:57.171663Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:57.215689Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:57.215142Z&quot;}}" data-execution_count="23">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -963,7 +969,7 @@ Figura&nbsp;5.5: Silhouette promedio de k-means para k = 2 a 8.
 <p>Con el mejor <em>k</em> según la silhouette, ¿los grupos tendrán tamaños <strong>parecidos</strong> (unas 25 muestras cada uno) o muy <strong>desiguales</strong>?</p>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-kmeans">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-kmeans">
 <div id="cell-l2-kmeans" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:57.217245Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:57.217150Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:57.248833Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:57.248567Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="24">
 <details class="code-fold">
 <summary>Código</summary>
@@ -976,7 +982,7 @@ Figura&nbsp;5.5: Silhouette promedio de k-means para k = 2 a 8.
 </div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-kmeans">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-kmeans">
 <div id="cell-fig-l2-kmeans" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:57.251989Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:57.251876Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:57.321055Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:57.320419Z&quot;}}" data-execution_count="25">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1003,7 +1009,7 @@ Figura&nbsp;5.6: Clusters de k-means sobre las dos primeras coordenadas del PCoA
 </div>
 </div>
 <p>El promedio esconde detalle: el <strong>diagrama de silhouette</strong> muestra una barra por muestra, agrupadas por cluster (<a href="#fig-l2-silhouette" class="quarto-xref">Figura&nbsp;<span>5.7</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-silhouette">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-silhouette">
 <div id="cell-fig-l2-silhouette" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:57.322616Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:57.322530Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:57.387436Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:57.386780Z&quot;}}" data-execution_count="26">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1088,7 +1094,7 @@ Figura&nbsp;5.7: Diagrama de silhouette: una barra por muestra, agrupadas por cl
 <section id="concordancia-entre-clusters-y-etiquetas" class="level3" data-number="5.6.1">
 <h3 data-number="5.6.1" class="anchored" data-anchor-id="concordancia-entre-clusters-y-etiquetas"><span class="header-section-number">5.6.1</span> Concordancia entre clusters y etiquetas</h3>
 <p>El <strong>índice de Rand ajustado</strong> (ARI) mide qué tanto coinciden dos agrupaciones: <strong>1</strong> = idénticas, <strong>~0</strong> = como al azar.</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-ari">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-ari">
 <div id="cell-l2-ari" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:57.405265Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:57.405182Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:57.420737Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:57.420281Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="30">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1101,7 +1107,7 @@ Figura&nbsp;5.7: Diagrama de silhouette: una barra por muestra, agrupadas por cl
 </div>
 </div>
 <p>La misma comparación para los dos métodos y las tres variables (<a href="#tbl-l2-ari" class="quarto-xref">Tabla&nbsp;<span>5.1</span></a>):</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-tbl-l2-ari">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-tbl-l2-ari">
 <div class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:57.421902Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:57.421826Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:57.428683Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:57.428383Z&quot;}}" data-execution_count="31">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1122,7 +1128,7 @@ Tabla&nbsp;5.1: Índice de Rand ajustado entre los clusters y tres variables del
 <div>
 
 
-<table class="dataframe cell caption-top table table-sm table-striped small" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1176,7 +1182,7 @@ Tabla&nbsp;5.1: Índice de Rand ajustado entre los clusters y tres variables del
 <p>¿Qué variable explicará <strong>más</strong> variación entre comunidades: la familia de planta, el país o el estudio? ¿Y cuál <strong>menos</strong>?</p>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-permanova">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-permanova">
 <div id="cell-l2-permanova" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:57.429612Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:57.429541Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:45:02.188774Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:45:02.188544Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="32">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1196,7 +1202,7 @@ Name: PERMANOVA results, dtype: object</code></pre>
 </div>
 </div>
 <p><code>permanova()</code> da el estadístico pseudo-F y el valor <em>p</em>; a partir de ellos calculamos el R² y el R² ajustado para las tres variables (<a href="#tbl-l2-permanova" class="quarto-xref">Tabla&nbsp;<span>5.2</span></a>):</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-tbl-l2-permanova">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-tbl-l2-permanova">
 <div class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:45:02.193973Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:45:02.193882Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:45:18.033142Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:45:18.032633Z&quot;}}" data-tags="[&quot;estado&quot;]" data-execution_count="34">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1216,7 +1222,7 @@ Tabla&nbsp;5.2: PERMANOVA (Bray-Curtis, 75 muestras): variación explicada por c
 <div>
 
 
-<table class="dataframe cell caption-top table table-sm table-striped small" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1266,7 +1272,7 @@ Tabla&nbsp;5.2: PERMANOVA (Bray-Curtis, 75 muestras): variación explicada por c
 <section id="distancias-entre-pares-qué-acerca-a-dos-muestras" class="level3" data-number="5.6.3">
 <h3 data-number="5.6.3" class="anchored" data-anchor-id="distancias-entre-pares-qué-acerca-a-dos-muestras"><span class="header-section-number">5.6.3</span> Distancias entre pares: ¿qué acerca a dos muestras?</h3>
 <p>Una pregunta directa, sin clusters: dos muestras <strong>de la misma familia</strong>, ¿están más cerca que dos de familias distintas? ¿Y dos <strong>del mismo estudio</strong>? Clasificamos todos los pares de muestras según lo que comparten (<a href="#fig-l2-pares" class="quarto-xref">Figura&nbsp;<span>5.8</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-pares">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-pares">
 <div class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:45:18.034297Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:45:18.034193Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:45:18.098358Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:45:18.097751Z&quot;}}" data-execution_count="35">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1317,7 +1323,7 @@ Tabla&nbsp;5.2: PERMANOVA (Bray-Curtis, 75 muestras): variación explicada por c
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<table class="dataframe do-not-create-environment caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1373,7 +1379,7 @@ Figura&nbsp;5.8
 <section id="y-sin-los-casos-atípicos" class="level3" data-number="5.6.4">
 <h3 data-number="5.6.4" class="anchored" data-anchor-id="y-sin-los-casos-atípicos"><span class="header-section-number">5.6.4</span> ¿Y sin los casos atípicos?</h3>
 <p>Revisemos quiénes son las muestras que k-means separó del grupo principal:</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-atipicos">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-l2-atipicos">
 <div id="cell-l2-atipicos" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:45:18.146885Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:45:18.146713Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:45:18.150903Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:45:18.150591Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="37">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1466,7 +1472,7 @@ Figura&nbsp;5.8
 </div>
 </div>
 <p>Estas pocas muestras pueden dominar el análisis. Repetimos el PCoA y la PERMANOVA <strong>sin ellas</strong>, para ver qué estructura hay dentro del grupo principal (<a href="#fig-l2-pcoa-sin-atipicos" class="quarto-xref">Figura&nbsp;<span>5.9</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-pcoa-sin-atipicos">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-pcoa-sin-atipicos">
 <div id="cell-fig-l2-pcoa-sin-atipicos" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:45:18.163375Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:45:18.163279Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:45:18.337640Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:45:18.337198Z&quot;}}" data-execution_count="39">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1502,7 +1508,7 @@ Figura&nbsp;5.9: PCoA recalculado sin las muestras atípicas: familia de planta 
 </div>
 </div>
 <p>El mensaje principal de la lección, en una sola figura (<a href="#fig-l2-r2" class="quarto-xref">Figura&nbsp;<span>5.10</span></a>):</p>
-<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-r2">
+<div class="quarto-embed-nb-cell" data-notebook="/home/claude/microagrobiome/curso_inverno_2026/notebooks/leccion_2_clustering.ipynb" data-notebook-title="Lección 2: Técnicas de clustering" data-notebook-cellid="cell-fig-l2-r2">
 <div id="cell-fig-l2-r2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:45:37.670562Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:45:37.670466Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:45:37.727981Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:45:37.727536Z&quot;}}" data-execution_count="41">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1698,7 +1704,7 @@ Figura&nbsp;5.10: R² ajustado de la PERMANOVA por variable, con todas las muest
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/github\.com\/MicroAgroBiome\/MicroAgroBiome_bioinfo2026_libro");
+        var filterRegex = new RegExp("https:\/\/microagrobiome\.github\.io\/Curso_Invierno_2026\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
