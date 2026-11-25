@@ -64,9 +64,9 @@ Cada día, la **última media hora a una hora** se dedica a que los equipos avan
 
 | Horario | Actividad | Capítulo |
 |:---:|---|---|
-| 15:00 – 16:30 | Transposición composicional | - |
+| 15:00 – 16:30 | Transformación composicional | - |
 | 16:30 – 17:00 | ☕ *Receso* | |
-| 17:00 – 17:30 | Transposición composicional | - |
+| 17:00 – 17:30 | Transformación composicional | - |
 | 17:30 – 18:30 | Avance del proyecto | [Proyecto](proyecto.qmd) |
 
 #### Jueves 3 de diciembre: Clustering

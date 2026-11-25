@@ -4,7 +4,7 @@ format: html
 notebook-links: true
 ---
 
-> **Instructor:** Haydee Peyurero, Alejandro Ucan-Puc · \~3.5 h (día 4, incluye un descanso)
+> **Instructor:** Haydeé Peruyero, Alejandro Ucan-Puc · \~3.5 h (día 4, incluye un descanso)
 
 ::: {.callout-note .questions}
 ## Preguntas
@@ -45,11 +45,17 @@ Trabajamos con **75 metagenomas de rizósfera** de cultivos de tres familias de 
 
 `abundance_table` tiene una fila por muestra y una columna por género; `metadata_df`, una fila por muestra y una columna por cada dato que conocemos de ella.
 
-La tabla de conteo de abundancias se muestra a continuación: {{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-conteo echo=true >}}
+La tabla de conteo de abundancias se muestra a continuación:
 
-La tabla de taxonomías se muestra a continuación: {{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-taxonomia echo=true >}}
+{{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-conteo echo=true >}}
 
-La tabla de metadatos se muestra a continuación: {{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-metadata echo=true >}}
+La tabla de taxonomías se muestra a continuación:
+
+{{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-taxonomia echo=true >}}
+
+La tabla de metadatos se muestra a continuación:
+
+{{< embed notebooks/leccion04_TDA_v2.ipynb#l4-mostrar-tabla-metadata echo=true >}}
 
 Notemos que las muestras pertenecen a 11 plantas: *tomate, maíz, soya, cacahuate, entre otras*. Puedes ver la distribución de las muestras por planta con el siguiente código:
 

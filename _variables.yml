@@ -1,4 +1,4 @@
 # ÚNICO lugar con la URL del repo: si se renombra, se cambia solo aquí
 # (y en notebook-view de _quarto.yml, si se usa)
-colab: "https://colab.research.google.com/github/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/blob/main/"
-github: "https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/blob/main/"
+colab: "https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/"
+github: "https://github.com/MicroAgroBiome/Curso_Invierno_2026/blob/main/"

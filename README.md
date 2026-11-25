@@ -1,6 +1,6 @@
 # Diferencias estadísticas y topológicas en la comunidad microbiana de suelos
 
-[![Libro del curso](https://img.shields.io/badge/📖_Libro-en_línea-1f6feb)](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/)
+[![Libro del curso](https://img.shields.io/badge/📖_Libro-en_línea-1f6feb)](https://microagrobiome.github.io/Curso_Invierno_2026/)
 [![Hecho con Quarto](https://img.shields.io/badge/Hecho_con-Quarto-75AADB)](https://quarto.org/)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB)](https://www.python.org/)
 [![Licencia: CC BY-NC-SA 4.0](https://img.shields.io/badge/Licencia-CC_BY--NC--SA_4.0-lightgrey)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)
@@ -42,7 +42,7 @@ A estudiantes y profesionales de biología, matemáticas, ciencias de datos y á
 - Estadística básica: media, varianza, pruebas de hipótesis.
 - Python básico: ejecutar celdas, usar variables y listas. **No** hace falta saber escribir funciones.
 - Una cuenta de Google para trabajar en Google Colab, o Python ≥ 3.10 instalado localmente.
-- Antes de la primera sesión: leer la [Dinámica de trabajo](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/dinamica_trabajo.html) y verificar que el notebook de la Lección 1 abre y su celda de Setup se ejecuta.
+- Antes de la primera sesión: leer la [Dinámica de trabajo](https://microagrobiome.github.io/Curso_Invierno_2026/dinamica_trabajo.html) y verificar que el notebook de la Lección 1 abre y su celda de Setup se ejecuta.
 
 ## Instructores
 
@@ -64,17 +64,17 @@ A estudiantes y profesionales de biología, matemáticas, ciencias de datos y á
 | **Viernes 4** | Redes de coocurrencia y TDA · Integración del proyecto |
 | **Sábado 5** | Presentaciones de los proyectos por equipo |
 
-La agenda por horas está en el libro: [Información general → Agenda](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/index.html#agenda).
+La agenda por horas está en el libro: [Información general → Agenda](https://microagrobiome.github.io/Curso_Invierno_2026/index.html#agenda).
 
 ## Materiales
 
 | Capítulo | Tipo | Notebook |
 |---|---|---|
-| 1 · [Mapa del tesoro: la ruta de la rizósfera](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/mapa_del_tesoro.html) | Actividad interactiva | — |
-| 2 · [Introducción a los datos](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/intro_datos.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/blob/main/notebooks/participante/leccion_1_introduccion_datos.ipynb) |
-| 3 · [Pruebas de hipótesis en microbiomas](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/pruebas_hipotesis.html) | Actividad interactiva (datos simulados) | — |
-| 4 · [Técnicas de clustering](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/clustering.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/blob/main/notebooks/participante/leccion_2_clustering.ipynb) |
-| [Proyecto del curso](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/proyecto.html) | Trabajo en equipo | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/blob/main/notebooks/proyecto_maiz.ipynb) |
+| 1 · [Mapa del tesoro: la ruta de la rizósfera](https://microagrobiome.github.io/Curso_Invierno_2026/mapa_del_tesoro.html) | Actividad interactiva | — |
+| 2 · [Introducción a los datos](https://microagrobiome.github.io/Curso_Invierno_2026/intro_datos.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/leccion_1_introduccion_datos.ipynb) |
+| 3 · [Pruebas de hipótesis en microbiomas](https://microagrobiome.github.io/Curso_Invierno_2026/pruebas_hipotesis.html) | Actividad interactiva (datos simulados) | — |
+| 4 · [Técnicas de clustering](https://microagrobiome.github.io/Curso_Invierno_2026/clustering.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/leccion_2_clustering.ipynb) |
+| [Proyecto del curso](https://microagrobiome.github.io/Curso_Invierno_2026/proyecto.html) | Trabajo en equipo | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/proyecto_maiz.ipynb) |
 
 ⚐ Faltan los capítulos de transformación composicional (martes) y de redes y TDA (viernes).
 
@@ -89,7 +89,7 @@ Los ejercicios no piden escribir código desde cero: se completa una línea, se 
 
 ### Proyecto
 
-En equipos (parejas), los participantes responden: **¿qué tan parecido es el microbioma de la rizósfera del maíz entre estudios distintos?** Cada día, la última media hora a una hora se dedica al proyecto. Cada equipo entrega un reporte y da una presentación de 10 minutos el sábado. Detalles: [Proyecto del curso](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/proyecto.html).
+En equipos (parejas), los participantes responden: **¿qué tan parecido es el microbioma de la rizósfera del maíz entre estudios distintos?** Cada día, la última media hora a una hora se dedica al proyecto. Cada equipo entrega un reporte y da una presentación de 10 minutos el sábado. Detalles: [Proyecto del curso](https://microagrobiome.github.io/Curso_Invierno_2026/proyecto.html).
 
 ## Datos
 
@@ -111,8 +111,8 @@ Usa los botones **Open in Colab** de la tabla de materiales o del libro. Guarda 
 ### En tu computadora
 
 ```bash
-git clone https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro.git
-cd MicroAgroBiome_bioinfo2026_libro
+git clone https://github.com/MicroAgroBiome/Curso_Invierno_2026.git
+cd Curso_Invierno_2026
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
@@ -152,7 +152,7 @@ Librerías principales: `pandas`, `numpy`, `scikit-bio`, `biom-format`, `scikit-
 
 ## Contribuir (instructores)
 
-El flujo completo está en el libro: [Dinámica de trabajo → Para instructores](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/dinamica_trabajo.html#para-instructores-cómo-se-produce-el-material). Resumen:
+El flujo completo está en el libro: [Dinámica de trabajo → Para instructores](https://microagrobiome.github.io/Curso_Invierno_2026/dinamica_trabajo.html#para-instructores-cómo-se-produce-el-material). Resumen:
 
 1. Trabaja en **tu propia rama**; los cambios llegan a `main` por *pull request*.
 2. El **notebook completo** es la única fuente. Edítalo, **ejecútalo completo** y genera la versión del participante:
@@ -183,7 +183,7 @@ El flujo completo está en el libro: [Dinámica de trabajo → Para instructores
 
 **El material del curso:**
 
-> Sélem-Mojica N, ⚐ Rafael, Peruyero H, García-Estrada DA, Ucan-Puc MA. *Diferencias estadísticas y topológicas en comunidades microbianas.* Segunda Escuela Michoacana de Biología Matemática, Centro de Ciencias Matemáticas, UNAM (2026). <https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/>
+> Sélem-Mojica N, ⚐ Rafael, Peruyero H, García-Estrada DA, Ucan-Puc MA. *Diferencias estadísticas y topológicas en comunidades microbianas.* Segunda Escuela Michoacana de Biología Matemática, Centro de Ciencias Matemáticas, UNAM (2026). <https://microagrobiome.github.io/Curso_Invierno_2026/>
 
 ## Financiamiento
 
