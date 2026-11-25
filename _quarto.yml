@@ -12,7 +12,7 @@ book:
     - name: Haydeé Peruyero
       degrees: PhD
       url: https://haydeeperuyero.github.io/
-      orcid: https://orcid.org/0000-0002-4820-1798
+      orcid: 0000-0002-4820-1798
       email: haydeeperuyero@unam.mx
       affiliations:
         - name: ENES-Juriquilla, UNAM
@@ -21,7 +21,7 @@ book:
     - name: Evelia Coss
       degrees: PhD
       url: https://eveliacoss.github.io/ 
-      orcid: https://orcid.org/0000-0002-7087-2977
+      orcid: 0000-0002-7087-2977
       email: ecosnav@gmail.com
       affiliations:
         - name: ENES-Juriquilla, UNAM
@@ -30,7 +30,7 @@ book:
     - name: David Alberto García Estrada
       degrees: MC
       url: https://davidalberto.github.io/
-      orcid: https://orcid.org/0009-0007-1169-5329
+      orcid: 0009-0007-1169-5329
       email: david.garcia@cimav.edu.mx
       affiliations:
         - name: Centro de Investigación en Materiales Avanzados (CIMAV)
@@ -38,8 +38,8 @@ book:
           url: https://cimav.edu.mx/ 
     - name: Manuel Alejandro Ucan Puc
       degrees: PhD
-      url: alejandroucanpuc.github.io
-      orcid: https://orcid.org/0000-0002-0037-9394
+      url: https://alejandroucanpuc.github.io/
+      orcid: 0000-0002-0037-9394
       email: alejandro.ucan-puc@tec.mx
       affiliations:
         - name: Escuela de Ingeniería y Ciencias, Tecnológico de Monterrey
@@ -65,28 +65,26 @@ book:
         - clustering.qmd 
     - part: "**Día 4**"
       chapters:
-        - cap04_TDA.qmd
+        - tda.qmd
   
   # Information
-  site-url: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro
-  repo-url: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro
+  site-url: https://microagrobiome.github.io/Curso_Invierno_2026/
+  repo-url: https://github.com/MicroAgroBiome/Curso_Invierno_2026
   sharing: [twitter, facebook, linkedin]
   favicon: "logos/MicroAgroBiome.png"
+  # Logo en la esquina superior de la barra lateral (manual de identidad, p. 2)
+  sidebar:
+    logo: "logos/MicroAgroBiome.png"
 
 format:
   html:
-    logo: "logos/MicroAgroBiome.png"
     toc-depth: 4
     number-depth: 3
-    # css
+    # Identidad gráfica: colores y fuentes en _brand.yml; ajustes finos en styles.css
+    theme: [cosmo, brand]   # solo modo claro
     css: styles.css
-  # Boton para cambiar tema de oscuro a claro
-    theme:
-      light: cosmo
-      # dark: darkly
     code-fold: show # Ocultar codigo
     code-copy: true # Copy button
-    freeze: false  # Desactivar congelamiento
 
 editor: visual
 

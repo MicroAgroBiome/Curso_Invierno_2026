@@ -12,3 +12,13 @@ datos/subset_proyecto/
 datos/agrobiomData/
 resultados/
 notebooks/*.pdf
+
+# Sistema operativo
+.DS_Store
+
+# Subproductos de Quarto fuera de docs/ (se regeneran al renderizar)
+*.out.ipynb
+*-preview.html
+/*_files/
+/notebooks/*_files/
+/_book/

@@ -1,0 +1,54 @@
+# Identidad gráfica de MicroAgroBiome (Manual de Identidad Gráfica, 2026)
+# Quarto aplica este archivo al tema del libro (ver theme en _quarto.yml).
+# Si el manual cambia, este es el único lugar donde actualizar colores y fuentes.
+
+meta:
+  name: MicroAgroBiome
+  link: https://agrobiom.matmor.unam.mx/
+
+logo:
+  images:
+    imagotipo:
+      path: logos/MicroAgroBiome.png
+      alt: "Logo de MicroAgroBiome"
+  medium: imagotipo
+
+color:
+  palette:
+    principal-1: "#135747"   # texto y títulos sobre fondos claros
+    principal-2: "#5A7D19"   # acompañar / figuras simples, títulos principales
+    secundario-1: "#429162"  # complemento (parte del logo)
+    secundario-2: "#BCA923"  # destacar, subrayar, enmarcar (no usar como color de texto)
+    secundario-3: "#F5FFF9"  # fondos muy claros
+  foreground: "#1F2A26"      # cuerpo de texto (casi negro, como en el manual)
+  background: "#FFFFFF"
+  primary: principal-1       # enlaces, botones, elementos activos
+  secondary: principal-2
+  success: secundario-1
+  warning: secundario-2
+  light: secundario-3
+  dark: principal-1
+
+typography:
+  fonts:
+    - family: Montserrat
+      source: google
+      weight: [400, 600, 700]
+    - family: Inter
+      source: google
+      weight: [400, 500, 600, 700]
+      style: [normal, italic]
+    - family: Roboto Mono
+      source: google
+      weight: [400, 700]
+  base:
+    family: Inter
+    line-height: 1.6
+  headings:
+    family: Inter              # títulos de segundo nivel (h2 y menores)
+    weight: 700
+    color: principal-1
+  monospace:
+    family: Roboto Mono        # código, IDs de muestra, nombres de genes
+  link:
+    color: principal-1

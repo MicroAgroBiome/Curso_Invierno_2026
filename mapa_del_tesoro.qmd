@@ -39,7 +39,7 @@ Necesitas conexión a internet: las salas y aplicaciones del MUMAT se abren desd
 | Parada | Tema | Dónde reaparece en el curso |
 |---|---|---|
 | 1 · Bienvenida | El Hormiguero del MUMAT: ¿cuántos microorganismos caben en un gramo de suelo? | Escala de los datos: millones de lecturas por muestra (capítulo 2) |
-| 2 · Topología | La forma de un objeto depende de sus **hoyos** y **conexiones**, no de sus medidas | Análisis topológico de datos (Lección 4) |
+| 2 · Topología | La forma de un objeto depende de sus **hoyos** y **conexiones**, no de sus medidas | Análisis topológico de datos |
 | 3 · Rizósfera | La zona del suelo que rodea las raíces y su diversidad microbiana | Los datos del curso son metagenomas de rizósfera (capítulos 2 y 4) |
 | 4 · Filogenia | Árboles que ordenan la diversidad por su ADN; qué es un **OTU** | Rangos taxonómicos y dendrogramas (capítulos 2 y 4) |
 | 5 · Gen 16S | Un solo gen para clasificar bacterias sin cultivarlas | Diferencia entre 16S y metagenómica *shotgun* (capítulo 2) |

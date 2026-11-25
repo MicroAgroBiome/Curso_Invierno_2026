@@ -1,1 +1,1 @@
-Sitemap: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro/sitemap.xml
+Sitemap: https://microagrobiome.github.io/Curso_Invierno_2026/sitemap.xml

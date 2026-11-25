@@ -28,19 +28,19 @@ Al completar esta lección, serás capaz de:
 
 Escribimos el código **juntos, en vivo**. Abre tu notebook antes de empezar:
 
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/participante/leccion_2_clustering.ipynb)
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/participante/clustering.ipynb)
 
 - **Sin instalar nada:** ábrelo en Google Colab con el botón de arriba y guarda una copia (*Archivo → Guardar una copia en Drive*).
-- **En tu computadora:** [descarga el notebook](notebooks/participante/leccion_2_clustering.ipynb){download="leccion_2_clustering.ipynb"} y ábrelo en VSCode o Jupyter.
+- **En tu computadora:** [descarga el notebook](notebooks/participante/clustering.ipynb){download="clustering.ipynb"} y ábrelo en VSCode o Jupyter.
 
-El notebook es **independiente**: vuelve a cargar los datos y repite la limpieza de la Lección 1, así que no necesitas haberla terminado. Los bloques que empiezan con `# ⌨️` son los que escribimos juntos; el código de las gráficas viene plegado y ya está escrito en tu notebook. Si te atrasas, copia el código del Etherpad o ejecuta la celda **🛟 Ponerse al día** más cercana.
+El notebook es **independiente**: vuelve a cargar los datos y repite la limpieza del capítulo *Introducción a los datos*, así que no necesitas haberla terminado. Los bloques que empiezan con `# ⌨️` son los que escribimos juntos; el código de las gráficas viene plegado y ya está escrito en tu notebook. Si te atrasas, copia el código del Etherpad o ejecuta la celda **🛟 Ponerse al día** más cercana.
 
-Para repasar después del curso: [notebook completo, con todo el código y las soluciones]({{< var colab >}}notebooks/leccion_2_clustering.ipynb).
+Para repasar después del curso: [notebook completo, con todo el código y las soluciones]({{< var colab >}}notebooks/clustering.ipynb).
 :::
 
 ## La pregunta de la lección
 
-En la Lección 1 vimos que casi cada estudio muestreó **una sola familia de planta**. Ahora buscamos grupos de muestras **sin mirar el metadato** y después preguntamos: *¿los grupos que aparecen siguen a la planta, al país o al estudio?*
+En el capítulo *Introducción a los datos* vimos que casi cada estudio muestreó **una sola familia de planta**. Ahora buscamos grupos de muestras **sin mirar el metadato** y después preguntamos: *¿los grupos que aparecen siguen a la planta, al país o al estudio?*
 
 Para eso necesitamos tres herramientas, en este orden:
 
@@ -55,9 +55,9 @@ flowchart LR
     E --> F
 ```
 
-Empezamos repasando la Lección 1: como la profundidad de secuenciación varía muchísimo entre muestras, no comparamos conteos crudos sino **abundancias relativas**, en las que cada muestra suma 1.
+Empezamos repasando el capítulo *Introducción a los datos*: como la profundidad de secuenciación varía muchísimo entre muestras, no comparamos conteos crudos sino **abundancias relativas**, en las que cada muestra suma 1.
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-relativa echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-relativa echo=true >}}
 
 ## Distancia entre comunidades
 
@@ -89,11 +89,11 @@ Calculamos la distancia entre **todos los pares** de muestras y la guardamos en 
 2.  ¿La distancia de A a B será igual a la de B a A?
 :::
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-distancias echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-distancias echo=true >}}
 
 La matriz es **simétrica** y tiene **ceros en la diagonal**. La mayoría de los pares tiene distancias bajas (@fig-l2-distancias): en general las comunidades se parecen bastante, y las distancias altas corresponden a unas pocas muestras muy distintas del resto.
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-distancias echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-distancias echo=true >}}
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 1: ¿Importa la métrica? (5 min)
@@ -123,7 +123,7 @@ Una matriz de 75 × 75 números no se puede "mirar". El **PCoA** (*Principal Coo
 - El porcentaje de cada eje indica qué fracción de la variación total representa.
 - Es el equivalente del PCA, pero parte de **cualquier** matriz de distancias (aquí, Bray-Curtis).
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-pcoa echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-pcoa echo=true >}}
 
 ::: callout-important
 ## 🔮 Predice antes de ver el mapa
@@ -131,7 +131,7 @@ Una matriz de 75 × 75 números no se puede "mirar". El **PCoA** (*Principal Coo
 ¿Esperas que las muestras se agrupen por **familia de planta**, por **estudio**, o que no haya grupos claros?
 :::
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-pcoa echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-pcoa echo=true >}}
 
 **Observa** @fig-l2-pcoa: son los mismos puntos con dos colores distintos. Hay unos pocos puntos **muy alejados** del resto: ¿qué serán? ¿En cuál de los dos paneles se ven *grupos* más claros? Guarda esas impresiones; las pondremos a prueba más adelante.
 
@@ -151,9 +151,9 @@ El **método de enlace** (*linkage*) define cómo se mide la distancia entre dos
 
 : Métodos de enlace más comunes.
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-linkage echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-linkage echo=true >}}
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-dendrograma echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-dendrograma echo=true >}}
 
 En @fig-l2-dendrograma, cada hoja es una muestra (etiqueta = estudio; color = familia de la planta). Fíjate si las hojas del mismo color, o del mismo estudio, quedan juntas.
 
@@ -161,17 +161,17 @@ En @fig-l2-dendrograma, cada hoja es una muestra (etiqueta = estudio; color = fa
 
 Reordenar la matriz de distancias según el dendrograma muestra los grupos como **bloques oscuros** de muestras muy parecidas (@fig-l2-clustermap). Las franjas de color indican la familia y el estudio de cada muestra.
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-clustermap echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-clustermap echo=true >}}
 
 ### De árbol a clusters
 
 Para obtener **clusters** "cortamos" el árbol a la altura que deja el número de grupos que pedimos. Revisa siempre **cuántas muestras** cae en cada cluster: un grupo de 3 muestras y otro de 69 no es lo mismo que tres grupos de 25.
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-fcluster echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-fcluster echo=true >}}
 
 La **correlación cofenética** mide qué tan fielmente el dendrograma conserva las distancias originales (más cerca de 1 = mejor). Sirve para comparar métodos de enlace.
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-cofenetica echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-cofenetica echo=true >}}
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 2: Cambiar el método de enlace (5 min)
@@ -213,7 +213,7 @@ La **silhouette** mide, para cada muestra, qué tan cerca está de su propio gru
 
 Probamos varios valores de *k* y comparamos la silhouette promedio (@fig-l2-eleccion-k).
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-eleccion-k echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-eleccion-k echo=true >}}
 
 ::: callout-important
 ## 🔮 Predice antes de ejecutar
@@ -221,13 +221,13 @@ Probamos varios valores de *k* y comparamos la silhouette promedio (@fig-l2-elec
 Con el mejor *k* según la silhouette, ¿los grupos tendrán tamaños **parecidos** (unas 25 muestras cada uno) o muy **desiguales**?
 :::
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-kmeans echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-kmeans echo=true >}}
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-kmeans echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-kmeans echo=true >}}
 
 El promedio esconde detalle: el **diagrama de silhouette** muestra una barra por muestra, agrupadas por cluster (@fig-l2-silhouette).
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-silhouette echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-silhouette echo=true >}}
 
 ::: callout-warning
 ## Una silhouette alta no garantiza clusters útiles
@@ -263,11 +263,11 @@ Tenemos grupos calculados **sin mirar** el metadato. Ahora los comparamos con tr
 
 El **índice de Rand ajustado** (ARI) mide qué tanto coinciden dos agrupaciones: **1** = idénticas, **\~0** = como al azar.
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-ari echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-ari echo=true >}}
 
 La misma comparación para los dos métodos y las tres variables (@tbl-l2-ari):
 
-{{< embed notebooks/leccion_2_clustering.ipynb#tbl-l2-ari echo=true >}}
+{{< embed notebooks/clustering.ipynb#tbl-l2-ari echo=true >}}
 
 ### ¿Cuánta variación explica cada variable? PERMANOVA
 
@@ -283,17 +283,17 @@ Los clusters dependen de cómo cortemos el árbol o de qué *k* elijamos. Una al
 ¿Qué variable explicará **más** variación entre comunidades: la familia de planta, el país o el estudio? ¿Y cuál **menos**?
 :::
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-permanova echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-permanova echo=true >}}
 
 `permanova()` da el estadístico pseudo-F y el valor *p*; a partir de ellos calculamos el R² y el R² ajustado para las tres variables (@tbl-l2-permanova):
 
-{{< embed notebooks/leccion_2_clustering.ipynb#tbl-l2-permanova echo=true >}}
+{{< embed notebooks/clustering.ipynb#tbl-l2-permanova echo=true >}}
 
 ### Distancias entre pares: ¿qué acerca a dos muestras?
 
 Una pregunta directa, sin clusters: dos muestras **de la misma familia**, ¿están más cerca que dos de familias distintas? ¿Y dos **del mismo estudio**? Clasificamos todos los pares de muestras según lo que comparten (@fig-l2-pares).
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-pares echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-pares echo=true >}}
 
 Compara sobre todo las **dos cajas de la derecha** (estudios distintos): ¿cambia la distancia por compartir familia? Dos advertencias:
 
@@ -304,15 +304,15 @@ Compara sobre todo las **dos cajas de la derecha** (estudios distintos): ¿cambi
 
 Revisemos quiénes son las muestras que k-means separó del grupo principal:
 
-{{< embed notebooks/leccion_2_clustering.ipynb#l2-atipicos echo=true >}}
+{{< embed notebooks/clustering.ipynb#l2-atipicos echo=true >}}
 
 Estas pocas muestras pueden dominar el análisis. Repetimos el PCoA y la PERMANOVA **sin ellas**, para ver qué estructura hay dentro del grupo principal (@fig-l2-pcoa-sin-atipicos).
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-pcoa-sin-atipicos echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-pcoa-sin-atipicos echo=true >}}
 
 El mensaje principal de la lección, en una sola figura (@fig-l2-r2):
 
-{{< embed notebooks/leccion_2_clustering.ipynb#fig-l2-r2 echo=true >}}
+{{< embed notebooks/clustering.ipynb#fig-l2-r2 echo=true >}}
 
 ::: {.callout-tip .challenge}
 ## ✏️ Ejercicio 4: Interpretar el mensaje de la lección (5 min)
@@ -350,7 +350,7 @@ jaccard_array = squareform(pdist(presence.values, metric=TU_CODIGO_AQUI))
 jaccard_array = squareform(pdist(presence.values, metric="jaccard"))
 ```
 
-Las distancias de Jaccard son **muy pequeñas** (mediana ≈ 0.01): como vimos en la Lección 1, la tabla es muy densa y casi todos los géneros están en casi todas las muestras, así que la presencia/ausencia distingue poco. Aun así, el **estudio** sigue explicando mucha más variación que la familia de planta, que con Jaccard deja de ser significativa (p ≈ 0.08). La conclusión no depende de la métrica.
+Las distancias de Jaccard son **muy pequeñas** (mediana ≈ 0.01): como vimos en el capítulo *Introducción a los datos*, la tabla es muy densa y casi todos los géneros están en casi todas las muestras, así que la presencia/ausencia distingue poco. Aun así, el **estudio** sigue explicando mucha más variación que la familia de planta, que con Jaccard deja de ser significativa (p ≈ 0.08). La conclusión no depende de la métrica.
 :::
 
 ::: {.callout-note .keypoints}
@@ -362,4 +362,4 @@ Las distancias de Jaccard son **muy pequeñas** (mediana ≈ 0.01): como vimos e
 - **Asociación no es causa:** si planta y estudio están entrelazados, el análisis no puede separar sus efectos.
 :::
 
-**Siguiente capítulo:** usamos proporciones y Bray-Curtis, pero los datos de microbioma son **composicionales** (sus valores suman 1), y eso tiene consecuencias estadísticas. La Lección 3 introduce las transformaciones (CLR, ILR) para tratarlo.
+**Siguiente capítulo:** usamos proporciones y Bray-Curtis, pero los datos de microbioma son **composicionales** (sus valores suman 1), y eso tiene consecuencias estadísticas. El capítulo *Transformación composicional* introduce las transformaciones (CLR, ILR) para tratarlo.

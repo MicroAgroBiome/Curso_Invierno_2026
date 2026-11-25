@@ -2,7 +2,7 @@
 Genera el notebook del PARTICIPANTE a partir del notebook COMPLETO (la fuente única).
 
 Uso (desde la raíz del repo):
-    python scripts/generar_notebook_participante.py notebooks/leccion_1_introduccion_datos.ipynb
+    python scripts/generar_notebook_participante.py notebooks/intro_datos.ipynb
 
 Escribe:  notebooks/participante/<mismo nombre>.ipynb
 

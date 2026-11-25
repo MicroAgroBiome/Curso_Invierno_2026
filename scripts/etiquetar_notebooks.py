@@ -19,7 +19,7 @@ from pathlib import Path
 # notebook -> lista de (fragmento único del código, label, caption)
 # Prefijo fig- = figura, tbl- = tabla (Quarto los numera y permite @referencias)
 LABELS = {
-    "notebooks/leccion_1_introduccion_datos.ipynb": [
+    "notebooks/intro_datos.ipynb": [
         ('ax.set_title("Media y mediana en datos asimétricos")', "fig-l1-media-mediana",
          "Media y mediana de los conteos de *Streptomyces*: en datos asimétricos la media se aleja de la mediana."),
         ("pd.crosstab(metadata_df[\"host_name_family\"], metadata_df[\"host_name\"])", "tbl-l1-plantas",
@@ -43,7 +43,7 @@ LABELS = {
         ('ax.set_title("Diversidad α por estudio (color = familia de la planta)")', "fig-l1-shannon-estudio",
          "Diversidad de Shannon por estudio, coloreada por familia de planta."),
     ],
-    "notebooks/leccion_2_clustering.ipynb": [
+    "notebooks/clustering.ipynb": [
         ('ax.set_title("Distancias entre pares de muestras")', "fig-l2-distancias",
          "Distribución de las distancias de Bray-Curtis entre todos los pares de muestras."),
         ('axes[1].set_title("Coloreado por estudio")', "fig-l2-pcoa",

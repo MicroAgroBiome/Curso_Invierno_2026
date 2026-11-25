@@ -35,8 +35,8 @@ No necesitas instalar nada; solo una cuenta de Google.
 Para quien ya trabaja con Python localmente (VSCode o Jupyter).
 
 ``` bash
-git clone https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro.git
-cd MicroAgroBiome_bioinfo2026_libro
+git clone https://github.com/MicroAgroBiome/Curso_Invierno_2026.git
+cd Curso_Invierno_2026
 python -m venv venv
 source venv/bin/activate        # en Windows: venv\Scripts\activate
 pip install -r requirements.txt
@@ -47,7 +47,7 @@ Abre el notebook y ejecuta la celda de **Setup**; debe decir `Entorno: Local (VS
 
 ### Lista de verificación
 
-- [ ] Puedo abrir el notebook de la Lección 1 en Colab (o localmente) y guardé una copia.
+- [ ] Puedo abrir el notebook del capítulo *Introducción a los datos* en Colab (o localmente) y guardé una copia.
 - [ ] La celda de Setup se ejecuta sin errores.
 - [ ] La celda de carga de datos muestra `(75, 3330)` y `(75, 21)`: 75 muestras, 3330 géneros y 21 columnas de metadatos.
 
@@ -92,7 +92,7 @@ Los ejercicios **no** piden escribir código desde cero. Hay cuatro tipos:
 - **Interpretar:** respondes preguntas sobre una figura o un resultado, sin escribir código.
 
 ``` python
-# Ejemplo (Lección 1, Ejercicio 2)
+# Ejemplo (Introducción a los datos, Ejercicio 2)
 fabaceae_samples = merged_table[merged_table["host_name_family"] == TU_CODIGO_AQUI]
 ```
 
@@ -183,7 +183,7 @@ Lo que guardas en Colab (resultados exportados, figuras) **se borra al cerrar la
 
 ## Para instructores: cómo se produce el material
 
-Todo sale de **una sola fuente**: el **notebook completo** ejecutado (`notebooks/leccion_N_*.ipynb`).
+Todo sale de **una sola fuente**: el **notebook completo** ejecutado (`notebooks/<tema>.ipynb`).
 
 - El **libro** toma de él el código y las figuras (`{{{< embed ... echo=true >}}}`) y **no vuelve a ejecutar** nada, por lo que quien renderiza no necesita Python ni los datos.
 - El **notebook del participante** (`notebooks/participante/`) se **genera** con un script: nunca se edita a mano.
@@ -206,8 +206,8 @@ flowchart TD
 1.  **Ejecutar el notebook completo** antes de cada commit: las figuras del libro son exactamente esas salidas. Las celdas de ejercicio fallan a propósito, por eso se usa `--allow-errors`. Se necesitan `nbconvert`, `nbformat` e `ipykernel` en el entorno:
 
     ``` bash
-    jupyter nbconvert --to notebook --execute --inplace --allow-errors notebooks/leccion_1_introduccion_datos.ipynb
-    python scripts/generar_notebook_participante.py notebooks/leccion_1_introduccion_datos.ipynb
+    jupyter nbconvert --to notebook --execute --inplace --allow-errors notebooks/intro_datos.ipynb
+    python scripts/generar_notebook_participante.py notebooks/intro_datos.ipynb
     ```
 
 2.  **Etiquetas de celda** del notebook completo (en VSCode: `...` de la celda → *Add Cell Tag*), que usa el script generador:
