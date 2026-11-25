@@ -7,7 +7,7 @@
 
 Curso del proyecto **MicroAgroBiome** en la [**Segunda Escuela Michoacana de Biología Matemática**](https://matmor.unam.mx/embm-2026/) (Centro de Ciencias Matemáticas, UNAM).
 
-**📖 Todo el material está en el libro del curso:** <https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/>
+**📖 Todo el material está en el libro del curso:** [https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro](https://microagrobiome.github.io/Curso_Inverno_2026/)
 
 ## Información del curso
 
