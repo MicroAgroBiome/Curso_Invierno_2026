@@ -1,4 +1,4 @@
-# Diferencias estadísticas y topológicas en comunidades microbianas
+# Diferencias estadísticas y topológicas en la comunidad microbiana de suelos
 
 [![Libro del curso](https://img.shields.io/badge/📖_Libro-en_línea-1f6feb)](https://microagrobiome.github.io/MicroAgroBiome_bioinfo2026_libro/)
 [![Hecho con Quarto](https://img.shields.io/badge/Hecho_con-Quarto-75AADB)](https://quarto.org/)
