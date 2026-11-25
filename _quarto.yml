@@ -72,21 +72,20 @@ book:
   repo-url: https://github.com/MicroAgroBiome/Curso_Invierno_2026
   sharing: [twitter, facebook, linkedin]
   favicon: "logos/MicroAgroBiome.png"
+  # Logo en la esquina superior de la barra lateral (manual de identidad, p. 2)
+  sidebar:
+    logo: "logos/MicroAgroBiome.png"
 
 format:
   html:
-    logo: "logos/MicroAgroBiome.png"
     toc-depth: 4
     number-depth: 3
-    # css
-    css: styles.css
-  # Boton para cambiar tema de oscuro a claro
+    # Identidad gráfica: colores y fuentes en _brand.yml; ajustes finos en styles.css
     theme:
-      light: cosmo
-      # dark: darkly
+      light: [cosmo, brand]
+    css: styles.css
     code-fold: show # Ocultar codigo
     code-copy: true # Copy button
-    freeze: false  # Desactivar congelamiento
 
 editor: visual
 
