@@ -81,8 +81,7 @@ format:
     toc-depth: 4
     number-depth: 3
     # Identidad gráfica: colores y fuentes en _brand.yml; ajustes finos en styles.css
-    theme:
-      light: [cosmo, brand]
+    theme: [cosmo, brand]   # solo modo claro
     css: styles.css
     code-fold: show # Ocultar codigo
     code-copy: true # Copy button

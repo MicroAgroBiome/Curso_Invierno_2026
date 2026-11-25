@@ -27,14 +27,14 @@ notebook-links: true
 
 Escribimos el código **juntos, en vivo**. Abre tu notebook antes de empezar:
 
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/participante/leccion_4_tda.ipynb)
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/leccion04_TDA_v2.ipynb)
 
 - **Sin instalar nada:** ábrelo en Google Colab con el botón de arriba y guarda una copia (*Archivo → Guardar una copia en Drive*) para conservar lo que escribas.
-- **En tu computadora:** [descarga el notebook](notebooks/participante/leccion_4_tda.ipynb){download="leccion_4_tda.ipynb"} y ábrelo en VSCode o Jupyter.
+- **En tu computadora:** [descarga el notebook](notebooks/leccion04_TDA_v2.ipynb){download="leccion_4_tda.ipynb"} y ábrelo en VSCode o Jupyter.
 
 En esta página, los bloques de código que empiezan con `⌨️` son los que escribimos juntos; el código de las gráficas viene plegado (*Ver el código de la gráfica*) y ya está escrito en tu notebook. Si te atrasas, copia el código del Etherpad o ejecuta la celda **🛟 Ponerse al día** más cercana.
 
-Para repasar después del curso: [notebook completo, con todo el código y las soluciones]({{< var colab >}}notebooks/leccion_4_tda.ipynb).
+Para repasar después del curso: [notebook completo, con todo el código y las soluciones]({{< var colab >}}notebooks/leccion04_TDA_v2.ipynb).
 :::
 
 ## Cargar los datos
