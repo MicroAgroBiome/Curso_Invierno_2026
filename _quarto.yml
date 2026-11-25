@@ -65,7 +65,7 @@ book:
         - clustering.qmd 
     - part: "**Día 4**"
       chapters:
-        - cap04_TDA.qmd
+        - tda.qmd
   
   # Information
   site-url: https://microagrobiome.github.io/Curso_Invierno_2026/
