@@ -272,3 +272,12 @@ code, pre, kbd, samp {
 .sidebar-title > a {
   display: none;
 }
+
+/* Banner de MicroAgroBiome detrás del bloque de título.
+   El banner ya trae sus franjas laterales: se quita la franja hecha con CSS. */
+.quarto-title-block {
+  border-left: none;
+  border-image: none;
+  background: var(--mab-secundario-3) url("flyer/banner_microagrobiome.png") center / cover no-repeat;
+  padding: 2rem 2.5rem 1.5rem 3.5rem;   /* margen izquierdo para no pisar las franjas del banner */
+}
