@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -95,15 +92,14 @@ div.csl-indent {
 <link href="./logos/MicroAgroBiome.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-082af2ee7995de50cbcc24d11e1d8aae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-832e3d7b6b94ddcc90a000f8fabe51a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,17 +135,17 @@ div.csl-indent {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Saltar al contenido principal</a>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" aria-label="Barra de herramientas">
+  <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_datos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a los datos</span></a></li></ol></nav>
-        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./mapa_del_tesoro.html"><strong>Día 1</strong></a></li><li class="breadcrumb-item"><a href="./intro_datos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a los datos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -160,7 +156,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Sitio web">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">MicroAgroBiome</a> 
@@ -217,37 +213,93 @@ div.csl-indent {
  <span class="menu-text"><strong>Proyecto del curso</strong></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Día 1</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mapa_del_tesoro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Mapa del tesoro: la ruta de la rizósfera</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_datos.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a los datos</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pruebas_hipotesis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pruebas de hipótesis en microbiomas</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Día 2</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Técnicas de clustering</span></span></a>
+  <a href="./composicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pendiente</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Día 3</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Técnicas de clustering</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Día 4</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cap04_TDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Uso de Análisis Topológico de Datos (TDA) en datos Biológicos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
@@ -274,9 +326,9 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./mapa_del_tesoro.html"><strong>Día 1</strong></a></li><li class="breadcrumb-item"><a href="./intro_datos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a los datos</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a los datos</span></h1>
 </div>
@@ -362,7 +414,7 @@ div.csl-indent {
 <section id="cargar-los-datos" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="cargar-los-datos"><span class="header-section-number">2.1</span> Cargar los datos</h2>
 <p>Trabajamos con <strong>75 metagenomas de rizósfera</strong> de cultivos de tres familias de plantas (Poaceae, Solanaceae y Fabaceae; 25 muestras de cada una), provenientes de <strong>19 estudios</strong> publicados. Son un subconjunto de la base de datos MicroAgroBiome <span class="citation" data-cites="aguilar2026">(<a href="#ref-aguilar2026" role="doc-biblioref">Aguilar et&nbsp;al. 2026</a>)</span> (<a href="https://agrobiom.matmor.unam.mx" class="uri">https://agrobiom.matmor.unam.mx</a>). La celda de <strong>Setup</strong> del notebook descarga y prepara los archivos; después los cargamos:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-cargar-datos">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-cargar-datos">
 <div id="cell-l1-cargar-datos" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.728056Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.727907Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.768673Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.768072Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="43">
 <details class="code-fold">
 <summary>Código</summary>
@@ -389,7 +441,7 @@ div.csl-indent {
 <li><strong>Inferencial:</strong> generalizar de una muestra a una población y probar hipótesis.</li>
 </ul>
 <p><strong>Estructura de un dataset tabular:</strong> cada <strong>fila</strong> es una observación (una muestra) y cada <strong>columna</strong> es una variable.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-shape">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-shape">
 <div id="cell-l1-shape" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.777879Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.777799Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.779979Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.779716Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="46">
 <details class="code-fold">
 <summary>Código</summary>
@@ -401,7 +453,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-iloc">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-iloc">
 <div id="cell-l1-iloc" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.780807Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.780741Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.785000Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.784529Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="47">
 <details class="code-fold">
 <summary>Código</summary>
@@ -487,7 +539,7 @@ div.csl-indent {
 </div>
 </div>
 <p>Las variables pueden ser <strong>numéricas</strong> (valores medibles) o <strong>categóricas</strong> (un número limitado de categorías). <code>pandas</code> las distingue con <code>.dtypes</code>:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-dtypes">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-dtypes">
 <div id="cell-l1-dtypes" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.788471Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.788396Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.792051Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.791852Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="49">
 <details class="code-fold">
 <summary>Código</summary>
@@ -505,7 +557,7 @@ dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-head">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-head">
 <div id="cell-l1-head" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.793473Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.793397Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.797183Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.796929Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="50">
 <details class="code-fold">
 <summary>Código</summary>
@@ -596,7 +648,7 @@ dtype: object</code></pre>
 <li><strong>Mediana:</strong> valor central; es menos sensible a valores extremos.</li>
 <li><strong>Desviación estándar:</strong> qué tan dispersos están los valores respecto a la media.</li>
 </ul>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-resumen-genero">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-resumen-genero">
 <div id="l1-resumen-genero" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.798149Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.798074Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.800771Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.800509Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="51">
 <details class="code-fold">
 <summary>Código</summary>
@@ -627,7 +679,7 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>Cuando unas pocas muestras tienen muchísimas lecturas, la media se va hacia ellas y se separa de la mediana (<a href="#fig-l1-media-mediana" class="quarto-xref">Figura&nbsp;<span>2.1</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-media-mediana">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-media-mediana">
 <div id="cell-fig-l1-media-mediana" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.801528Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.801454Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.885914Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.885631Z&quot;}}" data-execution_count="52">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -656,7 +708,7 @@ Figura&nbsp;2.1: Media y mediana de los conteos de <em>Streptomyces</em>: en dat
 </div>
 </div>
 <p><code>.describe()</code> calcula varias medidas de resumen a la vez:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-describe">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-describe">
 <div id="cell-l1-describe" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.888047Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.887965Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.894785Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.894361Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="53">
 <details class="code-fold">
 <summary>Código</summary>
@@ -812,7 +864,7 @@ Figura&nbsp;2.1: Media y mediana de los conteos de <em>Streptomyces</em>: en dat
 <section id="el-formato-biom" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="el-formato-biom"><span class="header-section-number">2.3.4</span> El formato BIOM</h3>
 <p>Los datos se distribuyen en formato <strong>BIOM</strong> (<em>Biological Observation Matrix</em>): guarda los conteos de forma eficiente junto con <strong>metadatos</strong> de los taxones (su linaje) y de las muestras. En BIOM, los taxones se llaman <strong>observaciones</strong>:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-biom-ids">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-biom-ids">
 <div id="cell-l1-biom-ids" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.937160Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.937082Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.939550Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.939068Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="55">
 <details class="code-fold">
 <summary>Código</summary>
@@ -829,14 +881,14 @@ Figura&nbsp;2.1: Media y mediana de los conteos de <em>Streptomyces</em>: en dat
 <section id="las-muestras-y-sus-metadatos" class="level3" data-number="2.3.5">
 <h3 data-number="2.3.5" class="anchored" data-anchor-id="las-muestras-y-sus-metadatos"><span class="header-section-number">2.3.5</span> Las muestras y sus metadatos</h3>
 <p>Tres variables del metadato serán centrales: la <strong>planta hospedera</strong> (<code>host_name</code>, agrupada en <code>host_name_family</code>), el <strong>estudio</strong> de origen (<code>doi</code>) y el <strong>país</strong> (<a href="#tbl-l1-plantas" class="quarto-xref">Tabla&nbsp;<span>2.1</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-tbl-l1-plantas">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-tbl-l1-plantas">
 <div class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.953524Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.953411Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.962807Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.962243Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="58">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ⌨️ ¿Qué plantas hay en cada familia? Tabla cruzada de dos columnas del metadato</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pd.crosstab(metadata_df[<span class="st">"host_name_family"</span>], metadata_df[<span class="st">"host_name"</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="tbl-l1-plantas" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tags="[&quot;teclear&quot;]" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.953524Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.953411Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.962807Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.962243Z&quot;}}" data-execution_count="58">
+<div id="tbl-l1-plantas" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.953524Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.953411Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.962807Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.962243Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="58">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-l1-plantas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Tabla&nbsp;2.1: Plantas hospederas incluidas en cada familia.
@@ -931,7 +983,7 @@ Tabla&nbsp;2.1: Plantas hospederas incluidas en cada familia.
 </div>
 </div>
 <p>Para analizar por planta, unimos conteos y metadatos por su índice común, <code>sample_id</code>:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-join">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-join">
 <div id="cell-l1-join" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.964033Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.963950Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.968711Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.968071Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="59">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1040,7 +1092,7 @@ Tabla&nbsp;2.1: Plantas hospederas incluidas en cada familia.
 <section id="diseño-planta-y-estudio-están-entrelazados" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="diseño-planta-y-estudio-están-entrelazados"><span class="header-section-number">2.4.1</span> Diseño: planta y estudio están entrelazados</h3>
 <p>Antes de comparar plantas hay que preguntar: <strong>¿cuántas familias de planta aporta cada estudio?</strong> Una tabla cruzada cuenta las muestras de cada combinación:</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-study-family">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-study-family">
 <div id="cell-l1-study-family" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.989518Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.989393Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:51.995944Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:51.995582Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="63">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1105,7 +1157,7 @@ Tabla&nbsp;2.1: Plantas hospederas incluidas en cada familia.
 </div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-estudio-familia">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-estudio-familia">
 <div id="cell-fig-l1-estudio-familia" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:51.996914Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:51.996833Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.099174Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.098771Z&quot;}}" data-execution_count="64">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1158,7 +1210,7 @@ Name: count, dtype: int64</code></pre>
 <p>Después de dividir cada conteo entre el total de su muestra, ¿cuánto debería sumar cada fila?</p>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-relativa">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-relativa">
 <div id="cell-l1-relativa" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.102220Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.102117Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.107648Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.107454Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="65">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1178,7 +1230,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Revisar de qué organismos son las lecturas evita sorpresas (<a href="#fig-l1-top-generos" class="quarto-xref">Figura&nbsp;<span>2.3</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-top-generos">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-top-generos">
 <div id="cell-fig-l1-top-generos" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.114428Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.114344Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.194086Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.193437Z&quot;}}" data-execution_count="67">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1209,7 +1261,7 @@ Figura&nbsp;2.3: Los 10 géneros con mayor abundancia relativa media, coloreados
 </div>
 </div>
 <p>Entre los géneros más abundantes aparece <strong><em>Homo</em></strong>: ADN <strong>humano</strong>, no microbiano (contaminación durante el muestreo o la preparación). En algunas muestras es una fracción importante de las lecturas (<a href="#fig-l1-homo" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-homo">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-homo">
 <div id="cell-fig-l1-homo" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.196392Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.196278Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.260972Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.260638Z&quot;}}" data-execution_count="68">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1237,7 +1289,7 @@ Figura&nbsp;2.4: Porcentaje de lecturas asignadas a <em>Homo</em> en las 10 mues
 </div>
 </div>
 <p>Para estudiar la comunidad <strong>procariota</strong> conservamos solo <strong>Bacteria y Archaea</strong> y descartamos <em>Homo</em> y los virus. Es una <strong>decisión de análisis</strong>, no un estándar: otros estudios conservarían hongos o virus. Lo importante es dejarla explícita.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-procariotas">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-procariotas">
 <div id="cell-l1-procariotas" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.262866Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.262768Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.266486Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.266271Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="69">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1255,7 +1307,7 @@ Figura&nbsp;2.4: Porcentaje de lecturas asignadas a <em>Homo</em> en las 10 mues
 <section id="composición-por-filo-opcional" class="level3" data-number="2.4.3">
 <h3 data-number="2.4.3" class="anchored" data-anchor-id="composición-por-filo-opcional"><span class="header-section-number">2.4.3</span> Composición por filo (opcional)</h3>
 <p>Una vista clásica de un microbioma es <strong>una barra por muestra</strong>, dividida según la abundancia relativa de cada <strong>filo</strong> (<a href="#fig-l1-filos" class="quarto-xref">Figura&nbsp;<span>2.5</span></a>). Dos filos dominan casi todas las muestras; fíjate en las barras que <strong>se salen del patrón</strong> y en qué estudios están.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-filos">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-filos">
 <div id="cell-fig-l1-filos" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.268047Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.267950Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.615822Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.615016Z&quot;}}" data-execution_count="70">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1305,7 +1357,7 @@ Figura&nbsp;2.5: Composición por filo de cada muestra, ordenadas por familia de
 <section id="profundidad-de-secuenciación" class="level3" data-number="2.4.4">
 <h3 data-number="2.4.4" class="anchored" data-anchor-id="profundidad-de-secuenciación"><span class="header-section-number">2.4.4</span> Profundidad de secuenciación</h3>
 <p>La <strong>profundidad</strong> de una muestra es su total de lecturas. Varía entre muestras por razones <strong>técnicas</strong>, no solo biológicas, y en este conjunto lo hace en más de dos órdenes de magnitud (<a href="#fig-l1-profundidad" class="quarto-xref">Figura&nbsp;<span>2.6</span></a>). Por eso, para comparar muestras usamos abundancias relativas en lugar de conteos crudos.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-profundidad">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-profundidad">
 <div id="cell-l1-profundidad" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.618984Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.618914Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.622212Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.621966Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="72">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1326,7 +1378,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-profundidad">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-profundidad">
 <div id="cell-fig-l1-profundidad" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.627583Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.627506Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.772025Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.771456Z&quot;}}" data-execution_count="74">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1355,7 +1407,7 @@ Figura&nbsp;2.6: Distribución de la profundidad de secuenciación (lecturas de 
 <section id="prevalencia-de-géneros" class="level3" data-number="2.4.5">
 <h3 data-number="2.4.5" class="anchored" data-anchor-id="prevalencia-de-géneros"><span class="header-section-number">2.4.5</span> Prevalencia de géneros</h3>
 <p>La <strong>prevalencia</strong> de un género es en cuántas muestras aparece (conteo &gt; 0).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-prevalencia">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-prevalencia">
 <div id="cell-l1-prevalencia" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.773709Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.773616Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.777057Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.776797Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="75">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1377,7 +1429,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>La tabla es <strong>muy densa</strong>: la mayoría de los géneros aparece en casi todas las muestras (<a href="#fig-l1-prevalencia" class="quarto-xref">Figura&nbsp;<span>2.7</span></a>). Con secuenciación tan profunda, incluso los géneros raros dejan algunas lecturas.</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-prevalencia">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-prevalencia">
 <div id="cell-fig-l1-prevalencia" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.777998Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.777930Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.842238Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.841146Z&quot;}}" data-execution_count="76">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1420,7 +1472,7 @@ Géneros presentes en 10 muestras o menos: 3</code></pre>
 <li><strong>Shannon:</strong> combina riqueza y equidad (qué tan parejas son las abundancias). Más alto = más diverso.</li>
 <li><strong>Simpson:</strong> da más peso a los géneros dominantes.</li>
 </ul>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-alfa">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-alfa">
 <div id="cell-l1-alfa" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.847724Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.847641Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.851696Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.851434Z&quot;}}" data-tags="[&quot;teclear&quot;,&quot;estado&quot;]" data-execution_count="78">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1454,7 +1506,7 @@ Name: shannon, dtype: float64</code></pre>
 <p>¿Las muestras con <strong>más lecturas</strong> tendrán <strong>más géneros detectados</strong>, menos, o no habrá relación?</p>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-spearman">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-spearman">
 <div id="cell-l1-spearman" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.852757Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.852688Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.856876Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.856594Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="79">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1467,7 +1519,7 @@ Name: shannon, dtype: float64</code></pre>
 </div>
 </div>
 <p>En una tabla tan densa, la riqueza distingue poco entre muestras y además <strong>depende de la profundidad</strong> (<a href="#fig-l1-riqueza-profundidad" class="quarto-xref">Figura&nbsp;<span>2.8</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-riqueza-profundidad">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-riqueza-profundidad">
 <div id="cell-fig-l1-riqueza-profundidad" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.858455Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.858381Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.935610Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.935145Z&quot;}}" data-execution_count="80">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1496,7 +1548,7 @@ Figura&nbsp;2.8: Riqueza de géneros frente a la profundidad de secuenciación.
 </div>
 </div>
 <p>Para comparar Shannon entre familias de plantas usamos la prueba de <strong>Kruskal-Wallis</strong>, que compara grupos sin suponer distribución normal (<a href="#fig-l1-shannon-familia" class="quarto-xref">Figura&nbsp;<span>2.9</span></a>).</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-shannon-familia">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-shannon-familia">
 <div id="cell-fig-l1-shannon-familia" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.937493Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.937379Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.987879Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.987446Z&quot;}}" data-execution_count="81">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1532,7 +1584,7 @@ Name: shannon, dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-kruskal">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-l1-kruskal">
 <div id="cell-l1-kruskal" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.989621Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.989543Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:52.992476Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:52.992279Z&quot;}}" data-tags="[&quot;teclear&quot;]" data-execution_count="82">
 <details class="code-fold">
 <summary>Código</summary>
@@ -1545,7 +1597,7 @@ Name: shannon, dtype: float64</code></pre>
 </div>
 </div>
 <p>La misma diversidad, ahora por estudio (<a href="#fig-l1-shannon-estudio" class="quarto-xref">Figura&nbsp;<span>2.10</span></a>):</p>
-<div class="quarto-embed-nb-cell" data-notebook="/home/david/Code/MicroAgroBiome_bioinfo2026_libro/notebooks/leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-shannon-estudio">
+<div class="quarto-embed-nb-cell" data-notebook="C:\Users\HaydeePeruyero\Documents\RSites\MicroAgroBiome_bioinfo2026_libro\notebooks\leccion_1_introduccion_datos.ipynb" data-notebook-title="Lección 1: Introducción a los datos" data-notebook-cellid="cell-fig-l1-shannon-estudio">
 <div id="cell-fig-l1-shannon-estudio" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T17:44:52.994047Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-20T17:44:52.993984Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-20T17:44:53.093524Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T17:44:53.092905Z&quot;}}" data-execution_count="83">
 <details class="code-fold">
 <summary>Ver el código de la gráfica</summary>
@@ -1750,8 +1802,7 @@ Aguilar, César, Fernando Fontove-Herrera, Anton Pashkov, et&nbsp;al. 2026. <spa
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1760,69 +1811,8 @@ Aguilar, César, Fernando Fontove-Herrera, Anton Pashkov, et&nbsp;al. 2026. <spa
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1836,7 +1826,6 @@ Aguilar, César, Fernando Fontove-Herrera, Anton Pashkov, et&nbsp;al. 2026. <spa
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1999,54 +1988,44 @@ Aguilar, César, Fernando Fontove-Herrera, Anton Pashkov, et&nbsp;al. 2026. <spa
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -2145,10 +2124,7 @@ Aguilar, César, Fernando Fontove-Herrera, Anton Pashkov, et&nbsp;al. 2026. <spa
     }
   });
   </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Código desplazable","output":"Salida desplazable"};
-  </script>
-<nav class="page-navigation" aria-label="Página">
+<nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./mapa_del_tesoro.html" class="pagination-link" aria-label="Mapa del tesoro: la ruta de la rizósfera">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Mapa del tesoro: la ruta de la rizósfera</span></span>

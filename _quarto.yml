@@ -47,14 +47,25 @@ book:
           url: https://research.tec.mx/vivo-tec/display/PID_318207          
   date: "11/30/2026"
   page-navigation: true
+  
   chapters:
-  - index.qmd
-  - dinamica_trabajo.qmd
-  - proyecto.qmd
-  - mapa_del_tesoro.qmd
-  - intro_datos.qmd
-  - pruebas_hipotesis.qmd
-  - clustering.qmd 
+    - index.qmd
+    - dinamica_trabajo.qmd
+    - proyecto.qmd
+    - part: "**Día 1**"
+      chapters:
+        - mapa_del_tesoro.qmd
+        - intro_datos.qmd
+        - pruebas_hipotesis.qmd
+    - part: "**Día 2**"
+      chapters:
+        - composicional.qmd
+    - part: "**Día 3**"
+      chapters:
+        - clustering.qmd 
+    - part: "**Día 4**"
+      chapters:
+        - cap04_TDA.qmd
   
   # Information
   site-url: https://github.com/MicroAgroBiome/MicroAgroBiome_bioinfo2026_libro
