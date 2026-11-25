@@ -274,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cap04_TDA.html" class="sidebar-item-text sidebar-link">
+  <a href="./tda.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Uso de Análisis Topológico de Datos (TDA) en datos Biológicos</span></span></a>
   </div>
 </li>
@@ -398,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="lista-de-verificación" class="level3">
 <h3 class="anchored" data-anchor-id="lista-de-verificación">Lista de verificación</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Puedo abrir el notebook de la Lección 1 en Colab (o localmente) y guardé una copia.</label></li>
+<li><label><input type="checkbox">Puedo abrir el notebook del capítulo <em>Introducción a los datos</em> en Colab (o localmente) y guardé una copia.</label></li>
 <li><label><input type="checkbox">La celda de Setup se ejecuta sin errores.</label></li>
 <li><label><input type="checkbox">La celda de carga de datos muestra <code>(75, 3330)</code> y <code>(75, 21)</code>: 75 muestras, 3330 géneros y 21 columnas de metadatos.</label></li>
 </ul>
@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Cambiar y comparar:</strong> cambias un parámetro (una métrica, un número de grupos) y comparas con el resultado anterior.</li>
 <li><strong>Interpretar:</strong> respondes preguntas sobre una figura o un resultado, sin escribir código.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo (Lección 1, Ejercicio 2)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo (Introducción a los datos, Ejercicio 2)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fabaceae_samples <span class="op">=</span> merged_table[merged_table[<span class="st">"host_name_family"</span>] <span class="op">==</span> TU_CODIGO_AQUI]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -720,7 +720,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="para-instructores-cómo-se-produce-el-material" class="level2">
 <h2 class="anchored" data-anchor-id="para-instructores-cómo-se-produce-el-material">Para instructores: cómo se produce el material</h2>
-<p>Todo sale de <strong>una sola fuente</strong>: el <strong>notebook completo</strong> ejecutado (<code>notebooks/leccion_N_*.ipynb</code>).</p>
+<p>Todo sale de <strong>una sola fuente</strong>: el <strong>notebook completo</strong> ejecutado (<code>notebooks/&lt;tema&gt;.ipynb</code>).</p>
 <ul>
 <li>El <strong>libro</strong> toma de él el código y las figuras (<code>{{&lt; embed ... echo=true &gt;}}</code>) y <strong>no vuelve a ejecutar</strong> nada, por lo que quien renderiza no necesita Python ni los datos.</li>
 <li>El <strong>notebook del participante</strong> (<code>notebooks/participante/</code>) se <strong>genera</strong> con un script: nunca se edita a mano.</li>
@@ -748,8 +748,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Reglas:</strong></p>
 <ol type="1">
 <li><p><strong>Ejecutar el notebook completo</strong> antes de cada commit: las figuras del libro son exactamente esas salidas. Las celdas de ejercicio fallan a propósito, por eso se usa <code>--allow-errors</code>. Se necesitan <code>nbconvert</code>, <code>nbformat</code> e <code>ipykernel</code> en el entorno:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> nbconvert <span class="at">--to</span> notebook <span class="at">--execute</span> <span class="at">--inplace</span> <span class="at">--allow-errors</span> notebooks/leccion_1_introduccion_datos.ipynb</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/generar_notebook_participante.py notebooks/leccion_1_introduccion_datos.ipynb</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> nbconvert <span class="at">--to</span> notebook <span class="at">--execute</span> <span class="at">--inplace</span> <span class="at">--allow-errors</span> notebooks/intro_datos.ipynb</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/generar_notebook_participante.py notebooks/intro_datos.ipynb</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Etiquetas de celda</strong> del notebook completo (en VSCode: <code>...</code> de la celda → <em>Add Cell Tag</em>), que usa el script generador:</p>
 <table class="caption-top table">
 <colgroup>
