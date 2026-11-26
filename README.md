@@ -49,7 +49,7 @@ A estudiantes y profesionales de biología, matemáticas, ciencias de datos y á
 | Instructor | Institución | Sesiones |
 |---|---|---|
 | Dra. Nelly Sélem Mojica | - | Introducción · Transformación composicional |
-| MC. Rafael | - | Introducción · Transformación composicional |
+| MC. Rafael Pérez-Estrada | - | Introducción · Transformación composicional |
 | MC. David Alberto García Estrada | Centro de Investigación en Materiales Avanzados (CIMAV) | Introducción a los datos · Clustering |
 | Dra. Haydeé Peruyero | ENES-Juriquilla, UNAM | Redes y TDA |
 | Dr. Manuel Alejandro Ucan Puc | Escuela de Ingeniería y Ciencias, Tecnológico de Monterrey | Redes y TDA |
@@ -100,8 +100,9 @@ Todos los datos son subconjuntos de la base de datos [MicroAgroBiome](https://ag
 |---|---|---|
 | `datos/subset.zip` | Lecciones en clase | 75 metagenomas · 3330 géneros · 21 columnas de metadatos |
 | `datos/subset_proyecto.zip` | Proyecto | 41 metagenomas de rizósfera de maíz (*Zea mays*) de 6 estudios (Sudáfrica y Estados Unidos) |
+| `datos/composicional.zip` | Transformación composicional (caso real) | 550 metagenomas · 4611 géneros: conteos, metadatos, calidad y linaje; el caso real usa 15 muestras de agaves y cactus (rizósfera y filósfera) |
 
-Cada zip incluye la lista de muestras y el registro de cómo se generó (`taller_samples.csv`, `subset_log.txt`), para que el subconjunto sea reproducible con `scripts/02_make_subset.py`. **No hace falta descargarlos a mano**: la celda de Setup de cada notebook los descarga y descomprime.
+`subset.zip` y `subset_proyecto.zip` incluyen la lista de muestras y el registro de cómo se generó (`taller_samples.csv`, `subset_log.txt`), para que el subconjunto sea reproducible con `scripts/02_make_subset.py`. **No hace falta descargarlos a mano**: la celda de Setup de cada notebook los descarga y descomprime.
 
 ## Ejecutar los notebooks
 
@@ -184,7 +185,7 @@ El flujo completo está en el libro: [Dinámica de trabajo → Para instructores
 
 **El material del curso:**
 
-> Sélem-Mojica N, ⚐ Rafael, Peruyero H, García-Estrada DA, Ucan-Puc MA. *Diferencias estadísticas y topológicas en comunidades microbianas.* Segunda Escuela Michoacana de Biología Matemática, Centro de Ciencias Matemáticas, UNAM (2026). <https://microagrobiome.github.io/Curso_Invierno_2026/>
+> Sélem-Mojica N, Pérez-Estrada R, Peruyero H, García-Estrada DA, Ucan-Puc MA. *Diferencias estadísticas y topológicas en comunidades microbianas.* Segunda Escuela Michoacana de Biología Matemática, Centro de Ciencias Matemáticas, UNAM (2026). <https://microagrobiome.github.io/Curso_Invierno_2026/>
 
 ## Financiamiento
 
