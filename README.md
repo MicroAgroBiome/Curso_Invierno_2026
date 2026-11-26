@@ -73,10 +73,11 @@ La agenda por horas está en el libro: [Información general → Agenda](https:/
 | 1 · [Mapa del tesoro: la ruta de la rizósfera](https://microagrobiome.github.io/Curso_Invierno_2026/mapa_del_tesoro.html) | Actividad interactiva | — |
 | 2 · [Introducción a los datos](https://microagrobiome.github.io/Curso_Invierno_2026/intro_datos.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/intro_datos.ipynb) |
 | 3 · [Pruebas de hipótesis en microbiomas](https://microagrobiome.github.io/Curso_Invierno_2026/pruebas_hipotesis.html) | Actividad interactiva (datos simulados) | — |
-| 4 · [Técnicas de clustering](https://microagrobiome.github.io/Curso_Invierno_2026/clustering.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/clustering.ipynb) |
+| 4 · [Transformación composicional](https://microagrobiome.github.io/Curso_Invierno_2026/composicional.html) | Lección con notebook (3 partes) | 1 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/composicional_transformacion.ipynb) · 2 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/composicional_clasificacion.ipynb) · 3 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/composicional_caso_real.ipynb) |
+| 5 · [Técnicas de clustering](https://microagrobiome.github.io/Curso_Invierno_2026/clustering.html) | Lección con notebook | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/participante/clustering.ipynb) |
 | [Proyecto del curso](https://microagrobiome.github.io/Curso_Invierno_2026/proyecto.html) | Trabajo en equipo | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MicroAgroBiome/Curso_Invierno_2026/blob/main/notebooks/proyecto_maiz.ipynb) |
 
-⚐ Faltan los capítulos de transformación composicional (martes) y de redes y TDA (viernes).
+⚐ Falta el capítulo de redes y TDA (viernes).
 
 ### Cómo se enseña
 
