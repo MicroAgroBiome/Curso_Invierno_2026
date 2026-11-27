@@ -49,7 +49,7 @@ A estudiantes y profesionales de biología, matemáticas, ciencias de datos y á
 | Instructor | Institución | Sesiones |
 |---|---|---|
 | Dra. Nelly Sélem Mojica | - | Introducción · Transformación composicional |
-| MC. Rafael Pérez-Estrada | - | Introducción · Transformación composicional |
+| MC. Rafael Pérez-Estrada | ENES-Morelia, UNAM | Introducción · Transformación composicional |
 | MC. David Alberto García Estrada | Centro de Investigación en Materiales Avanzados (CIMAV) | Introducción a los datos · Clustering |
 | Dra. Haydeé Peruyero | ENES-Juriquilla, UNAM | Redes y TDA |
 | Dr. Manuel Alejandro Ucan Puc | Escuela de Ingeniería y Ciencias, Tecnológico de Monterrey | Redes y TDA |
