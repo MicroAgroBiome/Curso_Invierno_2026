@@ -1,1 +1,362 @@
-# Pendiente
+---
+title: "Transformación composicional"
+---
+
+> **Instructor:** Rafael Pérez-Estrada · \~2 h (día 2, incluye un descanso)
+
+::: {.callout-note .questions}
+## Preguntas
+
+- ¿Por qué los datos de microbioma solo informan de proporciones y qué problema trae eso?
+- ¿Cómo se corrige? ¿Qué hace cada paso de la cadena composicional?
+- ¿Cambia algo en la práctica: en un ACP, en un clasificador, con datos reales?
+:::
+
+::: {.callout-note .objectives}
+## Objetivos
+
+Al completar esta lección, serás capaz de:
+
+1.  Explicar por qué la profundidad de secuenciación obliga a **cerrar** la tabla y por qué eso hace **composicionales** a los datos.
+2.  Aplicar la cadena composicional: amalgamar los taxones raros, recerrar, sustituir los ceros y transformar con **CLR**.
+3.  Comprobar que el CLR no depende de cuánto se secuenció cada muestra.
+4.  Comparar un ACP y tres clasificadores con y sin CLR, y explicar por qué la corrección importa más cuanto **menos supervisado** es el método.
+5.  Revisar datos reales antes de sacar conclusiones: duplicados, calidad por grupo, reinos, estudios de origen, sensibilidad a las decisiones y sentido biológico.
+:::
+
+::: callout-tip
+## 🧪 Cómo trabajar este capítulo
+
+El capítulo tiene **tres notebooks**, uno por parte. Todas sus celdas ya vienen escritas: las ejecutamos juntos, celda por celda, y las comentamos.
+
+| Parte | Notebook | Datos | Duración |
+|---|:---:|---|---|
+| 1 · La transformación paso a paso | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/composicional_transformacion.ipynb) | simulados | \~50 min |
+| 2 · ¿Cambia algo? ACP y clasificación | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/composicional_clasificacion.ipynb) | simulados | \~40 min |
+| 3 · Caso real: rizosfera contra filosfera | [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)]({{< var colab >}}notebooks/composicional_caso_real.ipynb) | MicroAgroBiome | \~30 min |
+
+- **Sin instalar nada:** ábrelos en Google Colab con los botones de la tabla y guarda una copia (*Archivo → Guardar una copia en Drive*).
+- **En tu computadora:** descarga la [parte 1](notebooks/composicional_transformacion.ipynb){download="composicional_transformacion.ipynb"}, la [parte 2](notebooks/composicional_clasificacion.ipynb){download="composicional_clasificacion.ipynb"} y la [parte 3](notebooks/composicional_caso_real.ipynb){download="composicional_caso_real.ipynb"}, y ábrelas en VSCode o Jupyter.
+
+Los tres notebooks son **independientes**: la celda **🔧 Setup** de cada uno prepara el código de apoyo (las funciones de la cadena composicional y de las figuras) y, en la parte 3, descarga los datos. Las partes 1 y 2 generan sus propios datos simulados, así que no necesitas haber terminado los capítulos anteriores. En esta página, el código de las gráficas viene plegado (*Ver el código de la gráfica*). Si te atrasas, en Colab usa *Entorno de ejecución → Ejecutar anteriores*.
+:::
+
+## La pregunta de la lección
+
+En el capítulo *Introducción a los datos* dividimos cada muestra entre su total para poder comparar muestras secuenciadas a distinta profundidad. Hoy vemos qué precio tiene esa operación y cómo pagarlo.
+
+Empezamos con datos **simulados**, en los que sabemos qué grupos hay y qué taxones los distinguen, para comprobar que cada paso hace lo que promete. Al final repetimos todo con datos **reales**, donde la respuesta no se conoce.
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+    A["Conteos<br/>muestras × taxones"] --> B["Cerrar<br/>cada fila suma 1"]
+    B --> C["1 · Amalgamar<br/>taxones raros"]
+    C --> D["2 · Recerrar<br/>faltante a other-genera"]
+    D --> E["3 · Sustituir ceros<br/>pseudoconteo c"]
+    E --> F["4 · CLR<br/>log-razón centrada"]
+    F --> G["ACP, distancias<br/>y clasificadores"]
+```
+
+## Parte 1 · La transformación paso a paso
+
+### El primer problema: cada muestra se secuenció distinto
+
+El notebook genera una tabla sintética con la forma de un estudio real: **900 muestras**, **500 taxones** y tres clases de 300 muestras. Sumando las lecturas de cada muestra obtenemos su **profundidad de secuenciación**:
+
+{{< embed notebooks/composicional_transformacion.ipynb#fig-l3-profundidad echo=true >}}
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-rango-profundidad echo=true >}}
+
+La muestra con más lecturas tiene **cien veces** más que la que menos, y eso no lo decide la biología: lo decide cuánta capacidad del secuenciador le tocó a cada muestra. Si un taxón tiene 5,000 lecturas en una muestra y 500 en otra, **no** podemos decir que sea diez veces más abundante.
+
+### La solución: cerrar la tabla
+
+Dividimos cada fila entre su total. A esta operación se le llama **cierre**:
+
+$$x_{ij} = \frac{c_{ij}}{\sum_{l} c_{il}}$$
+
+donde $c_{ij}$ son las lecturas del taxón $j$ en la muestra $i$. El resultado ya no son lecturas, sino **fracciones de la muestra**:
+
+{{< embed notebooks/composicional_transformacion.ipynb#fig-l3-dos-muestras echo=true >}}
+
+::: callout-warning
+## Lo que ganamos y lo que perdemos
+
+Ganamos poder comparar muestras. Pero las columnas quedan **atadas entre sí**: como cada fila suma 1, si un taxón sube, los demás tienen que bajar aunque no les haya pasado nada. Esto es lo que hace a los datos **composicionales**, y es la razón de todo lo que sigue.
+:::
+
+### El segundo problema: los ceros
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-fraccion-ceros echo=true >}}
+
+Más de un tercio de la tabla son ceros, y la mayoría no son ausencias reales: son taxones raros a los que no les tocó ninguna lectura. El paso final toma **logaritmos**, y el logaritmo de cero no existe, así que habrá que sustituirlos. Cuantos menos ceros lleguemos a tener, menos tendremos que inventar.
+
+{{< embed notebooks/composicional_transformacion.ipynb#fig-l3-ceros-prevalencia echo=true >}}
+
+### Paso 1 · Amalgamar los taxones raros
+
+**Amalgamar** es sumar varias partes en una sola. Los taxones presentes en menos del 70 % de las muestras (el conjunto $\mathcal{F}$) se juntan en una columna llamada `other-genera`:
+
+$$x_{i,\text{otros}} = \sum_{j \in \mathcal{F}} x_{ij}$$
+
+Perdemos el detalle de esos taxones, pero nos quitamos la mayor parte de los ceros:
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-amalgamar echo=true >}}
+
+{{< embed notebooks/composicional_transformacion.ipynb#fig-l3-amalgamar echo=true >}}
+
+Pasamos de 500 columnas a 259 y de un 36 % de ceros a un 11 %.
+
+### Paso 2 · Recerrar
+
+Al sumar y quitar columnas, las filas pueden dejar de sumar exactamente 1. Lo que falte se devuelve a `other-genera`:
+
+$$x_{i,\text{otros}} \;\leftarrow\; x_{i,\text{otros}} + \Big(1 - \sum_j x_{ij}\Big)$$
+
+Todo lo que falta va a **una sola columna** y no se reparte entre todas: es masa que no sabemos de quién es, y es más honesto acumularla con el resto de lo desconocido.
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-recerrar echo=true >}}
+
+### Paso 3 · Sustituir los ceros
+
+Hay que quitar los ceros **sin cambiar el total de la fila**. Primero elegimos el valor de relleno: el **menor valor positivo de toda la tabla**, que es lo más pequeño que el experimento fue capaz de medir.
+
+$$c = \min\{\, x_{ij} : x_{ij} > 0 \,\}$$
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-pseudoconteo echo=true >}}
+
+Si solo rellenáramos, la fila sumaría más de 1. Así que a cada valor que **ya era positivo** le restamos un poco. Para la muestra $i$, con $n_i$ ceros y $p_i$ valores positivos:
+
+$$\delta_i = \frac{n_i \cdot c}{p_i} \qquad\text{y la cuenta cuadra:}\qquad n_i \cdot c - p_i \cdot \delta_i = 0$$
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-delta echo=true >}}
+
+{{< embed notebooks/composicional_transformacion.ipynb#fig-l3-ceros echo=true >}}
+
+::: callout-note
+## ¿Por qué amalgamar antes?
+
+Si una muestra tuviera muchísimos ceros, $n_i / p_i$ sería grande, $\delta_i$ también, y podría dejar en negativo a los valores positivos más pequeños. Quitando ceros primero con la amalgamación, el descuento queda minúsculo.
+:::
+
+### Paso 4 · La transformación CLR
+
+CLR quiere decir *centered log-ratio*, log-razón centrada. Para cada muestra se calcula su **media geométrica**, una especie de «media multiplicativa»:
+
+$$g(x_i) = \Big(\prod_{j} x_{ij}\Big)^{1/D}$$
+
+y después se divide cada valor entre ella y se toma el logaritmo:
+
+$$\mathrm{clr}(x_i)_j = \log \frac{x_{ij}}{g(x_i)}$$
+
+En la práctica: el logaritmo de toda la fila menos su media. Los valores pasan a ser positivos o negativos según el taxón esté por encima o por debajo de la media de su muestra, y **cada fila suma cero**.
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-clr echo=true >}}
+
+{{< embed notebooks/composicional_transformacion.ipynb#fig-l3-clr echo=true >}}
+
+### Por qué el CLR arregla el problema
+
+La propiedad importante: **el CLR no cambia si multiplicas toda la fila por cualquier número**.
+
+$$\mathrm{clr}(\lambda \cdot x_i) = \mathrm{clr}(x_i) \qquad \text{para cualquier } \lambda > 0$$
+
+::: callout-important
+## 🔮 Predice antes de ejecutar
+
+Multiplicamos cada muestra por un número distinto, elegido al azar entre 0.01 y 100: las filas dejan de sumar 1 y pasan a sumar cualquier cosa. Si calculamos el CLR de esa tabla reescalada, ¿qué tan distinto saldrá del CLR original?
+:::
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-reescalar echo=true >}}
+
+{{< embed notebooks/composicional_transformacion.ipynb#l3-invariancia echo=true >}}
+
+La diferencia máxima es del orden de $10^{-14}$, el error de redondeo de la computadora: **son la misma matriz**. Da igual si partimos de lecturas, de fracciones o de porcentajes, y da igual si una muestra se secuenció diez veces más a fondo que otra.
+
+### Resumen de la cadena
+
+{{< embed notebooks/composicional_transformacion.ipynb#tbl-l3-resumen echo=true >}}
+
+| Paso | Qué hace | Para qué |
+|---|---|---|
+| **Cerrar** | divide cada fila entre su total | comparar muestras secuenciadas a distinta profundidad |
+| **1 · Amalgamar** | junta los taxones raros en una columna | reducir los ceros que habrá que inventar |
+| **2 · Recerrar** | devuelve el faltante a `other-genera` | que cada fila vuelva a sumar 1 |
+| **3 · Sustituir ceros** | rellena con $c$ y descuenta $\delta_i$ | poder tomar logaritmos sin cambiar el total |
+| **4 · CLR** | logaritmo menos la media de la fila | quitar el efecto de la profundidad y usar métodos habituales |
+
+## Parte 2 · ¿Cambia algo? ACP y clasificación
+
+El notebook de la parte 2 vuelve a generar los mismos datos y aplica la cadena de una vez (`compositional_chain`). Comparamos **dos versiones de la misma tabla**: sin corregir (abundancia relativa amalgamada) y con CLR. Tienen las mismas filas y las mismas columnas: lo único que cambia es la transformación.
+
+### Primera mirada: el ACP
+
+El análisis de componentes principales resume cientos de columnas en dos. Lo importante: **el ACP no ve las etiquetas**. Si aun así los grupos aparecen separados, la diferencia está de verdad en los datos.
+
+::: callout-important
+## 🔮 Predice antes de ver la gráfica
+
+Las tres clases simuladas son realmente distintas: cada una tiene sus propios taxones firma. ¿Se verán separadas en el ACP de la tabla **sin** corregir? ¿Y en la corregida?
+:::
+
+{{< embed notebooks/composicional_clasificacion.ipynb#fig-l3-acp-simulado echo=true >}}
+
+A la izquierda los tres grupos están completamente mezclados; a la derecha se separan. Son **los mismos datos**.
+
+### Clasificar con k vecinos más cercanos
+
+Para adivinar el grupo de una muestra, el modelo busca las 15 muestras que más se le parecen y se queda con el grupo más común entre ellas. Lo elegimos a propósito porque trabaja con **distancias**, que es justo lo que la corrección arregla. Medimos con validación cruzada de 5 pliegues y **exactitud balanceada**: con tres grupos, acertar al azar da 0.33.
+
+{{< embed notebooks/composicional_clasificacion.ipynb#l3-knn-sin-clr echo=true >}}
+
+{{< embed notebooks/composicional_clasificacion.ipynb#l3-knn-con-clr echo=true >}}
+
+De 0.36, apenas por encima del azar, a 0.83: **los mismos datos, el mismo modelo, la misma validación**.
+
+{{< embed notebooks/composicional_clasificacion.ipynb#fig-l3-confusion echo=true >}}
+
+### ¿Pasa lo mismo con otros modelos?
+
+::: callout-important
+## 🔮 Predice antes de ejecutar
+
+Probamos también una **regresión logística**, que traza fronteras rectas entre los grupos, y un **bosque aleatorio**, que hace muchas preguntas del tipo «¿este taxón está por encima de tal valor?» y vota. ¿Cuál crees que gane más con el CLR y cuál menos?
+:::
+
+{{< embed notebooks/composicional_clasificacion.ipynb#tbl-l3-modelos echo=true >}}
+
+{{< embed notebooks/composicional_clasificacion.ipynb#fig-l3-aciertos echo=true >}}
+
+Tres resultados distintos, y los tres tienen explicación:
+
+- **Los vecinos** son los que más ganan: comparan muestras por distancia y no pueden compensar nada. Si el espacio está deformado, fallan.
+- **La regresión logística** se recupera bastante sin CLR: puede sumar y restar columnas entre sí y cancelar parte de la deformación.
+- **El bosque aleatorio** casi no nota la diferencia: mira cada columna por separado con umbrales, y eso le afecta poco.
+
+::: callout-warning
+## La moraleja no es «el CLR siempre mejora»
+
+Depende del método. Si usas **distancias, agrupamientos u ordenaciones** como el ACP, la corrección es imprescindible.
+:::
+
+### ¿Se fijó en los taxones correctos?
+
+La ventaja de los datos simulados es que sabemos qué taxones distinguen a los grupos: los **taxones firma**. De los 30, 21 sobreviven a la amalgamación. Entrenamos una regresión logística con todas las muestras y miramos qué peso le da a cada taxón:
+
+{{< embed notebooks/composicional_clasificacion.ipynb#fig-l3-pesos-con-clr echo=true >}}
+
+{{< embed notebooks/composicional_clasificacion.ipynb#fig-l3-pesos-sin-clr echo=true >}}
+
+{{< embed notebooks/composicional_clasificacion.ipynb#l3-firma echo=true >}}
+
+Los dos encuentran los taxones correctos, aunque sin CLR el modelo apenas acierte las clases. No es contradictorio: la regresión logística **ve las etiquetas mientras aprende** y, con 900 muestras, encuentra qué columnas se relacionan con el grupo aunque el espacio esté deformado. El ACP **no las ve**, y por eso ahí la diferencia era total.
+
+> **La corrección composicional importa más cuanta menos ayuda tenga el método.** Es imprescindible para explorar y medir distancias; útil, pero no decisiva, para un modelo supervisado con muchos datos.
+
+## Parte 3 · Caso real: rizosfera contra filosfera
+
+Ahora, datos reales sin respuesta conocida: metagenomas de la base de datos MicroAgroBiome [@aguilar2026] (<https://agrobiom.matmor.unam.mx>). La pregunta: **¿las bacterias que viven pegadas a la raíz (rizosfera) son distintas de las que viven sobre las hojas (filosfera)?** La respondemos con **15 muestras** de cuatro agaves y cactus de Guanajuato y Jalisco. Ninguna está en el subconjunto del proyecto:
+
+{{< embed notebooks/composicional_caso_real.ipynb#l3-taller echo=true >}}
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-diseno echo=true >}}
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-estudios echo=true >}}
+
+Casi todas las plantas tienen muestras de raíz **y** de hoja, así que al comparar compartimentos no comparamos sin querer una planta contra otra. El reparto por estudio, en cambio, no es parejo: un estudio aporta sobre todo raíces y otro sobre todo hojas. Volveremos sobre eso.
+
+### Tres revisiones antes de analizar
+
+**1. ¿Hay muestras repetidas?** En las bases de datos públicas, a veces la misma secuenciación aparece con distinto identificador. Si no lo notamos, contamos la misma muestra dos veces y, en una validación cruzada, la copia puede quedar en entrenamiento y el original en prueba.
+
+{{< embed notebooks/composicional_caso_real.ipynb#l3-duplicados echo=true >}}
+
+**2. ¿Los grupos se secuenciaron de forma parecida?**
+
+{{< embed notebooks/composicional_caso_real.ipynb#fig-l3-calidad echo=true >}}
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-calidad echo=true >}}
+
+En la filosfera la mayoría de las lecturas **no se clasifican**. Tiene explicación biológica: sobre una hoja hay muy pocas bacterias, así que casi todo el ADN extraído es de la propia planta. Una hoja de agave azul (`SRR10127267`) se parece más a una raíz que a una hoja en estos números: ojo con ella en el ACP.
+
+**3. ¿Qué hay en la tabla?**
+
+{{< embed notebooks/composicional_caso_real.ipynb#l3-reinos echo=true >}}
+
+Más de la mitad de las columnas son **virus**. La pregunta es sobre bacterias, y la asignación de virus es menos fiable, así que nos quedamos con los 1,992 géneros bacterianos. Con metagenomas tan profundos hay menos del 1 % de ceros, frente al 36 % de los datos simulados, y la amalgamación casi no quita géneros.
+
+### El ACP con datos reales
+
+{{< embed notebooks/composicional_caso_real.ipynb#fig-l3-acp-real echo=true >}}
+
+**Sin CLR** las hojas y las raíces se mezclan. **Con CLR**, el eje horizontal ordena las muestras de raíz a hoja; el segundo eje lo ocupa casi entero la hoja rara de agave azul. Para no quedarnos en «a ojo», medimos qué fracción de la variación de cada eje explica el compartimento ($\eta^2$):
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-eta2 echo=true >}}
+
+### ¿Es real la diferencia? PERMANOVA
+
+El ACP sugiere, pero no prueba. La **PERMANOVA** mide qué parte de las distancias entre muestras explica el grupo ($R^2$) y compara con 999 barajadas de las etiquetas (valor $p$). Sobre la tabla CLR, la distancia euclidiana es la **distancia de Aitchison**, la adecuada para composiciones.
+
+{{< embed notebooks/composicional_caso_real.ipynb#l3-permanova echo=true >}}
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-factores echo=true >}}
+
+La planta tiene un $R^2$ parecido al del compartimento, pero un valor $p$ mucho peor: **con más grupos, el $R^2$ sube solo por azar**. Para comparar factores con distinto número de grupos hay que mirar el valor $p$, no solo el $R^2$. Y como el reparto por estudio no era parejo, repetimos la prueba **dentro de un solo estudio**, el que tiene hojas y raíces:
+
+{{< embed notebooks/composicional_caso_real.ipynb#l3-permanova-estudio echo=true >}}
+
+El compartimento explica lo mismo o un poco más ($R^2 = 0.35$): la diferencia no la fabricó mezclar laboratorios. El $p$ no baja de 0.05 por aritmética: con 7 muestras solo hay 35 formas de repartirlas en 4 hojas y 3 raíces, así que el $p$ más pequeño posible es $1/35 \approx 0.03$.
+
+### ¿Depende el resultado de mis decisiones?
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-umbral echo=true >}}
+
+{{< embed notebooks/composicional_caso_real.ipynb#l3-sin-rara echo=true >}}
+
+El **tamaño** del efecto cambia con el umbral ($R^2$ entre 0.15 y 0.31) y sin la hoja rara sube a 0.41, pero la **conclusión** no cambia. El umbral mueve el $R^2$ porque decide cuántos ceros quedan por sustituir, y un cero sustituido tiene un logaritmo muy negativo que pesa mucho en las distancias.
+
+### ¿Qué géneros cambian?
+
+Para cada género comparamos su CLR medio en hoja y en raíz (una diferencia de 1 es casi el triple respecto al resto de la comunidad) y su $\eta^2$, que dice qué tan consistente es esa diferencia.
+
+{{< embed notebooks/composicional_caso_real.ipynb#fig-l3-generos echo=true >}}
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-conocidos echo=true >}}
+
+Nadie le dijo al análisis qué géneros esperar y, aun así, los conocidos caen del lado correcto: *Methylobacterium* y *Methylorubrum*, que se alimentan del metanol que liberan las hojas, salen **más en la hoja**; los rizobios (*Bradyrhizobium*, *Rhizobium*, *Mesorhizobium*) y *Streptomyces* salen **más en la raíz**. Eso es lo que da confianza en un resultado con datos reales: **que tenga sentido biológico**, no solo un valor $p$ pequeño.
+
+{{< embed notebooks/composicional_caso_real.ipynb#tbl-l3-sospechosos echo=true >}}
+
+::: callout-warning
+## Los sospechosos de siempre
+
+*Cutibacterium* y *Staphylococcus* son las bacterias más comunes de la **piel humana**, y aquí están entre los géneros que más suben en la hoja. La explicación más probable es técnica: en la hoja hay muy poco ADN bacteriano, y con **baja biomasa** cualquier contaminación (de quien tomó la muestra o de los reactivos) pesa mucho en la proporción. Algo parecido pasa con las cianobacterias de la hoja: los cloroplastos descienden de ellas, y parte de esas lecturas podría ser ADN de la planta mal asignado.
+
+Que un género salga arriba en la lista no lo convierte en hallazgo.
+:::
+
+¿Y un clasificador? Aquí no, a propósito: con 15 muestras, cada pliegue de validación cruzada tendría dos o tres muestras de prueba y los aciertos saltarían muchísimo de una partición a otra. Con tan pocas muestras, la PERMANOVA es la herramienta adecuada.
+
+### Lo que se llevan para su subconjunto
+
+Antes de cualquier ACP o clasificador del [proyecto](proyecto.qmd), respondan con sus datos:
+
+1.  **¿Hay muestras repetidas?** Usen `perfiles_duplicados`, definida en el notebook de la parte 3.
+2.  **¿Sus grupos se secuenciaron igual?** Comparen lecturas y fracción sin clasificar.
+3.  **¿Qué reinos hay en la tabla?** Decidan con cuáles se quedan y por qué.
+4.  **¿De cuántos estudios viene cada grupo?** Si un grupo sale de un solo estudio, no podrán distinguir el grupo del laboratorio.
+5.  **¿El resultado aguanta?** Cambien el umbral y quiten las muestras raras.
+6.  **¿Tiene sentido biológico?** Busquen en la literatura los géneros que salgan arriba.
+
+::: {.callout-note .keypoints}
+## Puntos clave
+
+- Los datos de microbioma son **proporciones**: cerrar la tabla permite comparar muestras, pero ata las columnas entre sí y deforma las distancias.
+- La cadena composicional **amalgama** los taxones raros, **recierra**, **sustituye los ceros** sin cambiar el total y aplica el **CLR**, que no depende de la profundidad de secuenciación.
+- La corrección **no inventa señal, la destapa**: con CLR, el ACP separa grupos que sin él se veían mezclados, con datos simulados y con datos reales.
+- Importa más cuanto **menos supervisado** es el método: es imprescindible para ACP, distancias y agrupamientos, y casi no cambia a un bosque aleatorio.
+- Con datos reales, un $p$ pequeño no basta: revisen duplicados, calidad, estudios de origen, sensibilidad a las decisiones y **sentido biológico**.
+:::
+
+**Siguiente capítulo:** [Técnicas de clustering](clustering.qmd). Medimos distancias entre comunidades y buscamos grupos de muestras sin mirar el metadato.
